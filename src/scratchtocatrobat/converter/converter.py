@@ -332,6 +332,8 @@ class _ScratchToCatrobat(object):
         "backgroundIndex": catformula.Sensors.OBJECT_BACKGROUND_NUMBER,
         "costumeIndex": catformula.Sensors.OBJECT_LOOK_NUMBER,
 
+        "testBlock": None,
+
         # WORKAROUND: using ROUND for Catrobat float => Scratch int
         "soundLevel": lambda *_args: catrobat.formula_element_for(catformula.Functions.ROUND,
                                        arguments=[catrobat.formula_element_for(catformula.Sensors.LOUDNESS)]),  # @UndefinedVariable
@@ -2094,3 +2096,17 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
             formula_element.value = arguments[0]
         return formula_element
 
+    @_register_handler(_block_name_to_handler_map, "testBlock")
+    def _convert_testBrick(self):
+        gt_element = catformula.FormulaElement(catElementType.OPERATOR, str(catformula.Operators.GREATER_THAN), None)
+        loudness_element = catformula.FormulaElement(catElementType.SENSOR, str(catformula.Sensors.LOUDNESS), gt_element)
+
+        value_element = catformula.FormulaElement(catElementType.NUMBER, str(self.arguments[1]), gt_element)
+        gt_element.setLeftChild(loudness_element)
+        gt_element.setRightChild(value_element)
+
+        formula = catformula.Formula(gt_element)
+
+        begin_brick = catbricks.IfThenLogicBeginBrick(formula)
+        end_brick = catbricks.IfThenLogicEndBrick(begin_brick)
+        return [begin_brick, self.arguments[2], end_brick]
