@@ -1,6 +1,7 @@
 import httplib
 import json
 import os
+import pprint
 
 class ProjectDownload(object):
     def __init__(self):
@@ -20,15 +21,15 @@ class ProjectDownload(object):
         jythonpath = "/usr/jython/bin/jython" #TODO: get it differently
         os.system(jythonpath+" "+dir+"/run_dbg "+ "https://scratch.mit.edu/projects/"+str(projectID) + " --extracted" + " 2> out.txt")
         log_file = open("out.txt", "r")
-        filtered_log = ""
         last_converted_sprite = ""
         is_new_sprite = True
         in_traceback = False
         traceback = ""
         filtered_log_dict = dict()
         for line in log_file.readlines():
-            if "Converting Sprite:" in line:
-                last_converted_sprite = line
+            if "Converting Sprite: " in line:
+                sprite_name_position = line.find("Converting Sprite: " ) + len("Converting Sprite: ")
+                last_converted_sprite = line[sprite_name_position:].replace("\n","").replace("'","")
                 is_new_sprite = True
             interestingLine = "WARNING" in line
             interestingLine |= "ERROR" in line
@@ -42,19 +43,15 @@ class ProjectDownload(object):
 
             if not interestingLine and not in_traceback:
                 continue
-            filtered_log += str(interestingLine) +" , "+ str(in_traceback) + "\n"
             if is_new_sprite: #write sprite line only once and only if we need it
                 filtered_log_dict[last_converted_sprite] = []
-                filtered_log += last_converted_sprite
                 is_new_sprite = False
             if interestingLine:
-                filtered_log_dict[last_converted_sprite].append(line)
+                filtered_log_dict[last_converted_sprite].append(" ".join(line.split(" ")[2:]))
             elif in_traceback:
                 traceback += line
 
         log_file.close()
-        print filtered_log
-        print filtered_log_dict
+        pprint.pprint(filtered_log_dict)
 
-
-        return code_xml_content
+        return filtered_log_dict
