@@ -1,0 +1,19 @@
+create table errors (ID int not null auto_increment,
+errortext TEXT,
+primary key (ID));
+
+create table conversions (
+CID int not null auto_increment,
+PID int not null,
+num_errors int,
+primary key (CID)
+);
+
+create table error_occurences (
+CID int not null,
+EID int not null,
+primary key (CID, EID),
+foreign key (CID) references conversions(CID),
+foreign key (EID) references errors(ID)
+);
+
