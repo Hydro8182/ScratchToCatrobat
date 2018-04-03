@@ -31,22 +31,18 @@ class ProjectDownload(object):
                 sprite_name_position = line.find("Converting Sprite: " ) + len("Converting Sprite: ")
                 last_converted_sprite = line[sprite_name_position:].replace("\n","").replace("'","")
                 is_new_sprite = True
-            interestingLine = "WARNING" in line
-            interestingLine |= "ERROR" in line
             if in_traceback:
                 in_traceback = not line.strip()[0].isdigit()
                 if not in_traceback:
                     filtered_log_dict[last_converted_sprite].append(traceback)
                     traceback = ""
             in_traceback |= "Traceback" in line
-
-
-            if not interestingLine and not in_traceback:
+            if not isInterestingLine(line) and not in_traceback:
                 continue
             if is_new_sprite: #write sprite line only once and only if we need it
                 filtered_log_dict[last_converted_sprite] = []
                 is_new_sprite = False
-            if interestingLine:
+            if isInterestingLine(line):
                 filtered_log_dict[last_converted_sprite].append(" ".join(line.split(" ")[2:]))
             elif in_traceback:
                 traceback += line
@@ -55,3 +51,11 @@ class ProjectDownload(object):
         pprint.pprint(filtered_log_dict)
 
         return filtered_log_dict
+
+def isInterestingLine(line):
+    interestingLine = "WARNING" in line
+    boringWarings = ["WARNING  Costume resolution not same for all costumes"]
+    if line in boringWarings:
+        interestingLine = False
+    interestingLine |= "ERROR" in line
+    return interestingLine

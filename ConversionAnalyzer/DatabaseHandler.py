@@ -25,19 +25,19 @@ def writeErrors(conn, errors):
             while rs and rs.next(  ):
                 has_entry = True
                 errorID = rs.getInt("ID")
-                print(rs.getInt("ID"))
         stmt.close()
         if not has_entry:
-            stmt_insert = conn.prepareStatement("INSERT INTO errors (`errortext`) VALUES (?)")
+            stmt_insert = conn.prepareStatement("INSERT INTO errors (`errortext`) VALUES (?)", Statement.RETURN_GENERATED_KEYS)
             stmt_insert.setString(1, error)
-            errorID = stmt_insert.executeUpdate(Statement.RETURN_GENERATED_KEYS)
+            stmt_insert.executeUpdate()
+            keys = stmt_insert.getGeneratedKeys()
+            while keys.next():
+                errorID = keys.getInt(1)
             stmt_insert.close()
         return errorID
 
     list_of_errors = []
     for sprite in errors:
-        print errors[sprite]
-        print "______________________________________________________"
         errorID = writeError(conn, "".join(errors[sprite]))
         list_of_errors.append(errorID)
     return list_of_errors
@@ -45,9 +45,23 @@ def writeErrors(conn, errors):
 
 def insertProject(conn, pid):
     query = "INSERT INTO conversions (PID) VALUES (?);"
-    stmt = conn.prepareStatement(query)
+    stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
     stmt.setInt(1, pid)
-    id = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS)
-
+    stmt.executeUpdate()
+    keys = stmt.getGeneratedKeys()
+    id = -1
+    while keys.next():
+        id = keys.getInt(1)
     stmt.close()
     return id
+
+
+def insertErrorOccurances(conn, pid, errors):
+    for error in errors:
+        query = "INSERT IGNORE INTO error_occurences (CID, EID) VALUES (?, ?);"
+        stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
+        stmt.setInt(1, pid)
+        stmt.setInt(2, error)
+        stmt.executeUpdate()
+
+    return
