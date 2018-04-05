@@ -4,12 +4,13 @@ class configParams(object):
     keyword = None
     start_offset = 0
     end_offset = 1
-
+    jythonpath = ""
     def readConfig(self):
         config = helpers._setup_configuration("config/default.ini")
         self.keyword = config.config_parser.get("ConversionAnalyzer", "keyword")
         self.start_offset = config.config_parser.getint("ConversionAnalyzer", "start_offset")
         self.end_offset = config.config_parser.getint("ConversionAnalyzer", "end_offset")
+        self.jythonpath = config.config_parser.get("Other", "jythonpath")
 
         self.database.database = config.config_parser.get("Database", "database")
         self.database.user = config.config_parser.get("Database", "user")

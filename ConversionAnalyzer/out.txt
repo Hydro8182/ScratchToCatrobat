@@ -28,14 +28,398 @@
 *sys-package-mgr*: can't write index file
 *sys-package-mgr*: can't write cache file for '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/lib/mysql-connector-java-5.1.44-bin.jar'
 *sys-package-mgr*: can't write index file
-2018-04-05 15:41:38,293 INFO     calling converter
-  0% |                                                         | ETA:  --:--:--2018-04-05 15:41:40,309 INFO     Downloading project from URL: 'https://scratch.mit.edu/projects/18731064' to temp dir /tmp/tmpGsgJib ...
-2018-04-05 15:41:40,319 INFO     Requesting web api url: https://projects.scratch.mit.edu/internalapi/project/18731064/get/
-  2% |#                                                         | ETA:  0:02:082018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/acabbb1d9f872826fa9462826e6a62fd.png/get/
-2018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c66f000b5d41390c7446066a1818add3.png/get/
-2018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/15cbe99022804ddf0cc44f3fbfbc9b38.png/get/
-2018-04-05 15:41:40,936 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9b66359528de1c7241fdf97cd742a162.wav/get/
-2018-04-05 15:41:40,937 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5d6914d3591fb4f2f35fcd7cfa081b52.wav/get/
-2018-04-05 15:41:40,937 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d9bb29cb571a4f4429a840c96c20d825.wav/get/
-2018-04-05 15:41:40,941 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5ef0d508b6703f13516365e573029989.wav/get/
-  4% |##                                                        | ETA:  0:01:10  5% |##                                                        | ETA:  0:01:12  7% |####                                                      | ETA:  0:00:52  9% |#####                                                     | ETA:  0:01:15
+2018-04-05 17:55:36,275 INFO     calling converter
+  0% |                                                         | ETA:  --:--:--2018-04-05 17:55:37,279 INFO     Downloading project from URL: 'https://scratch.mit.edu/projects/44951718' to temp dir /tmp/tmpvBCJQP ...
+2018-04-05 17:55:37,286 INFO     Requesting web api url: https://projects.scratch.mit.edu/internalapi/project/44951718/get/
+  0% |                                                         | ETA:  --:--:--2018-04-05 17:55:38,049 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/256356f8c01f467e902227b4d161c047.png/get/
+2018-04-05 17:55:38,052 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d035aca5428140346d2839957491f25e.png/get/
+2018-04-05 17:55:38,062 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/41b3cfe53786184ff6e8d6c7f93a7c7e.png/get/
+2018-04-05 17:55:38,062 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/799c200e6ba22657fac7ac1eed608968.png/get/
+2018-04-05 17:55:38,062 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5591312be0c1f99cef4cd4c605108983.png/get/
+2018-04-05 17:55:38,063 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c075ae9d17bfb18d7ebd7549d10f9f1b.png/get/
+2018-04-05 17:55:38,089 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/fbcbc4c824f0532198c5386a3d187286.png/get/
+  1% |                                                          | ETA:  0:03:12  2% |#                                                         | ETA:  0:01:37  3% |#                                                         | ETA:  0:01:092018-04-05 17:55:38,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/137875ca20733438947050dbd0dd6d75.png/get/
+2018-04-05 17:55:38,446 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/7c8b1313f33a6ebae429645db34efbf8.png/get/
+2018-04-05 17:55:38,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/559c89adb83c449cafb4dd36a7d8d493.png/get/
+2018-04-05 17:55:38,454 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/8cb265cdda25f246dd626cd0d42f717a.png/get/
+2018-04-05 17:55:38,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4c51f334618c76806ad3bc7208b19ef7.png/get/
+2018-04-05 17:55:38,447 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5836bef15b9e896aecddcd2c43b462b2.png/get/
+2018-04-05 17:55:38,447 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/80a1c079775ede144654ef819ef57c7f.png/get/
+  4% |##                                                        | ETA:  0:00:55  5% |##                                                        | ETA:  0:00:452018-04-05 17:55:38,664 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/425dc6a2e2121a46fd6ab0b07bcdd987.png/get/
+2018-04-05 17:55:38,676 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/808e2e8afee13fc7bd019bc969ca96af.png/get/
+2018-04-05 17:55:38,687 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a4f62818cae409642a968874bfa399c5.png/get/
+2018-04-05 17:55:38,676 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/16bf2d5d848dd128705170e08f7dddd0.png/get/
+2018-04-05 17:55:38,674 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d9b7e5031891dd8bcbfa8e20b64e3ea7.png/get/
+2018-04-05 17:55:38,667 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b9b164897440d0fd264222158ebfc154.png/get/
+2018-04-05 17:55:38,673 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/268dd5de416f769aca3396bffe0543a3.png/get/
+  6% |###                                                       | ETA:  0:00:39  7% |####                                                      | ETA:  0:00:342018-04-05 17:55:38,928 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/81a841de876908a45ff60cb2d24eb0e8.png/get/
+2018-04-05 17:55:38,923 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/7502bda1e7f1111ded8002e15144a53e.png/get/
+2018-04-05 17:55:38,927 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/f86a7c67026b7da79820bd1d0c1b6bbe.png/get/
+2018-04-05 17:55:38,923 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/911bd75e97b6a5601ccdf78e18741cab.png/get/
+2018-04-05 17:55:38,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/8299dbf55244c4e2ad4ae9fc30cc5dd4.png/get/
+2018-04-05 17:55:38,931 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/327961d8e3922d0cbfea1acab0006a90.png/get/
+2018-04-05 17:55:38,930 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/08840b3fff0bbce82176cd86c83bc77e.png/get/
+  8% |####                                                      | ETA:  0:00:31  9% |#####                                                     | ETA:  0:00:28 10% |#####                                                     | ETA:  0:00:262018-04-05 17:55:39,217 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/de921ec8c7c565d0ed04f9ecc5079bc4.png/get/
+2018-04-05 17:55:39,217 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/3ff855fee029571d22b91ea23b4c3b54.png/get/
+2018-04-05 17:55:39,213 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a89f84030f4e173042049cc273910dce.png/get/
+2018-04-05 17:55:39,219 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9c5e61efe74bb90918524e7804182a1b.png/get/
+2018-04-05 17:55:39,219 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/50c20f47a637eaf9ab8e7d959ac12a79.png/get/
+2018-04-05 17:55:39,229 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/fc7491a6c0f4c210a100c5bb609433f5.wav/get/
+2018-04-05 17:55:39,217 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b2c0087c78592bd36657f7fed61aee4c.png/get/
+ 11% |######                                                    | ETA:  0:00:24 12% |######                                                    | ETA:  0:00:232018-04-05 17:55:40,005 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c755c3de193e80fdfd2d2cd7fd3d5257.png/get/
+2018-04-05 17:55:40,007 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4d97eec9a5a9dcff9e78f82d863e93c6.png/get/
+2018-04-05 17:55:40,009 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/89b3e658d163e120cb42ceca434c6982.png/get/
+2018-04-05 17:55:40,009 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/78ca4f0cf53eedad878140146ac75c5d.svg/get/
+2018-04-05 17:55:40,005 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/95c0f433d3724b99e3b15d0925254f8e.png/get/
+2018-04-05 17:55:40,005 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/97bc3e38ffeb812d7860f2cd8bc54e6b.png/get/
+2018-04-05 17:55:40,007 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/0a70f95d5f4e4a8ffec57d0754f0d115.png/get/
+ 13% |#######                                                   | ETA:  0:00:25 14% |########                                                  | ETA:  0:00:232018-04-05 17:55:40,216 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/3305d1063d306d33f752e2fa7e4797c1.png/get/
+2018-04-05 17:55:40,217 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a7328d8afc998ccb8051aa8cfa39ae71.png/get/
+2018-04-05 17:55:40,219 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a95abec21ef12f4718777fbfd9544f55.svg/get/
+2018-04-05 17:55:40,216 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/f58e052abfd7515a1acffe16a8d33e08.png/get/
+2018-04-05 17:55:40,221 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b83e26b18f72d781c5700b6e2ef5263d.png/get/
+2018-04-05 17:55:40,216 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a894ab76509f7915a65a688b8ce4f136.png/get/
+2018-04-05 17:55:40,221 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/67dace985761982f124fa11336b34b42.png/get/
+ 15% |########                                                  | ETA:  0:00:22 16% |#########                                                 | ETA:  0:00:21 17% |#########                                                 | ETA:  0:00:192018-04-05 17:55:40,351 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b8881c613e96fcf038e8c21f878b4884.png/get/
+2018-04-05 17:55:40,349 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/99ec56cbb5d5d611020ecea4a230ebf0.png/get/
+2018-04-05 17:55:40,349 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/96624715c69ad44621e56e7daead81a8.png/get/
+2018-04-05 17:55:40,349 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/0237deb3f3612bfba8492c0d71ce83b8.png/get/
+2018-04-05 17:55:40,349 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/7e5c8ac1c80d1d53397bef661f67d9b1.png/get/
+2018-04-05 17:55:40,349 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/da07bb424dec563224192af0320df91d.png/get/
+2018-04-05 17:55:40,355 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/64210fed9d0fad2281f7b44d53f109ba.png/get/
+ 18% |##########                                                | ETA:  0:00:18 19% |###########                                               | ETA:  0:00:172018-04-05 17:55:40,443 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4de62b777c378fba347c6019c555078d.png/get/
+2018-04-05 17:55:40,444 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/07a7edeb9b491c3893770374a0e45061.png/get/
+2018-04-05 17:55:40,446 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/e51a3b33d07a841a0f264eb3953e13bf.png/get/
+2018-04-05 17:55:40,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/baa26aeb3c71a35c8f4e0e6896e89b34.png/get/
+2018-04-05 17:55:40,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5aeda61e7dd94d1e043d34d94b424ca8.png/get/
+2018-04-05 17:55:40,450 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c62106e15da56b2432481db15da6620c.png/get/
+2018-04-05 17:55:40,451 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/786802dc07a5c3faef854b63d7fd1cf9.png/get/
+ 20% |###########                                               | ETA:  0:00:16 21% |############                                              | ETA:  0:00:152018-04-05 17:55:40,542 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/83a9787d4cb6f3b7632b4ddfebf74367.wav/get/
+2018-04-05 17:55:40,545 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/6d11128a47ad4e81ca2bb3d6d20e9fde.svg/get/
+2018-04-05 17:55:40,545 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d976773efbb226523fbfe305f5195c03.png/get/
+2018-04-05 17:55:40,546 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/13042ab7e693087e3800f88b1dd85e87.png/get/
+2018-04-05 17:55:40,542 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5598751d0ecb3be2ecf241f222c83756.png/get/
+ 22% |############                                              | ETA:  0:00:15 23% |#############                                             | ETA:  0:00:142018-04-05 17:55:40,848 INFO     Scratch project: Create Your Own Pusheen!(ID: 44951718)
+2018-04-05 17:55:40,910 INFO     Converting scratch project 'Create Your Own Pusheen!' into output folder: /home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output
+2018-04-05 17:55:40,924 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,926 INFO     Converting Sprite: 'Stage'
+2018-04-05 17:55:40,927 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,930 INFO       script type: whenGreenFlag, args: []
+ 24% |#############                                             | ETA:  0:00:142018-04-05 17:55:40,937 INFO       script type: whenKeyPressed, args: [u'space']
+2018-04-05 17:55:40,944 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:40,951 INFO     
+2018-04-05 17:55:40,953 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,953 INFO     Converting Sprite: 'Make your own'
+2018-04-05 17:55:40,954 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,956 INFO       script type: whenGreenFlag, args: []
+ 25% |##############                                            | ETA:  0:00:142018-04-05 17:55:40,980 INFO     
+2018-04-05 17:55:40,980 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,982 INFO     Converting Sprite: 'Pusheen'
+2018-04-05 17:55:40,983 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:40,983 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,000 INFO     
+2018-04-05 17:55:41,000 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,002 INFO     Converting Sprite: 'Pusshy'
+2018-04-05 17:55:41,002 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,003 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,012 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+ 26% |###############                                           | ETA:  0:00:132018-04-05 17:55:41,020 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,035 INFO     
+2018-04-05 17:55:41,036 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,036 INFO     Converting Sprite: 'pick a'
+2018-04-05 17:55:41,036 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,039 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,042 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+ 27% |###############                                           | ETA:  0:00:122018-04-05 17:55:41,055 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,059 INFO     
+2018-04-05 17:55:41,061 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,062 INFO     Converting Sprite: 'pushy'
+2018-04-05 17:55:41,062 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,065 WARNING  Costume resolution not same for all costumes
+2018-04-05 17:55:41,065 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,075 INFO       script type: whenIReceive, args: [u'White']
+ 28% |################                                          | ETA:  0:00:122018-04-05 17:55:41,081 INFO       script type: whenIReceive, args: [u'Mint']
+2018-04-05 17:55:41,086 INFO       script type: whenIReceive, args: [u'Blue']
+2018-04-05 17:55:41,091 INFO       script type: whenIReceive, args: [u'Lavender']
+ 29% |################                                          | ETA:  0:00:112018-04-05 17:55:41,096 INFO       script type: whenIReceive, args: [u'Black']
+2018-04-05 17:55:41,101 INFO       script type: whenIReceive, args: [u'Gray']
+2018-04-05 17:55:41,104 INFO       script type: whenIReceive, args: [u'Brown']
+ 30% |#################                                         | ETA:  0:00:112018-04-05 17:55:41,107 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,108 WARNING    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2018-04-05 17:55:41,114 WARNING    Replacing doPlaySoundAndWait with NoteBrick
+2018-04-05 17:55:41,115 WARNING    Exception: Sprite does not contain sound with name=Perfume - Chocolate Disco_チョコレイト_ディスコ_.mp3, 
+Traceback (most recent call last):
+  File "/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/converter/converter.py", line 1395, in _converted_script_element
+    converted_element = getattr(self, handler_method_name)()
+  File "/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/converter/converter.py", line 1870, in _convert_sound_and_wait_block
+    raise ConversionError("Sprite does not contain sound with name={}".format(sound_name))
+ConversionError: Sprite does not contain sound with name=Perfume - Chocolate Disco_チョコレイト_ディスコ_.mp3
+2018-04-05 17:55:41,122 INFO       script type: whenIReceive, args: [u'Orange']
+2018-04-05 17:55:41,125 INFO       script type: whenIReceive, args: [u'Pink']
+ 31% |#################                                         | ETA:  0:00:102018-04-05 17:55:41,128 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,135 INFO     
+2018-04-05 17:55:41,135 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,137 INFO     Converting Sprite: 'Sprite1'
+2018-04-05 17:55:41,138 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,138 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,141 INFO       script type: whenClicked, args: []
+ 32% |##################                                        | ETA:  0:00:102018-04-05 17:55:41,147 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,150 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,158 INFO     
+2018-04-05 17:55:41,158 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,160 INFO     Converting Sprite: 'Sprite2'
+2018-04-05 17:55:41,161 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,161 INFO       script type: whenGreenFlag, args: []
+ 33% |###################                                       | ETA:  0:00:092018-04-05 17:55:41,164 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,167 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,168 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+ 34% |###################                                       | ETA:  0:00:092018-04-05 17:55:41,178 INFO     
+2018-04-05 17:55:41,178 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,180 INFO     Converting Sprite: 'Sprite3'
+2018-04-05 17:55:41,180 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,180 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,184 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,186 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 35% |####################                                      | ETA:  0:00:092018-04-05 17:55:41,188 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,196 INFO     
+2018-04-05 17:55:41,197 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,197 INFO     Converting Sprite: 'Sprite4'
+2018-04-05 17:55:41,197 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,198 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,201 INFO       script type: whenClicked, args: []
+ 36% |####################                                      | ETA:  0:00:082018-04-05 17:55:41,204 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,207 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,213 INFO     
+2018-04-05 17:55:41,214 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,214 INFO     Converting Sprite: 'Sprite5'
+2018-04-05 17:55:41,216 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,217 INFO       script type: whenGreenFlag, args: []
+ 37% |#####################                                     | ETA:  0:00:082018-04-05 17:55:41,219 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,221 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,223 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+ 38% |######################                                    | ETA:  0:00:082018-04-05 17:55:41,233 INFO     
+2018-04-05 17:55:41,233 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,233 INFO     Converting Sprite: 'Sprite6'
+2018-04-05 17:55:41,234 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,236 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,237 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,240 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 39% |######################                                    | ETA:  0:00:072018-04-05 17:55:41,243 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,250 INFO     
+2018-04-05 17:55:41,252 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,252 INFO     Converting Sprite: 'Sprite7'
+2018-04-05 17:55:41,253 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,253 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,256 INFO       script type: whenClicked, args: []
+ 40% |#######################                                   | ETA:  0:00:072018-04-05 17:55:41,259 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,260 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,267 INFO     
+2018-04-05 17:55:41,269 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,269 INFO     Converting Sprite: 'Sprite8'
+2018-04-05 17:55:41,269 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,270 INFO       script type: whenGreenFlag, args: []
+ 41% |#######################                                   | ETA:  0:00:072018-04-05 17:55:41,273 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,276 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,279 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+ 42% |########################                                  | ETA:  0:00:062018-04-05 17:55:41,286 INFO     
+2018-04-05 17:55:41,288 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,288 INFO     Converting Sprite: 'Sprite9'
+2018-04-05 17:55:41,289 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,289 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,290 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,292 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 43% |########################                                  | ETA:  0:00:062018-04-05 17:55:41,295 INFO       script type: whenSceneStarts, args: [u'Pick A Skin']
+2018-04-05 17:55:41,302 INFO     
+2018-04-05 17:55:41,303 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,303 INFO     Converting Sprite: 'pick an eye'
+2018-04-05 17:55:41,303 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,305 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,308 INFO       script type: whenGreenFlag, args: []
+ 44% |#########################                                 | ETA:  0:00:062018-04-05 17:55:41,309 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,321 INFO     
+2018-04-05 17:55:41,322 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,322 INFO     Converting Sprite: 'puh'
+2018-04-05 17:55:41,322 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,323 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,331 INFO       script type: whenGreenFlag, args: []
+ 45% |##########################                                | ETA:  0:00:062018-04-05 17:55:41,334 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,342 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,345 INFO       script type: whenClicked, args: []
+ 46% |##########################                                | ETA:  0:00:052018-04-05 17:55:41,351 INFO     
+2018-04-05 17:55:41,351 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,352 INFO     Converting Sprite: 'hi o-o'
+2018-04-05 17:55:41,352 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,354 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,357 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,362 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+ 47% |###########################                               | ETA:  0:00:052018-04-05 17:55:41,368 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,374 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,378 INFO     
+2018-04-05 17:55:41,378 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,378 INFO     Converting Sprite: 'Sprite10'
+2018-04-05 17:55:41,378 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,380 INFO       script type: whenGreenFlag, args: []
+ 48% |###########################                               | ETA:  0:00:052018-04-05 17:55:41,382 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,388 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,391 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 49% |############################                              | ETA:  0:00:052018-04-05 17:55:41,395 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,398 INFO     
+2018-04-05 17:55:41,398 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,400 INFO     Converting Sprite: 'Sprite11'
+2018-04-05 17:55:41,400 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,401 WARNING  Costume resolution not same for all costumes
+2018-04-05 17:55:41,401 WARNING  Costume resolution not same for all costumes
+2018-04-05 17:55:41,401 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,404 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+ 50% |#############################                             | ETA:  0:00:052018-04-05 17:55:41,408 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,413 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 51% |#############################                             | ETA:  0:00:042018-04-05 17:55:41,418 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,423 INFO     
+2018-04-05 17:55:41,423 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,424 INFO     Converting Sprite: 'Sprite12'
+2018-04-05 17:55:41,424 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,424 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,427 INFO       script type: whenClicked, args: []
+ 52% |##############################                            | ETA:  0:00:042018-04-05 17:55:41,433 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+2018-04-05 17:55:41,437 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,440 INFO       script type: whenGreenFlag, args: []
+ 53% |##############################                            | ETA:  0:00:042018-04-05 17:55:41,444 INFO     
+2018-04-05 17:55:41,444 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,444 INFO     Converting Sprite: 'Sprite13'
+2018-04-05 17:55:41,444 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,446 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,450 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,451 INFO       script type: whenSceneStarts, args: [u'Pick an Eye']
+ 54% |###############################                           | ETA:  0:00:042018-04-05 17:55:41,457 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,459 INFO       script type: whenKeyPressed, args: [u'e']
+2018-04-05 17:55:41,463 INFO     
+2018-04-05 17:55:41,463 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,463 INFO     Converting Sprite: 'pick an accessory'
+2018-04-05 17:55:41,463 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,464 INFO       script type: whenGreenFlag, args: []
+ 55% |###############################                           | ETA:  0:00:042018-04-05 17:55:41,466 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,467 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,473 INFO     
+2018-04-05 17:55:41,473 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,474 INFO     Converting Sprite: 'Bow'
+2018-04-05 17:55:41,474 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,476 INFO       script type: whenGreenFlag, args: []
+ 56% |################################                          | ETA:  0:00:042018-04-05 17:55:41,479 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,482 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,486 INFO       script type: whenKeyPressed, args: [u'r']
+ 57% |#################################                         | ETA:  0:00:032018-04-05 17:55:41,487 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,493 INFO     
+2018-04-05 17:55:41,494 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,496 INFO     Converting Sprite: 'T-Rex'
+2018-04-05 17:55:41,496 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,496 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,500 INFO       script type: whenClicked, args: []
+ 58% |#################################                         | ETA:  0:00:032018-04-05 17:55:41,503 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,506 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,510 INFO       script type: whenIReceive, args: [u'Go Back 2']
+ 59% |##################################                        | ETA:  0:00:032018-04-05 17:55:41,519 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,523 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,529 INFO     
+2018-04-05 17:55:41,529 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,530 INFO     Converting Sprite: 'Mustachio'
+2018-04-05 17:55:41,530 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,532 INFO       script type: whenGreenFlag, args: []
+ 60% |##################################                        | ETA:  0:00:032018-04-05 17:55:41,533 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,536 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,539 INFO       script type: whenKeyPressed, args: [u'r']
+ 61% |###################################                       | ETA:  0:00:032018-04-05 17:55:41,540 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,546 INFO     
+2018-04-05 17:55:41,548 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,548 INFO     Converting Sprite: 'Nutella'
+2018-04-05 17:55:41,548 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,549 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,552 INFO       script type: whenSceneStarts, args: [u'All Done']
+ 62% |###################################                       | ETA:  0:00:032018-04-05 17:55:41,555 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,558 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,561 INFO       script type: whenIReceive, args: [u'Go Back 2']
+ 63% |####################################                      | ETA:  0:00:032018-04-05 17:55:41,565 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,569 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,575 INFO     
+2018-04-05 17:55:41,575 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,575 INFO     Converting Sprite: 'Glasses'
+2018-04-05 17:55:41,576 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,576 INFO       script type: whenClicked, args: []
+ 64% |#####################################                     | ETA:  0:00:022018-04-05 17:55:41,579 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,582 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,586 INFO       script type: whenKeyPressed, args: [u'r']
+ 65% |#####################################                     | ETA:  0:00:022018-04-05 17:55:41,592 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,599 INFO     
+2018-04-05 17:55:41,601 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,601 INFO     Converting Sprite: 'Scarf'
+2018-04-05 17:55:41,604 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,605 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,611 INFO       script type: whenClicked, args: []
+ 66% |######################################                    | ETA:  0:00:022018-04-05 17:55:41,615 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,628 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,631 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+ 67% |######################################                    | ETA:  0:00:022018-04-05 17:55:41,637 INFO     
+2018-04-05 17:55:41,637 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,638 INFO     Converting Sprite: 'All Done'
+2018-04-05 17:55:41,638 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,638 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,640 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,644 INFO     
+2018-04-05 17:55:41,645 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,645 INFO     Converting Sprite: 'stage'
+2018-04-05 17:55:41,645 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,647 INFO       script type: whenGreenFlag, args: []
+ 68% |#######################################                   | ETA:  0:00:022018-04-05 17:55:41,650 INFO     
+2018-04-05 17:55:41,650 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,651 INFO     Converting Sprite: 'pusheen-sambraro'
+2018-04-05 17:55:41,651 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,651 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,674 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,677 INFO       script type: whenGreenFlag, args: []
+ 69% |########################################                  | ETA:  0:00:022018-04-05 17:55:41,680 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,684 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,688 INFO     
+2018-04-05 17:55:41,690 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,690 INFO     Converting Sprite: 'KAWAII'
+2018-04-05 17:55:41,690 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,690 INFO       script type: whenGreenFlag, args: []
+ 70% |########################################                  | ETA:  0:00:022018-04-05 17:55:41,694 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,696 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,697 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+ 71% |#########################################                 | ETA:  0:00:022018-04-05 17:55:41,703 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,707 INFO     
+2018-04-05 17:55:41,707 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,707 INFO     Converting Sprite: 'ezgif.com-gif-maker'
+2018-04-05 17:55:41,709 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,709 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,710 INFO       script type: whenKeyPressed, args: [u'r']
+ 72% |#########################################                 | ETA:  0:00:022018-04-05 17:55:41,713 INFO       script type: whenSceneStarts, args: [u'All Done']
+2018-04-05 17:55:41,714 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,720 INFO       script type: whenClicked, args: []
+ 73% |##########################################                | ETA:  0:00:022018-04-05 17:55:41,723 INFO     
+2018-04-05 17:55:41,723 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,723 INFO     Converting Sprite: 'ezgif.com-gif-maker2'
+2018-04-05 17:55:41,723 INFO     --------------------------------------------------------------------------------
+2018-04-05 17:55:41,723 INFO       script type: whenClicked, args: []
+2018-04-05 17:55:41,726 INFO       script type: whenGreenFlag, args: []
+2018-04-05 17:55:41,730 INFO       script type: whenSceneStarts, args: [u'All Done']
+ 74% |##########################################                | ETA:  0:00:012018-04-05 17:55:41,733 INFO       script type: whenKeyPressed, args: [u'r']
+2018-04-05 17:55:41,737 INFO       script type: whenSceneStarts, args: [u'Pick A Mouth']
+2018-04-05 17:55:41,743 INFO     
+2018-04-05 17:55:41,759 INFO     convert Scratch project to '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output'
+2018-04-05 17:55:41,759 INFO       Creating Catrobat project structure
+2018-04-05 17:55:41,762 INFO       Saving media files
+ 75% |###########################################               | ETA:  0:00:01 76% |############################################              | ETA:  0:00:01 77% |############################################              | ETA:  0:00:01 78% |#############################################             | ETA:  0:00:01 79% |#############################################             | ETA:  0:00:01 80% |##############################################            | ETA:  0:00:01 81% |##############################################            | ETA:  0:00:01 82% |###############################################           | ETA:  0:00:01 83% |################################################          | ETA:  0:00:01 84% |################################################          | ETA:  0:00:01 85% |#################################################         | ETA:  0:00:00 86% |#################################################         | ETA:  0:00:00 87% |##################################################        | ETA:  0:00:00 88% |###################################################       | ETA:  0:00:00 89% |###################################################       | ETA:  0:00:00 90% |####################################################      | ETA:  0:00:00 91% |####################################################      | ETA:  0:00:00 92% |#####################################################     | ETA:  0:00:00 93% |#####################################################     | ETA:  0:00:00 94% |######################################################    | ETA:  0:00:00 95% |#######################################################   | ETA:  0:00:00 96% |#######################################################   | ETA:  0:00:002018-04-05 17:55:42,089 INFO           converting '/tmp/tmpvBCJQP/fc7491a6c0f4c210a100c5bb609433f5.wav' to Pocket Code compatible wav '/tmp/tmpvBCJQP/fc7491a6c0f4c210a100c5bb609433f5_converted.wav'
+2018-04-05 17:55:42,092 INFO           converting '/tmp/tmpvBCJQP/6d11128a47ad4e81ca2bb3d6d20e9fde.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/6d11128a47ad4e81ca2bb3d6d20e9fde_rotX_158_rotY_104.png'
+2018-04-05 17:55:42,095 INFO           converting '/tmp/tmpvBCJQP/78ca4f0cf53eedad878140146ac75c5d.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/78ca4f0cf53eedad878140146ac75c5d_rotX_203_rotY_37.png'
+2018-04-05 17:55:42,098 INFO           converting '/tmp/tmpvBCJQP/a95abec21ef12f4718777fbfd9544f55.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/a95abec21ef12f4718777fbfd9544f55_rotX_203_rotY_37.png'
+2018-04-05 17:55:42,257 INFO           converting '/tmp/tmpvBCJQP/78ca4f0cf53eedad878140146ac75c5d.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/78ca4f0cf53eedad878140146ac75c5d_rotX_203_rotY_37.png'
+2018-04-05 17:55:42,263 INFO           converting '/tmp/tmpvBCJQP/a95abec21ef12f4718777fbfd9544f55.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/a95abec21ef12f4718777fbfd9544f55_rotX_203_rotY_37.png'
+2018-04-05 17:55:42,273 INFO           converting '/tmp/tmpvBCJQP/6d11128a47ad4e81ca2bb3d6d20e9fde.svg' to Pocket Code compatible png '/tmp/tmpvBCJQP/6d11128a47ad4e81ca2bb3d6d20e9fde_rotX_158_rotY_104.png'
+2018-04-05 17:55:42,890 INFO     Output path: /tmp/tmpvBCJQP/78ca4f0cf53eedad878140146ac75c5d_rotX_203_rotY_37.png
+2018-04-05 17:55:42,892 INFO     Output path: /tmp/tmpvBCJQP/a95abec21ef12f4718777fbfd9544f55_rotX_203_rotY_37.png
+ 97% |########################################################  | ETA:  0:00:002018-04-05 17:55:43,029 INFO     Output path: /tmp/tmpvBCJQP/6d11128a47ad4e81ca2bb3d6d20e9fde_rotX_158_rotY_104.png
+2018-04-05 17:55:43,349 INFO       Saving project XML file
+2018-04-05 17:55:43,654 INFO       Downloading and adding automatic screenshot
+2018-04-05 17:55:43,655 INFO     Requesting web api url: https://uploads.scratch.mit.edu/projects/thumbnails/44951718.png
+100% |##########################################################| ETA:  0:00:002018-04-05 17:55:44,585 INFO       save packaged Scratch project to '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output/Create Your Own Pusheen!.catrobat'
+100% |##########################################################| Time: 0:00:08

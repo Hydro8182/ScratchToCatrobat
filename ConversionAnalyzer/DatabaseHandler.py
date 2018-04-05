@@ -1,42 +1,37 @@
-import java.sql
+import mysql.connector
 from config import configParams
-import java
-from java.sql import Statement
-
+from mysql.connector.cursor import MySQLCursor
 def connect(params):
     assert(isinstance(params, configParams))
-    driver = params.database.driver
-    java.lang.Class.forName(driver).newInstance(  )
     server= params.database.host
     db =  params.database.database
     usr = params.database.user
     passwd = params.database.password
-    url = "jdbc:mysql://%s/%s?user=%s&password=%s" % (
-        server, db, usr, passwd)
-    conn = java.sql.DriverManager.getConnection(url)
-    return conn
+    cnx = mysql.connector.connect(user=usr, password=passwd,
+                                  host=server,
+                                  database=db)
+    return cnx
 
 def writeErrors(conn, errors):
     def writeError(conn, error):
-        query = "SELECT * FROM errors WHERE errortext=?"
-        stmt = conn.prepareStatement(query)
-        stmt.setString(1, error)
+        query = "SELECT * FROM errors WHERE errortext=%(errortext)s"
+        data = {
+            'errortext': error,
+        }
+        assert (isinstance(conn, mysql.connector.MySQLConnection))
+        cursor = conn.cursor(dictionary=True)
+        assert isinstance(cursor, MySQLCursor)
+        cursor.execute(query, data)
         has_entry = False
         errorID = -1
-        if stmt.execute():
-            rs = stmt.getResultSet(  )
-            while rs and rs.next(  ):
-                has_entry = True
-                errorID = rs.getInt("ID")
-        stmt.close()
+        for entry in cursor:
+            has_entry = True
+            errorID = entry["ID"]
         if not has_entry:
-            stmt_insert = conn.prepareStatement("INSERT INTO errors (`errortext`) VALUES (?)", Statement.RETURN_GENERATED_KEYS)
-            stmt_insert.setString(1, error)
-            stmt_insert.executeUpdate()
-            keys = stmt_insert.getGeneratedKeys()
-            while keys.next():
-                errorID = keys.getInt(1)
-            stmt_insert.close()
+            query = "INSERT INTO errors (`errortext`) VALUES (%(errortext)s)"
+            cursor.execute(query, data)
+            errorID = cursor.getlastrowid()
+        cursor.close()
         return errorID
 
     list_of_errors = []
@@ -47,24 +42,29 @@ def writeErrors(conn, errors):
 
 
 def insertProject(conn, pid):
-    query = "INSERT INTO conversions (PID) VALUES (?);"
-    stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
-    stmt.setInt(1, pid)
-    stmt.executeUpdate()
-    keys = stmt.getGeneratedKeys()
-    id = -1
-    while keys.next():
-        id = keys.getInt(1)
-    stmt.close()
+    query = "INSERT INTO conversions (PID) VALUES (%(pid)s);"
+    data = {
+        'pid': pid,
+    }
+    assert (isinstance(conn, mysql.connector.MySQLConnection))
+    cursor = conn.cursor()
+    assert isinstance(cursor, MySQLCursor)
+    cursor.execute(query, data)
+    id = cursor.getlastrowid()
+    cursor.close()
     return id
 
 
-def insertErrorOccurances(conn, pid, errors):
-    for error in errors:
-        query = "INSERT IGNORE INTO error_occurences (CID, EID) VALUES (?, ?);"
-        stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
-        stmt.setInt(1, pid)
-        stmt.setInt(2, error)
-        stmt.executeUpdate()
-
+def insertErrorOccurances(conn, pid, errorIDs):
+    assert (isinstance(conn, mysql.connector.MySQLConnection))
+    cursor = conn.cursor()
+    assert isinstance(cursor, MySQLCursor)
+    for errorID in errorIDs:
+        data = {
+            'pid': pid,
+            'errorID': errorID
+        }
+        query = "INSERT IGNORE INTO error_occurences (CID, EID) VALUES (%(pid)s, %(errorID)s);"
+        cursor.execute(query, data)
+    cursor.close()
     return

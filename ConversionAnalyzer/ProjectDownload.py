@@ -1,8 +1,9 @@
-from httplib2 import HTTPSConnectionWithTimeout
+import httplib
 import json
 import os
 import pprint
 import time
+import sys
 
 class ProjectDownload(object):
     def __init__(self):
@@ -14,7 +15,7 @@ class ProjectDownload(object):
         while con is None:
             try:
                 i += 1
-                con = HTTPSConnectionWithTimeout("api.scratch.mit.edu")
+                con = httplib.HTTPSConnection("api.scratch.mit.edu")
                 con.request("GET","/search/projects?q="+querystring+"&offset="+str(offset)+"&limit=1")
                 response = con.getresponse()
             except:
@@ -28,11 +29,14 @@ class ProjectDownload(object):
         jsonResponse = json.loads(response.read())
         return jsonResponse[0]["id"]
 
-    def convert(self, projectID):
-        code_xml_content = ""
+    def convert(self, projectID, params):
         dir = os.path.dirname(os.getcwd())
-        jythonpath = "/usr/jython/bin/jython" #TODO: get it differently
-        os.system(jythonpath+" "+dir+"/run_dbg "+ "https://scratch.mit.edu/projects/"+str(projectID) + " --extracted" + " 2> out.txt")
+        print dir
+        os.environ["JYTHONPATH"] = os.environ["PYTHONPATH"]
+        jythonpath = params.jythonpath
+        command = jythonpath+" "+dir+"/run_dbg "+ "https://scratch.mit.edu/projects/"+str(projectID) + " 2> out.txt"
+        print command
+        os.system(command)
         log_file = open("out.txt", "r")
         last_converted_sprite = ""
         is_new_sprite = True
@@ -69,7 +73,7 @@ def isInterestingLine(line):
     interestingLine = "WARNING" in line
     boringWarings = ["Costume resolution not same for all costumes"]
     for boringline in boringWarings:
-        if line in boringline:
+        if boringline in line:
             interestingLine = False
     interestingLine |= "ERROR" in line
     return interestingLine

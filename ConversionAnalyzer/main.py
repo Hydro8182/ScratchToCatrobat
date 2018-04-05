@@ -13,9 +13,9 @@ def main():
         print "------------------------------------------------------------------"
 
 def convert_single_project_and_insert_errors(projectDownloader, keyword, offset):
-    id = projectDownloader.findProjectBySearch(keyword,offset)
-    error = projectDownloader.convert(id)
     global params
+    id = projectDownloader.findProjectBySearch(keyword,offset)
+    error = projectDownloader.convert(id, params)
     conn = DatabaseHandler.connect(params)
     database_error_ids = DatabaseHandler.writeErrors(conn, error)
     database_pid = DatabaseHandler.insertProject(conn, id)

@@ -17,3 +17,4 @@ foreign key (CID) references conversions(CID),
 foreign key (EID) references errors(ID)
 );
 
+ALTER DATABASE conversion_analysis CHARACTER SET utf8 COLLATE utf8_unicode_ci;
