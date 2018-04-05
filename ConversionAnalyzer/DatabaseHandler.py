@@ -1,13 +1,16 @@
 import java.sql
-
-import java, javax
+from config import configParams
+import java
 from java.sql import Statement
 
-def connect():
-    driver = "com.mysql.jdbc.Driver"
+def connect(params):
+    assert(isinstance(params, configParams))
+    driver = params.database.driver
     java.lang.Class.forName(driver).newInstance(  )
-    server, db = "localhost", "conversion_analysis"
-    usr, passwd = "root", "1"
+    server= params.database.host
+    db =  params.database.database
+    usr = params.database.user
+    passwd = params.database.password
     url = "jdbc:mysql://%s/%s?user=%s&password=%s" % (
         server, db, usr, passwd)
     conn = java.sql.DriverManager.getConnection(url)

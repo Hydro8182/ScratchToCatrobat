@@ -1,15 +1,28 @@
-import httplib
+from httplib2 import HTTPSConnectionWithTimeout
 import json
 import os
 import pprint
+import time
 
 class ProjectDownload(object):
     def __init__(self):
         pass
     def findProjectBySearch(self, querystring, offset):
-        con = httplib.HTTPSConnection("api.scratch.mit.edu")
-        con.request("GET","/search/projects?q="+querystring+"&offset="+str(offset)+"&limit=1")
-        response = con.getresponse()
+        i = 0
+        con = None
+        response = None
+        while con is None:
+            try:
+                i += 1
+                con = HTTPSConnectionWithTimeout("api.scratch.mit.edu")
+                con.request("GET","/search/projects?q="+querystring+"&offset="+str(offset)+"&limit=1")
+                response = con.getresponse()
+            except:
+                time.sleep(0.005)
+                pass
+            if i > 100:
+                break
+        print "socket connection retry count: "+str(i)
         if response.status != 200:
             raise Exception("Bad Response")
         jsonResponse = json.loads(response.read())
@@ -54,8 +67,9 @@ class ProjectDownload(object):
 
 def isInterestingLine(line):
     interestingLine = "WARNING" in line
-    boringWarings = ["WARNING  Costume resolution not same for all costumes"]
-    if line in boringWarings:
-        interestingLine = False
+    boringWarings = ["Costume resolution not same for all costumes"]
+    for boringline in boringWarings:
+        if line in boringline:
+            interestingLine = False
     interestingLine |= "ERROR" in line
     return interestingLine

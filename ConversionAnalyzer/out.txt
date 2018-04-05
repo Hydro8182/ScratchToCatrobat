@@ -28,239 +28,14 @@
 *sys-package-mgr*: can't write index file
 *sys-package-mgr*: can't write cache file for '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/lib/mysql-connector-java-5.1.44-bin.jar'
 *sys-package-mgr*: can't write index file
-2018-04-03 17:45:09,144 INFO     calling converter
-  0% |                                                         | ETA:  --:--:--2018-04-03 17:45:11,134 INFO     Downloading project from URL: 'https://scratch.mit.edu/projects/16105965' to temp dir /tmp/tmp40TfyE ...
-2018-04-03 17:45:11,141 INFO     Requesting web api url: https://projects.scratch.mit.edu/internalapi/project/16105965/get/
-  0% |                                                         | ETA:  --:--:--2018-04-03 17:45:12,220 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d8ccf4933d8862574f9ae172b2a07434.png/get/
-2018-04-03 17:45:12,236 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/57df9e8ea894ebc7d5bc5f02c3951c1b.png/get/
-2018-04-03 17:45:12,243 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5ecaae1c423775f2128e217328e1b428.png/get/
-2018-04-03 17:45:12,246 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/49c144a2cae28fa7009e8cc8ae85343f.png/get/
-2018-04-03 17:45:12,243 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/72bf898e1cffcf8eb54f9c62230cfc38.png/get/
-2018-04-03 17:45:12,246 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/f9da4ddbf29286d405ab03e8a9ede47e.png/get/
-2018-04-03 17:45:12,247 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/902ab7de4d7b5a032c386c14e52d2d3f.png/get/
-  1% |                                                          | ETA:  0:05:23  2% |#                                                         | ETA:  0:02:43  3% |#                                                         | ETA:  0:01:50  4% |##                                                        | ETA:  0:01:252018-04-03 17:45:12,730 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/e03bb0358d2bb86fefa71dd0f600160a.png/get/
-2018-04-03 17:45:12,730 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/953178cfac0dbf35e2eabe8a513e49e6.png/get/
-2018-04-03 17:45:12,733 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/e507c2ccb6556d7800898fcc9cd308ff.png/get/
-2018-04-03 17:45:12,733 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d42f309700f65b77fa0e73215f93e362.png/get/
-2018-04-03 17:45:12,730 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/e77b970134b4e48688912c2bf0e55d48.png/get/
-2018-04-03 17:45:12,739 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/17f70bbeb047497a9ff61148776eddaa.png/get/
-2018-04-03 17:45:12,742 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c28029deadfffe3f16965b8a98584773.png/get/
-  5% |##                                                        | ETA:  0:01:14  6% |###                                                       | ETA:  0:01:01  7% |####                                                      | ETA:  0:00:532018-04-03 17:45:13,190 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9ae27cd93de945bffc40068f55986a1c.png/get/
-2018-04-03 17:45:13,190 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/1dde6d9c447d5242f250d37ca1a8abb4.png/get/
-2018-04-03 17:45:13,197 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/bdf46d8e66039fb17c16a86b77a26ef6.png/get/
-2018-04-03 17:45:13,194 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/12a2cb8a5e7398df696e0d5075b57b96.png/get/
-2018-04-03 17:45:13,194 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/3271298991d9efe59838a1a73324aca2.png/get/
-2018-04-03 17:45:13,209 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/fb1d956aa66f63748248d65d6c3f81f2.png/get/
-2018-04-03 17:45:13,216 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c7df4b9b263602080b19b81aa6c4c30c.png/get/
-  8% |####                                                      | ETA:  0:00:50  9% |#####                                                     | ETA:  0:00:44 10% |#####                                                     | ETA:  0:00:412018-04-03 17:45:13,720 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/61ec0af674450531b5ffee552d81aae5.png/get/
-2018-04-03 17:45:13,721 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/dd4e2bf4addaa45f58edab38f7af82e8.png/get/
-2018-04-03 17:45:13,717 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/8acc4594cecac9a0624560ed5a633651.png/get/
-2018-04-03 17:45:13,723 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/00a6a124a4bc22790b0bfff993014997.png/get/
-2018-04-03 17:45:13,721 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/7507864171c4b5490a701c9ec52ec3ac.png/get/
-2018-04-03 17:45:13,732 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/93e15992b7a47c97fddef66333a9dd5e.png/get/
-2018-04-03 17:45:13,756 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4328945e25fb8bd3e99711b4308e7a1b.png/get/
- 11% |######                                                    | ETA:  0:00:38 12% |######                                                    | ETA:  0:00:35 13% |#######                                                   | ETA:  0:00:332018-04-03 17:45:14,094 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d1e768059ae2ebd0dd56b28f1a772ddc.png/get/
-2018-04-03 17:45:14,101 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b27d4bbb62ff3cc46d3ecec197f178be.png/get/
-2018-04-03 17:45:14,107 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/341812c528803b8de42b9e1ee3bcaf15.png/get/
-2018-04-03 17:45:14,104 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5ccc27a8952587cfbfc09171808fbf04.png/get/
-2018-04-03 17:45:14,114 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/36ab44f8d867bd572f99c21b6efaeaad.png/get/
-2018-04-03 17:45:14,114 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9e5cfda72d6f136759857df29f6691e2.png/get/
-2018-04-03 17:45:14,112 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a2a270a2fff08ebb6cc4276b9fbcfc48.png/get/
- 14% |########                                                  | ETA:  0:00:32 15% |########                                                  | ETA:  0:00:29 16% |#########                                                 | ETA:  0:00:292018-04-03 17:45:14,851 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b20e5be3565e442e51bc828168df9fe3.png/get/
-2018-04-03 17:45:14,851 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/7a018d9ed45c7372e079a32058e75a68.png/get/
-2018-04-03 17:45:14,855 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4545ae1e31ed0695eb5c79436a7c63fc.png/get/
-2018-04-03 17:45:14,851 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/faefb0ddcd2c56ba205514a52cefdd68.png/get/
-2018-04-03 17:45:14,851 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/1f9105eec2ae73bb89feef4ca4a2b32d.png/get/
-2018-04-03 17:45:14,865 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/2cb5c722f6b909eab68efd20f858c210.png/get/
-2018-04-03 17:45:14,855 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/0b0a3b64e537df5167d4cf9ab5c6acd4.png/get/
- 17% |#########                                                 | ETA:  0:00:29 18% |##########                                                | ETA:  0:00:27 19% |###########                                               | ETA:  0:00:252018-04-03 17:45:15,220 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/33cb1989e1db91999086d88a7fc9b32a.png/get/
-2018-04-03 17:45:15,220 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/6f2b145c7f1746dd02d39a2774c78cd9.png/get/
-2018-04-03 17:45:15,223 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/ea885dff94d46337fbdbde62882cda1c.png/get/
-2018-04-03 17:45:15,224 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c7428d9567079fcbe45620c5ccbc9616.png/get/
-2018-04-03 17:45:15,226 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a47e15dd510a0b0cef451170a648d82b.png/get/
-2018-04-03 17:45:15,233 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/ef1d82309056220d6296493920b54ab2.png/get/
-2018-04-03 17:45:15,237 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/e6bc8d168f191a146e72395dee2d4f05.png/get/
- 20% |###########                                               | ETA:  0:00:25 21% |############                                              | ETA:  0:00:23 22% |############                                              | ETA:  0:00:222018-04-03 17:45:15,533 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a83759306c9871b8afb3446691f995cb.png/get/
-2018-04-03 17:45:15,592 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9d48c6c6a32b4da7571e53b935375ca2.png/get/
-2018-04-03 17:45:15,594 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9c7bc86bd62d09d654e3203edf753d6c.png/get/
-2018-04-03 17:45:15,595 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c6c30c923ec10746a32a01507d661d47.png/get/
-2018-04-03 17:45:15,595 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/22aef673a8fc9bbf6c96d356f2d5e4ec.png/get/
-2018-04-03 17:45:15,595 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a5052d9e59044c68d7a5d6b8206b369f.png/get/
-2018-04-03 17:45:15,595 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c262117486c8fd1c08032c0a6c63c750.png/get/
- 23% |#############                                             | ETA:  0:00:22 24% |#############                                             | ETA:  0:00:21 25% |##############                                            | ETA:  0:00:202018-04-03 17:45:15,903 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/51fa8019a5c0953697d92976bf76a7d3.png/get/
-2018-04-03 17:45:15,904 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/763426821dc75a3c17c7cb99d9b948b2.png/get/
-2018-04-03 17:45:15,903 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/cff7ca06cdfee0b037fabfd985660494.png/get/
-2018-04-03 17:45:15,903 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/04ca7bafcb59182d9aedd5ef5789512c.png/get/
-2018-04-03 17:45:15,907 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/60d1f33ec45e1c9b9dd6b12cafef8441.png/get/
-2018-04-03 17:45:15,904 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/3a961def8805a032f4d79949156451de.png/get/
-2018-04-03 17:45:15,904 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/91662d1ea81af1e89a9d432dd209398e.png/get/
- 26% |###############                                           | ETA:  0:00:19 27% |###############                                           | ETA:  0:00:18 28% |################                                          | ETA:  0:00:182018-04-03 17:45:16,252 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/72c2e1c078fbe1d1dbb1c9afee957607.png/get/
-2018-04-03 17:45:16,253 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/a4d96376e93e1735f9da30eeb0e6b010.png/get/
-2018-04-03 17:45:16,250 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/34d3d049e458f5356ecb9c01f11a8605.png/get/
-2018-04-03 17:45:16,250 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/bc22bb528a6ac97a970ff79b37ccdb3f.png/get/
-2018-04-03 17:45:16,257 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/0dfe276937c12c7af34e1432dbd81f6e.png/get/
-2018-04-03 17:45:16,263 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/1f8a2a7d700a9680d1aab7cc1a177e09.png/get/
-2018-04-03 17:45:16,272 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/ff380c3ed746662ecf73d5d5cab912c9.png/get/
- 29% |################                                          | ETA:  0:00:17 30% |#################                                         | ETA:  0:00:17 31% |#################                                         | ETA:  0:00:162018-04-03 17:45:16,650 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/2565c776cd7e27234f0e2ee6c3ad674e.png/get/
-2018-04-03 17:45:16,651 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4a41aec69d5843c7bd3ed42be96b652e.png/get/
-2018-04-03 17:45:16,657 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/ac75ce8d83eae3bdde7ccff96644da98.png/get/
-2018-04-03 17:45:16,654 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/ca068106f082779e1fa0af9c1d00fda8.png/get/
-2018-04-03 17:45:16,661 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/012ab859bf38c722adb08f6268721926.png/get/
-2018-04-03 17:45:16,654 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/b7fb8adb214aa98cbca826bcc0ea4ae4.png/get/
-2018-04-03 17:45:16,650 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4ddfd1f7f5c09f82e7baea95f622d8ba.png/get/
- 32% |##################                                        | ETA:  0:00:16 33% |###################                                       | ETA:  0:00:15 34% |###################                                       | ETA:  0:00:15 35% |####################                                      | ETA:  0:00:142018-04-03 17:45:16,960 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/83a9787d4cb6f3b7632b4ddfebf74367.wav/get/
-2018-04-03 17:45:16,963 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/153ddba935a589411125ae0a8ede924d.png/get/
-2018-04-03 17:45:16,964 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/de4698f6582f84ac2fad679949cae1aa.png/get/
-2018-04-03 17:45:16,960 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/449717fadd84ec7603aee1b30a7976af.png/get/
-2018-04-03 17:45:16,960 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/83c36d806dc92327b9e7049a565c6bff.wav/get/
-2018-04-03 17:45:16,964 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/91d3c7073f133f39e5352cc04b5efbc7.png/get/
-2018-04-03 17:45:16,963 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/4f7cfc0085c1cb40fb3e06827337c3ce.png/get/
- 36% |####################                                      | ETA:  0:00:14 37% |#####################                                     | ETA:  0:00:13 38% |######################                                    | ETA:  0:00:132018-04-03 17:45:17,282 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/3fab613b2fd88eb8c80924785af96321.png/get/
-2018-04-03 17:45:17,282 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/0b0de054c6489dc98de513920129e11a.png/get/
- 39% |######################                                    | ETA:  0:00:132018-04-03 17:45:17,655 INFO     Scratch project: Warrior Cat Generator(ID: 16105965)
-2018-04-03 17:45:17,697 INFO     Converting scratch project 'Warrior Cat Generator' into output folder: /home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output
-2018-04-03 17:45:17,713 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,714 INFO     Converting Sprite: 'Stage'
-2018-04-03 17:45:17,716 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,723 INFO       script type: whenKeyPressed, args: [u'down arrow']
-2018-04-03 17:45:17,765 INFO       script type: whenKeyPressed, args: [u'space']
- 40% |#######################                                   | ETA:  0:00:122018-04-03 17:45:17,773 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,786 INFO       script type: whenKeyPressed, args: [u'up arrow']
- 41% |#######################                                   | ETA:  0:00:122018-04-03 17:45:17,796 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,848 INFO     
-2018-04-03 17:45:17,849 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,851 INFO     Converting Sprite: 'Sprite4'
-2018-04-03 17:45:17,851 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,858 INFO     
-2018-04-03 17:45:17,858 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,858 INFO     Converting Sprite: 'Sprite1'
-2018-04-03 17:45:17,859 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,861 INFO       script type: whenKeyPressed, args: [u'space']
- 42% |########################                                  | ETA:  0:00:122018-04-03 17:45:17,878 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,901 INFO     
-2018-04-03 17:45:17,901 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,901 INFO     Converting Sprite: 'Sprite5'
-2018-04-03 17:45:17,903 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,904 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,914 INFO       script type: whenKeyPressed, args: [u'space']
- 43% |########################                                  | ETA:  0:00:112018-04-03 17:45:17,937 INFO     
-2018-04-03 17:45:17,937 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,937 INFO     Converting Sprite: 'Sprite6'
-2018-04-03 17:45:17,937 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,940 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,947 INFO       script type: whenKeyPressed, args: [u'space']
- 44% |#########################                                 | ETA:  0:00:112018-04-03 17:45:17,969 INFO     
-2018-04-03 17:45:17,970 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,970 INFO     Converting Sprite: 'Sprite7'
-2018-04-03 17:45:17,970 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:17,973 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:17,979 INFO       script type: whenKeyPressed, args: [u'space']
- 45% |##########################                                | ETA:  0:00:102018-04-03 17:45:18,000 INFO     
-2018-04-03 17:45:18,000 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,002 INFO     Converting Sprite: 'Sprite8'
-2018-04-03 17:45:18,002 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,007 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,015 INFO       script type: whenKeyPressed, args: [u'space']
- 46% |##########################                                | ETA:  0:00:102018-04-03 17:45:18,035 INFO     
-2018-04-03 17:45:18,036 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,036 INFO     Converting Sprite: 'Sprite11'
-2018-04-03 17:45:18,036 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,038 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,045 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,065 INFO     
-2018-04-03 17:45:18,065 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,065 INFO     Converting Sprite: 'Sprite12'
-2018-04-03 17:45:18,065 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,066 INFO       script type: whenKeyPressed, args: [u'space']
- 47% |###########################                               | ETA:  0:00:102018-04-03 17:45:18,073 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,094 INFO     
-2018-04-03 17:45:18,094 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,095 INFO     Converting Sprite: 'Sprite13'
-2018-04-03 17:45:18,095 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,095 INFO       script type: whenKeyPressed, args: [u'space']
- 48% |###########################                               | ETA:  0:00:092018-04-03 17:45:18,115 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,121 INFO     
-2018-04-03 17:45:18,122 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,122 INFO     Converting Sprite: 'Sprite14'
-2018-04-03 17:45:18,124 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,125 INFO       script type: whenKeyPressed, args: [u'space']
- 49% |############################                              | ETA:  0:00:092018-04-03 17:45:18,141 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,148 INFO     
-2018-04-03 17:45:18,148 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,150 INFO     Converting Sprite: 'Sprite16'
-2018-04-03 17:45:18,150 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,151 INFO       script type: whenKeyPressed, args: [u'space']
- 50% |#############################                             | ETA:  0:00:092018-04-03 17:45:18,167 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,174 INFO     
-2018-04-03 17:45:18,174 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,176 INFO     Converting Sprite: 'Sprite20'
-2018-04-03 17:45:18,176 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,177 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,190 INFO       script type: whenKeyPressed, args: [u'space']
- 51% |#############################                             | ETA:  0:00:082018-04-03 17:45:18,198 INFO     
-2018-04-03 17:45:18,200 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,200 INFO     Converting Sprite: 'Sprite21'
-2018-04-03 17:45:18,200 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,200 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,237 INFO       script type: whenKeyPressed, args: [u'space']
- 52% |##############################                            | ETA:  0:00:082018-04-03 17:45:18,247 INFO     
-2018-04-03 17:45:18,249 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,249 INFO     Converting Sprite: 'Sprite22'
-2018-04-03 17:45:18,249 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,250 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,265 INFO       script type: whenKeyPressed, args: [u'space']
- 53% |##############################                            | ETA:  0:00:082018-04-03 17:45:18,273 INFO     
-2018-04-03 17:45:18,273 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,275 INFO     Converting Sprite: 'Sprite10'
-2018-04-03 17:45:18,275 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,276 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,282 INFO       script type: whenKeyPressed, args: [u'space']
- 54% |###############################                           | ETA:  0:00:072018-04-03 17:45:18,301 INFO     
-2018-04-03 17:45:18,302 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,302 INFO     Converting Sprite: 'Sprite3'
-2018-04-03 17:45:18,302 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,303 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,309 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,323 INFO     
-2018-04-03 17:45:18,323 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,325 INFO     Converting Sprite: 'Sprite9'
-2018-04-03 17:45:18,325 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,325 INFO       script type: whenKeyPressed, args: [u'space']
- 55% |###############################                           | ETA:  0:00:072018-04-03 17:45:18,331 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,345 INFO     
-2018-04-03 17:45:18,345 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,345 INFO     Converting Sprite: 'Sprite15'
-2018-04-03 17:45:18,345 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,346 INFO       script type: whenKeyPressed, args: [u'space']
- 56% |################################                          | ETA:  0:00:072018-04-03 17:45:18,351 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,368 INFO     
-2018-04-03 17:45:18,368 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,368 INFO     Converting Sprite: 'Sprite2'
-2018-04-03 17:45:18,368 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,368 INFO       script type: whenClicked, args: []
- 57% |#################################                         | ETA:  0:00:062018-04-03 17:45:18,371 INFO       script type: whenKeyPressed, args: [u'space']
-2018-04-03 17:45:18,380 INFO     
-2018-04-03 17:45:18,381 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,381 INFO     Converting Sprite: 'Sprite17'
-2018-04-03 17:45:18,381 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,382 INFO       script type: whenClicked, args: []
- 58% |#################################                         | ETA:  0:00:062018-04-03 17:45:18,391 INFO       script type: whenKeyPressed, args: [u'down arrow']
-2018-04-03 17:45:18,394 INFO     
-2018-04-03 17:45:18,394 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,394 INFO     Converting Sprite: 'Sprite18'
-2018-04-03 17:45:18,394 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,395 INFO       script type: whenKeyPressed, args: [u'up arrow']
-2018-04-03 17:45:18,434 INFO       script type: whenGreenFlag, args: []
- 59% |##################################                        | ETA:  0:00:062018-04-03 17:45:18,473 INFO     
-2018-04-03 17:45:18,474 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,474 INFO     Converting Sprite: 'Sprite19'
-2018-04-03 17:45:18,474 INFO     --------------------------------------------------------------------------------
-2018-04-03 17:45:18,476 INFO     
-2018-04-03 17:45:18,486 INFO     convert Scratch project to '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output'
-2018-04-03 17:45:18,486 INFO       Creating Catrobat project structure
-2018-04-03 17:45:18,487 INFO       Saving media files
- 60% |##################################                        | ETA:  0:00:06 61% |###################################                       | ETA:  0:00:05 62% |###################################                       | ETA:  0:00:05 63% |####################################                      | ETA:  0:00:05 64% |#####################################                     | ETA:  0:00:05 65% |#####################################                     | ETA:  0:00:05 66% |######################################                    | ETA:  0:00:04 67% |######################################                    | ETA:  0:00:04 68% |#######################################                   | ETA:  0:00:04 69% |########################################                  | ETA:  0:00:04 70% |########################################                  | ETA:  0:00:04 71% |#########################################                 | ETA:  0:00:03 72% |#########################################                 | ETA:  0:00:03 73% |##########################################                | ETA:  0:00:03 74% |##########################################                | ETA:  0:00:03 75% |###########################################               | ETA:  0:00:03 76% |############################################              | ETA:  0:00:02 77% |############################################              | ETA:  0:00:02 78% |#############################################             | ETA:  0:00:02 79% |#############################################             | ETA:  0:00:02 80% |##############################################            | ETA:  0:00:02 81% |##############################################            | ETA:  0:00:02 82% |###############################################           | ETA:  0:00:02 83% |################################################          | ETA:  0:00:01 84% |################################################          | ETA:  0:00:01 85% |#################################################         | ETA:  0:00:01 86% |#################################################         | ETA:  0:00:01 87% |##################################################        | ETA:  0:00:01 88% |###################################################       | ETA:  0:00:01 89% |###################################################       | ETA:  0:00:01 90% |####################################################      | ETA:  0:00:01 91% |####################################################      | ETA:  0:00:00 92% |#####################################################     | ETA:  0:00:00 93% |#####################################################     | ETA:  0:00:00 94% |######################################################    | ETA:  0:00:00 95% |#######################################################   | ETA:  0:00:00 96% |#######################################################   | ETA:  0:00:00 97% |########################################################  | ETA:  0:00:002018-04-03 17:45:19,111 INFO       Saving project XML file
-2018-04-03 17:45:19,650 INFO       Downloading and adding automatic screenshot
-2018-04-03 17:45:19,651 INFO     Requesting web api url: https://uploads.scratch.mit.edu/projects/thumbnails/16105965.png
-100% |##########################################################| ETA:  0:00:002018-04-03 17:45:20,553 INFO       save packaged Scratch project to '/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/src/scratchtocatrobat/tools/../../../data/output/Warrior Cat Generator.catrobat'
-100% |##########################################################| Time: 0:00:11
+2018-04-05 15:41:38,293 INFO     calling converter
+  0% |                                                         | ETA:  --:--:--2018-04-05 15:41:40,309 INFO     Downloading project from URL: 'https://scratch.mit.edu/projects/18731064' to temp dir /tmp/tmpGsgJib ...
+2018-04-05 15:41:40,319 INFO     Requesting web api url: https://projects.scratch.mit.edu/internalapi/project/18731064/get/
+  2% |#                                                         | ETA:  0:02:082018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/acabbb1d9f872826fa9462826e6a62fd.png/get/
+2018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/c66f000b5d41390c7446066a1818add3.png/get/
+2018-04-05 15:41:40,934 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/15cbe99022804ddf0cc44f3fbfbc9b38.png/get/
+2018-04-05 15:41:40,936 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/9b66359528de1c7241fdf97cd742a162.wav/get/
+2018-04-05 15:41:40,937 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5d6914d3591fb4f2f35fcd7cfa081b52.wav/get/
+2018-04-05 15:41:40,937 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/d9bb29cb571a4f4429a840c96c20d825.wav/get/
+2018-04-05 15:41:40,941 INFO     Requesting web api url: http://cdn.assets.scratch.mit.edu/internalapi/asset/5ef0d508b6703f13516365e573029989.wav/get/
+  4% |##                                                        | ETA:  0:01:10  5% |##                                                        | ETA:  0:01:12  7% |####                                                      | ETA:  0:00:52  9% |#####                                                     | ETA:  0:01:15
