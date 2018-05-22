@@ -76,28 +76,44 @@ class Scratch3Block(object):
         FORMULA = 1
     def visitblock(self, block):
         scratch3_to_scratch2_map = {
-            "doifnew" : ["doIf", "CONDITION: {0{1}}", "SUBSTACK"],
-            "event_broadcast" : ["whenIReceive", ("BROADCAST_INPUT", 1, 2)] #"whenIReceive", "Trees"
+            "event_broadcast" : ["whenIReceive", ("inputs", "BROADCAST_INPUT", 1, 2)] #"whenIReceive", "Trees"
         }
-        keys = scratch3_to_scratch2_map[block.opcode]
+        if not "opcode" in scratch3_to_scratch2_map:
+            return block
+        keys = scratch3_to_scratch2_map["opcode"]
 
         newname = keys[0]
 
         for key in keys[1:]:
             if  key in block["inputs"]:
-                blockvalue = block["inputs"][key]
+
+                #blockvalue = block["inputs"][key]
+                def search(json_pos, list):
+                    if len(list) == 0:
+                        return self.visitblock(json_pos)
+
+                    else:
+                        return search(json_pos[list[0]], list[1:])
+
+                blockvalue = search(block, keys)
 
 
-"inputs":{
-             "BROADCAST_INPUT":[
-                 1,
-                 [
-                     11,
-                     "message1",
-                     "PtPY47g*YB=o?D!f@U_C"
-                 ]
-             ]
-         },
+
+
+"y%sx.1U$*5ORAHMlDK5D":{
+    "next":null,
+    "opcode":"event_broadcast",
+    "parent":"[bI:rFG}?Cfu7B`_=o5x",
+    "inputs":{
+        "BROADCAST_INPUT":[
+            1,
+            [
+                11,
+                "message1",
+                "PtPY47g*YB=o?D!f@U_C"
+            ]
+        ]
+    },
 
 
 class Scratch3Project(object):
