@@ -1,5 +1,18 @@
 from pprint import pprint
 
+import scratch3visitor.scripts
+import scratch3visitor.control
+import scratch3visitor.looks
+import scratch3visitor.sensors
+
+visitormap = {
+    "control_if" : scratch3visitor.control.visitIf,
+    "event_whenflagclicked" : scratch3visitor.scripts.visitWhenFlagClicked,
+    "sensing_touchingobject" : scratch3visitor.sensors.visitTouchingObject,
+    "looks_say" : scratch3visitor.looks.visitSay
+}
+
+
 class Scratch3Sprite(object):
     def __init__(self):
         self.isStage = False
@@ -52,6 +65,11 @@ class Scratch3Sound(object):
         pass
 
 
+
+
+
+
+
 class Scratch3Block(object):
 
     def __init__(self, block, name):
@@ -71,49 +89,52 @@ class Scratch3Block(object):
             self.x = block["x"]
             self.y = block["y"]
 
-    pass
-    class type (object):
-        FORMULA = 1
-    def visitblock(self, block):
-        scratch3_to_scratch2_map = {
-            "event_broadcast" : ["whenIReceive", ("inputs", "BROADCAST_INPUT", 1, 2)] #"whenIReceive", "Trees"
-        }
-        if not "opcode" in scratch3_to_scratch2_map:
-            return block
-        keys = scratch3_to_scratch2_map["opcode"]
-
-        newname = keys[0]
-
-        for key in keys[1:]:
-            if  key in block["inputs"]:
-
-                #blockvalue = block["inputs"][key]
-                def search(json_pos, list):
-                    if len(list) == 0:
-                        return self.visitblock(json_pos)
-
-                    else:
-                        return search(json_pos[list[0]], list[1:])
-
-                blockvalue = search(block, keys)
-
-
+    # pass
+    # class type (object):
+    #     FORMULA = 1
+    # def visitblock(self, block):
+    #     scratch3_to_scratch2_map = {
+    #         "event_broadcast" : ["whenIReceive", ("inputs", "BROADCAST_INPUT", 1, 2)] #"whenIReceive", "Trees"
+    #     }
+    #     if not "opcode" in scratch3_to_scratch2_map:
+    #         return block
+    #     keys = scratch3_to_scratch2_map["opcode"]
+    #
+    #     newname = keys[0]
+    #
+    #     for key in keys[1:]:
+    #         if  key in block["inputs"]:
+    #
+    #             #blockvalue = block["inputs"][key]
+    #             def search(json_pos, list):
+    #                 if len(list) == 0:
+    #                     return self.visitblock(json_pos)
+    #
+    #                 else:
+    #                     return search(json_pos[list[0]], list[1:])
+    #
+    #             blockvalue = search(block, keys)
 
 
-"y%sx.1U$*5ORAHMlDK5D":{
-    "next":null,
-    "opcode":"event_broadcast",
-    "parent":"[bI:rFG}?Cfu7B`_=o5x",
-    "inputs":{
-        "BROADCAST_INPUT":[
-            1,
-            [
-                11,
-                "message1",
-                "PtPY47g*YB=o?D!f@U_C"
-            ]
-        ]
-    },
+
+
+
+# "y%sx.1U$*5ORAHMlDK5D":{
+#     "next":null,
+#     "opcode":"event_broadcast",
+#     "parent":"[bI:rFG}?Cfu7B`_=o5x",
+#     "inputs":{
+#         "BROADCAST_INPUT":[
+#             1,
+#             [
+#                 11,
+#                 "message1",
+#                 "PtPY47g*YB=o?D!f@U_C"
+#             ]
+#         ]
+#     },
+
+
 
 
 class Scratch3Project(object):
@@ -161,6 +182,15 @@ class Scratch3Parser(object):
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
+            self.visitBlockAlt(block, temp_block_dict)
+
+    def visitBlockAlt(self, block, blockmap):
+        blocklist = []
+        while block != None:
+            blocklist.append(visitormap[block.opcode](block, blockmap))
+            # if block.next == None: return blocklist
+            block = block.nextBlock
+        return blocklist
 
     def printLinkedBlockList(self, block, temp_block_dict):
         #TODO: unhardcode this
