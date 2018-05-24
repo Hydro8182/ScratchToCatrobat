@@ -38,7 +38,20 @@ def visitAdd(block, blockmap):
     return ["add", num1, num2]
 
 def visitEquals(block, blockmap):
-    pass
+    block1 = get_block(block.inputs["NUM1"][1], blockmap)
+    block2 = get_block(block.inputs["NUM2"][1], blockmap)
+
+    if isinstance(block1, Scratch3Block):
+        num1 = visitBlockAlt(block1, blockmap)
+    else:
+        num1 = block1[1]
+
+    if isinstance(block2, Scratch3Block):
+        num2 = visitBlockAlt(block2, blockmap)
+    else:
+        num2 = block2[1]
+
+    return ["equals", num1, num2]
 
 def visitMathop(block, blockmap):
     num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1],blockmap), blockmap)
