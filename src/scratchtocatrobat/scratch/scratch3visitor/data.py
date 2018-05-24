@@ -1,11 +1,11 @@
-def visitSetvariableto(block):
+def visitSetvariableto(block, blockmap):
     pass
 
-def visitChangevariableby(block):
+def visitChangevariableby(block, blockmap):
     pass
 
-def visitShowvariable(block):
+def visitShowvariable(block, blockmap):
     pass
 
-def visitHidevariable(block):
+def visitHidevariable(block, blockmap):
     pass

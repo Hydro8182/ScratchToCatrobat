@@ -1,13 +1,18 @@
 from pprint import pprint
 
+def get_block(blockid, blockmap):
+    if blockid in blockmap.keys():
+        return blockmap[blockid]
+    return blockid
 
 def visitBlockAlt(block, blockmap):
+    if not isinstance(block, Scratch3Block):
+        return block
     blocklist = []
-    # while block != None:
-        # blocklist.append(visitormap[block.opcode](block, blockmap))
-        # if block.next == None: return blocklist
-        # block = block.nextBlock
-    # pprint(blocklist)
+    while block != None:
+        blocklist.append(visitormap[block.opcode](block, blockmap))
+        block = block.nextBlock
+    pprint(blocklist)
     return blocklist
 
 
@@ -179,7 +184,7 @@ class Scratch3Parser(object):
 
         #test
         for block in script_blocks:
-            # print "------------"
+            print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
             visitBlockAlt(block, temp_block_dict)
 
@@ -191,7 +196,7 @@ class Scratch3Parser(object):
         group = block.opcode.split('_')[0]
         blockcode = "_".join(block.opcode.split('_')[1:])
         blockcode = blockcode[0].upper() + blockcode[1:]
-        print( '"'+block.opcode+"\" : scratch3visitor." + group + ".visit" + blockcode + ",")
+        # print( '"'+block.opcode+"\" : scratch3visitor." + group + ".visit" + blockcode + ",")
         # if "CONDITION" in block.inputs:
         #     print "--condition--"
         #     self.printLinkedBlockList(temp_block_dict[block.inputs["CONDITION"][1]], temp_block_dict)
@@ -312,6 +317,7 @@ visitormap = {
     "sensing_answer" : scratch3visitor.sensing.visitAnswer,
     "sensing_dayssince2000" : scratch3visitor.sensing.visitDayssince2000,
     "sensing_keypressed" : scratch3visitor.sensing.visitKeypressed,
+    "sensing_keyoptions" : scratch3visitor.sensing.visitKey_options,
     "looks_backdropnumbername" : scratch3visitor.looks.visitBackdropnumbername,
     "sensing_mousex" : scratch3visitor.sensing.visitMousex,
     "sensing_mousedown" : scratch3visitor.sensing.visitMousedown,

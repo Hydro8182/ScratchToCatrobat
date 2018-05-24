@@ -1,23 +1,23 @@
 def visitWhenflagclicked(block, blockmap):
     return ["whenFlagClicked"]
 
-def visitBroadcast(block):
+def visitBroadcast(block, blockmap):
     pass
 
-def visitBroadcastandwait(block):
+def visitBroadcastandwait(block, blockmap):
     pass
 
-def visitWhenthisspriteclicked(block):
+def visitWhenthisspriteclicked(block, blockmap):
     pass
 
-def visitWhenkeypressed(block):
+def visitWhenkeypressed(block, blockmap):
     pass
 
-def visitWhenbackdropswitchesto(block):
+def visitWhenbackdropswitchesto(block, blockmap):
     pass
 
-def visitWhenbroadcastreceived(block):
+def visitWhenbroadcastreceived(block, blockmap):
     pass
 
-def visitWhengreaterthan(block):
+def visitWhengreaterthan(block, blockmap):
     pass

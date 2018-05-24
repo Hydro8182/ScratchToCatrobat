@@ -1,28 +1,28 @@
-def visitPlay(block):
+def visitPlay(block, blockmap):
     pass
 
-def visitPlayuntildone(block):
+def visitPlayuntildone(block, blockmap):
     pass
 
-def visitStopallsounds(block):
+def visitStopallsounds(block, blockmap):
     pass
 
-def visitChangeeffectby(block):
+def visitChangeeffectby(block, blockmap):
     pass
 
-def visitSeteffectto(block):
+def visitSeteffectto(block, blockmap):
     pass
 
-def visitCleareffects(block):
+def visitCleareffects(block, blockmap):
     pass
 
-def visitChangevolumeby(block):
+def visitChangevolumeby(block, blockmap):
     pass
 
-def visitSetvolumeto(block):
+def visitSetvolumeto(block, blockmap):
     pass
 
-def visitVolume(block):
+def visitVolume(block, blockmap):
     pass
 
 

@@ -1,53 +1,53 @@
-def visitMovesteps(block):
+def visitMovesteps(block, blockmap):
     pass
 
-def visitTurnright(block):
+def visitTurnright(block, blockmap):
     pass
 
-def visitTurnleft(block):
+def visitTurnleft(block, blockmap):
     pass
 
-def visitGoto(block):
+def visitGoto(block, blockmap):
     pass
 
-def visitGotoxy(block):
+def visitGotoxy(block, blockmap):
     pass
 
-def visitGlideto(block):
+def visitGlideto(block, blockmap):
     pass
 
-def visitGlidesecstoxy(block):
+def visitGlidesecstoxy(block, blockmap):
     pass
 
-def visitPointindirection(block):
+def visitPointindirection(block, blockmap):
     pass
 
-def visitPointtowards(block):
+def visitPointtowards(block, blockmap):
     pass
 
-def visitChangexby(block):
+def visitChangexby(block, blockmap):
     pass
 
-def visitSetx(block):
+def visitSetx(block, blockmap):
     pass
 
-def visitChangeyby(block):
+def visitChangeyby(block, blockmap):
     pass
 
-def visitSety(block):
+def visitSety(block, blockmap):
     pass
 
-def visitIfonedgebounce(block):
+def visitIfonedgebounce(block, blockmap):
     pass
 
-def visitSetrotationstyle(block):
+def visitSetrotationstyle(block, blockmap):
     pass
 
-def visitDirection(block):
+def visitDirection(block, blockmap):
     pass
 
-def visitYposition(block):
+def visitYposition(block, blockmap):
     pass
 
-def visitXposition(block):
+def visitXposition(block, blockmap):
     pass
