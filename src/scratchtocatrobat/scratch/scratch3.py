@@ -1,8 +1,10 @@
 from pprint import pprint
 
-def get_block(blockid, blockmap):
-    if blockid in blockmap.keys():
-        return blockmap[blockid]
+testglobalmap = dict()
+
+def get_block(blockid):
+    if blockid in testglobalmap.keys():
+        return testglobalmap[blockid]
     return blockid
 
 def visitBlockAlt(block, blockmap):
@@ -183,6 +185,8 @@ class Scratch3Parser(object):
                 script_blocks.append(temp_block_dict[blockId])
 
         #test
+        global testglobalmap
+        testglobalmap = temp_block_dict
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)

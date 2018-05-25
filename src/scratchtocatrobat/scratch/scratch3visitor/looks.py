@@ -1,4 +1,5 @@
 from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
+from scratchtocatrobat.scratch.scratch3 import testglobalmap
 
 def visitSayforsecs(block, blockmap):
     message = visitBlockAlt(blockmap[block.inputs["MESSAGE"][1]], blockmap)

@@ -3,7 +3,7 @@ from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
 def visitTouchingObject(block, blockmap):
     touch = visitBlockAlt(blockmap[block.inputs["TOUCHINGOBJECTMENU"][1]],blockmap)
     print("touching ", touch)
-    return ["touching", touch[0]]
+    return ["touching:", touch[0]]
 
 def visitTouchingObjectMenu(block, blockmap):
     selection = block.fields["TOUCHINGOBJECTMENU"][0]

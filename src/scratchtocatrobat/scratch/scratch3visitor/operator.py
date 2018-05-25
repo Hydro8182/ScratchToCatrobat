@@ -22,8 +22,8 @@ def visitMod(block, blockmap):
     pass
 
 def visitAdd(block, blockmap):
-    block1 = get_block(block.inputs["NUM1"][1], blockmap)
-    block2 = get_block(block.inputs["NUM2"][1], blockmap)
+    block1 = get_block(block.inputs["NUM1"][1])
+    block2 = get_block(block.inputs["NUM2"][1])
 
     if isinstance(block1, Scratch3Block):
         num1 = visitBlockAlt(block1, blockmap)
@@ -38,8 +38,8 @@ def visitAdd(block, blockmap):
     return ["add", num1, num2]
 
 def visitEquals(block, blockmap):
-    block1 = get_block(block.inputs["NUM1"][1], blockmap)
-    block2 = get_block(block.inputs["NUM2"][1], blockmap)
+    block1 = get_block(block.inputs["NUM1"][1])
+    block2 = get_block(block.inputs["NUM2"][1])
 
     if isinstance(block1, Scratch3Block):
         num1 = visitBlockAlt(block1, blockmap)
@@ -54,7 +54,7 @@ def visitEquals(block, blockmap):
     return ["equals", num1, num2]
 
 def visitMathop(block, blockmap):
-    num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1],blockmap), blockmap)
+    num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1]), blockmap)
     operation = block.fields["OPERATOR"][0]
     return ["mathop", operation, num1]
 
