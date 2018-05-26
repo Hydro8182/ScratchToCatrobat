@@ -1,12 +1,21 @@
 from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
 from scratchtocatrobat.scratch.scratch3 import get_block
 from scratchtocatrobat.scratch.scratch3 import testglobalmap
-from scratchtocatrobat.scratch.scratch3 import Scratch3Block
+from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric
+
+
 def visitWait(block, blockmap):
-    pass
+    duration = visitGeneric(block, 'DURATION')
+    if duration == []:
+        duration = block.inputs['DURATION'][1][1]
+    return ["wait:elapsed:from:", duration]
 
 def visitRepeat(block, blockmap):
-    pass
+    times = visitGeneric(block, "TIMES")
+    if times == []:
+        times = block.inputs["TIMES"][1][1]
+    substack = visitSubStack(block, "SUBSTACK")
+    return ["doRepeat", times, substack]
 
 def visitIf(block, blockmap):
     # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
@@ -16,33 +25,41 @@ def visitIf(block, blockmap):
     return ["doIf", condition, substack1]
 
 def visitIf_else(block, blockmap):
-    condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
-    substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK1"][1]], blockmap)
-    substack2 = visitBlockAlt(blockmap[block.inputs["SUBSTACK2"][1]], blockmap)
-    return ["doIfElse", condition[0], substack1, substack2]
+    # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
+    condition = visitCondition(block)
+    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK1"][1]], blockmap)
+    substack1 = visitSubStack(block, "SUBSTACK1")
+    substack2 = visitSubStack(block, "SUBSTACK2")
+    # substack2 = visitBlockAlt(blockmap[block.inputs["SUBSTACK2"][1]], blockmap)
+    return ["doIfElse", condition, substack1, substack2]
 
 def visitWait_until(block, blockmap):
-    pass
+    condition = visitCondition(block)
+    return ["doWaitUntil", condition]
 
 def visitRepeat_until(block, blockmap):
-    condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
-    substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
-    return ["doRepeat", condition[0], substack1]
+    # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
+    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
+    condition = visitCondition(block)
+    substack1 = visitSubStack(block, "SUBSTACK")
+    return ["doUntil", condition, substack1]
 
 def visitCreate_clone_of(block, blockmap):
-    pass
+    clone = visitGeneric(block, 'CLONE_OPTION')
+    return ["createCloneOf", clone]
 
 def visitStop(block, blockmap):
-    return["stopScripts"]
+    return ["stopScripts"]
 
 def visitStart_as_clone(block, blockmap):
-    pass
+    return ["whenCloned"]
 
 def visitDelete_this_clone(block, blockmap):
-    pass
+    return ["deleteClone"]
 
 def visitForever(block, blockmap):
-    substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
+    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
+    substack1 = visitSubStack(block, "SUBSTACK")
     return ["doForever", substack1]
 
 
@@ -62,7 +79,4 @@ def visitSubStack(block, substackkey):
         if isinstance(substackstartblock, Scratch3Block):
             substack = visitBlockAlt(substackstartblock, testglobalmap)
             return substack
-        else:
-            return []
-    else:
-        return []
+    return []

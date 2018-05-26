@@ -23,10 +23,7 @@ def visitGeneric(block, attributename):
         if isinstance(substackstartblock, Scratch3Block):
             blocklist = visitBlockAlt(substackstartblock, testglobalmap)
             return blocklist
-        else:
-            return []
-    else:
-        return []
+    return []
 
 
 
@@ -366,7 +363,7 @@ visitormap = {
     "operator_contains" : scratch3visitor.operator.visitContains,
     "operator_or" : scratch3visitor.operator.visitOr,
     "operator_length" : scratch3visitor.operator.visitLength,
-
+    "sensing_username" : scratch3visitor.sensing.visitUsername,
 
     "sensing_of_object_menu" : scratch3visitor.sensing.visitOf_object_menu,
 

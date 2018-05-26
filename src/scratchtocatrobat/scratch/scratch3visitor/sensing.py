@@ -11,7 +11,10 @@ def visitTouchingObjectMenu(block, blockmap):
 
 
 def visitAskandwait(block, blockmap):
-    pass
+    question = visitGeneric(block, "QUESTION")
+    if question == []:
+        question = block.inputs["QUESTION"][1][1]
+    return ["doAsk", question]
 
 def visitSetdragmode(block, blockmap):
     dragmode = block.fields["DRAG_MODE"][0]
@@ -30,7 +33,14 @@ def visitDistanceto(block, blockmap):
         # 1: zum join block, 2: zu distance_menu{mouse} ?????
 
 def visitColoristouchingcolor(block, blockmap):
-    pass
+    color = visitGeneric(block, "COLOR")
+    if color == []:
+        color = block.inputs["COLOR"][1][1]
+
+    color2 = visitGeneric(block, "COLOR2")
+    if color2 == []:
+        color2 = block.inputs["COLOR2"][1][1]
+    return ["touchingColor:", color, color2]
 
 def visitOf(block, blockmap):
     property = block.fields['PROPERTY'][0]
@@ -40,15 +50,16 @@ def visitOf(block, blockmap):
 
 def visitTouchingobject(block, blockmap):
     object = visitGeneric(block, 'TOUCHINGOBJECTMENU')
+    return ["touching:", object]
 
 def visitCurrent(block, blockmap):
-    pass
+    return ["timeAndDate", block.fields['CURRENTMENU'][0]]
 
 def visitAnswer(block, blockmap):
-    pass
+    return ["answer"]
 
 def visitDayssince2000(block, blockmap):
-    pass
+    return ["timestamp"]
 
 def visitKeypressed(block, blockmap):
     key = visitBlockAlt(blockmap[block.inputs["KEY_OPTION"][1]], blockmap)
@@ -73,8 +84,13 @@ def visitTimer(block, blockmap):
     return ["timer"]
 
 def visitTouchingcolor(block, blockmap):
-    pass
+    color = visitGeneric(block, "COLOR")
+    if color == []:
+        color = block.inputs["COLOR"][1]
+    return ["touchingColor:", color]
 
+def visitUsername(block, blockmap):
+    return ["getUserName"]
 
 
 def visitOf_object_menu(block, blockmap):

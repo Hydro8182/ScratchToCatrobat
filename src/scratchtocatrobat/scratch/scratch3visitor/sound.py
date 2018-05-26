@@ -1,3 +1,5 @@
+from scratchtocatrobat.scratch.scratch3 import visitGeneric
+
 def visitPlay(block, blockmap):
     pass
 
