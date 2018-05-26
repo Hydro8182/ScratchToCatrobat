@@ -17,6 +17,17 @@ def visitBlockAlt(block, blockmap):
     pprint(blocklist)
     return blocklist
 
+def visitGeneric(block, attributename):
+    if attributename in block.inputs:
+        substackstartblock = get_block(block.inputs[attributename][1])
+        if isinstance(substackstartblock, Scratch3Block):
+            blocklist = visitBlockAlt(substackstartblock, testglobalmap)
+            return blocklist
+        else:
+            return []
+    else:
+        return []
+
 
 
 class Scratch3Sprite(object):
@@ -357,6 +368,7 @@ visitormap = {
     "operator_length" : scratch3visitor.operator.visitLength,
 
 
+    "sensing_of_object_menu" : scratch3visitor.sensing.visitOf_object_menu,
 
 
 }

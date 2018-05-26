@@ -38,6 +38,7 @@ def visitAdd(block, blockmap):
     return ["add", num1, num2]
 
 def visitEquals(block, blockmap):
+    return []
     block1 = get_block(block.inputs["NUM1"][1])
     block2 = get_block(block.inputs["NUM2"][1])
 

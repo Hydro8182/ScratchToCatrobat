@@ -1,4 +1,4 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
+from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, Scratch3Block, get_block, testglobalmap, visitGeneric
 
 def visitTouchingObject(block, blockmap):
     touch = visitBlockAlt(blockmap[block.inputs["TOUCHINGOBJECTMENU"][1]],blockmap)
@@ -14,25 +14,32 @@ def visitAskandwait(block, blockmap):
     pass
 
 def visitSetdragmode(block, blockmap):
-    pass
+    dragmode = block.fields["DRAG_MODE"][0]
+    return ["dragMode", dragmode] #TODO: not implemented in old converter?
+
 
 def visitResettimer(block, blockmap):
-    pass
+    return ["timerReset"]
 
 def visitLoudness(block, blockmap):
-    pass
+    return ["soundLevel"]
 
 def visitDistanceto(block, blockmap):
     pass
+    #TODO: distanceTO(join("asdf", "asdfdsf")) hat zwei refernezen in inputs:
+        # 1: zum join block, 2: zu distance_menu{mouse} ?????
 
 def visitColoristouchingcolor(block, blockmap):
     pass
 
 def visitOf(block, blockmap):
+    property = block.fields['PROPERTY'][0]
+    object = visitGeneric(block, 'OBJECT')
+    return ["of", property, object]
     pass
 
 def visitTouchingobject(block, blockmap):
-    pass
+    object = visitGeneric(block, 'TOUCHINGOBJECTMENU')
 
 def visitCurrent(block, blockmap):
     pass
@@ -52,17 +59,27 @@ def visitKey_options(block, blockmap):
     return key
 
 def visitMousex(block, blockmap):
-    pass
+    return ["mouseX"]
 
 def visitMousedown(block, blockmap):
-    pass
+    return ["mousePressed"]
+
 
 def visitMousey(block, blockmap):
-    pass
+    return ["mouseY"]
+
 
 def visitTimer(block, blockmap):
-    pass
+    return ["timer"]
 
 def visitTouchingcolor(block, blockmap):
     pass
+
+
+
+def visitOf_object_menu(block, blockmap):
+    return block.fields['OBJECT'][0]
+
+def visitTouchingobjectmenu(block, blockmap):
+    return block.fields['TOUCHINGOBJECTMENU'][0]
 
