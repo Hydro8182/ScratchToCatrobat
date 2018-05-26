@@ -45,8 +45,8 @@ def visitColoristouchingcolor(block, blockmap):
 def visitOf(block, blockmap):
     property = block.fields['PROPERTY'][0]
     object = visitGeneric(block, 'OBJECT')
-    return ["of", property, object]
-    pass
+    return ["getAttribute:of:", property, object]
+
 
 def visitTouchingobject(block, blockmap):
     object = visitGeneric(block, 'TOUCHINGOBJECTMENU')

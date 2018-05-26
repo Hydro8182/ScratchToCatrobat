@@ -1,86 +1,105 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, get_block
+from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, get_block, visitGeneric, testglobalmap
 from scratchtocatrobat.scratch.scratch3 import Scratch3Block
+
+
 def visitSubtract(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["-", operand1, operand2]
 
 def visitGt(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return [">", operand1, operand2]
 
 def visitJoin(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "STRING1")
+    operand2 = visitOperand(block, "STRING2")
+    return ["concatenate:with:", operand1, operand2]
 
 def visitLetter_of(block, blockmap):
-    pass
+    letter = visitOperand(block, "LETTER")
+    string = visitOperand(block, "STRING")
+    return ["letter:of:", letter, string]
 
 def visitLt(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["<", operand1, operand2]
 
 def visitNot(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND")
+    return ["not", operand1]
 
 def visitMod(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["%", operand1, operand2]
 
 def visitAdd(block, blockmap):
-    block1 = get_block(block.inputs["NUM1"][1])
-    block2 = get_block(block.inputs["NUM2"][1])
-
-    if isinstance(block1, Scratch3Block):
-        num1 = visitBlockAlt(block1, blockmap)
-    else:
-        num1 = block1[1]
-
-    if isinstance(block2, Scratch3Block):
-        num2 = visitBlockAlt(block2, blockmap)
-    else:
-        num2 = block2[1]
-
-    return ["add", num1, num2]
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["+", operand1, operand2]
 
 def visitEquals(block, blockmap):
-    return []
-    block1 = get_block(block.inputs["NUM1"][1])
-    block2 = get_block(block.inputs["NUM2"][1])
-
-    if isinstance(block1, Scratch3Block):
-        num1 = visitBlockAlt(block1, blockmap)
-    else:
-        num1 = block1[1]
-
-    if isinstance(block2, Scratch3Block):
-        num2 = visitBlockAlt(block2, blockmap)
-    else:
-        num2 = block2[1]
-
-    return ["equals", num1, num2]
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["=", operand1, operand2]
 
 def visitMathop(block, blockmap):
     num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1]), blockmap)
     operation = block.fields["OPERATOR"][0]
-    return ["mathop", operation, num1]
+    return ["computeFunction:of:", operation, num1]
 
 def visitAnd(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["&", operand1, operand2]
 
 def visitRound(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "NUM")
+    return ["rounded", operand1]
 
 def visitMultiply(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["*", operand1, operand2]
 
 def visitRandom(block, blockmap):
-    pass
+    from_param = visitOperand(block, "FROM")
+    to_param = visitOperand(block, "TO")
+    return ["randomFrom:to:", from_param, to_param]
 
 def visitDivide(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["/", operand1, operand2]
 
 
 def visitContains(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "STRING1")
+    operand2 = visitOperand(block, "STRING2")
+    return ["contains:", operand1, operand2]
+    #TODO: not in scratch2?
+
 
 def visitOr(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "OPERAND1")
+    operand2 = visitOperand(block, "OPERAND2")
+    return ["|", operand1, operand2]
 
 def visitLength(block, blockmap):
-    pass
+    operand1 = visitOperand(block, "STRING")
+    return ["stringLength:", operand1]
 
+def visitOperand(block, operandname):
+    if operandname in block.inputs:
+        operandblock = get_block(block.inputs[operandname][1])
+        if isinstance(operandblock, Scratch3Block):
+            operand = visitBlockAlt(operandblock, testglobalmap)
+            return operand[0]
+        else:
+            operand = block.inputs[operandname][1][1]
+            return operand
+
+    return []

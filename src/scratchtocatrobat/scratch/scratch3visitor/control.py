@@ -66,7 +66,7 @@ def visitForever(block, blockmap):
 
 def visitCondition(block):
     if "CONDITION" in block.inputs:
-        conditionblock = get_block(block["CONDITION"][1])
+        conditionblock = get_block(block.inputs["CONDITION"][1])
         if isinstance(conditionblock, Scratch3Block):
             condition = visitBlockAlt(conditionblock, testglobalmap)
             return condition[0]
