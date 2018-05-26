@@ -366,6 +366,6 @@ visitormap = {
     "sensing_username" : scratch3visitor.sensing.visitUsername,
 
     "sensing_of_object_menu" : scratch3visitor.sensing.visitOf_object_menu,
-
+    "sound_sounds_menu" : scratch3visitor.sound.visitSounds_menu,
 
 }
