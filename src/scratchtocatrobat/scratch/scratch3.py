@@ -367,5 +367,8 @@ visitormap = {
 
     "sensing_of_object_menu" : scratch3visitor.sensing.visitOf_object_menu,
     "sound_sounds_menu" : scratch3visitor.sound.visitSounds_menu,
+    "motion_goto_menu" : scratch3visitor.motion.visitGoto_menu,
+    "motion_glideto_menu" : scratch3visitor.motion.visitGlideto_menu,
+    "motion_pointtowards_menu" : scratch3visitor.motion.visitPointtowards_menu,
 
 }

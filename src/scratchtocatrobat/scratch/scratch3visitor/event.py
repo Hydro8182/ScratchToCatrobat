@@ -1,3 +1,5 @@
+from scratchtocatrobat.scratch.scratch3 import visitGeneric
+
 def visitWhenflagclicked(block, blockmap):
     return ["whenFlagClicked"]
 
@@ -8,16 +10,22 @@ def visitBroadcastandwait(block, blockmap):
     pass
 
 def visitWhenthisspriteclicked(block, blockmap):
-    pass
+    return ["whenClicked"]
 
 def visitWhenkeypressed(block, blockmap):
-    pass
+    key = block.fields["KEY_OPTION"][0]
+    return ["whenKeyPressed", key]
 
 def visitWhenbackdropswitchesto(block, blockmap):
-    pass
+    backdrop = block.fields["BACKDROP"][0]
+    return ["whenSceneStarts", backdrop]
 
 def visitWhenbroadcastreceived(block, blockmap):
-    pass
+    message = block.fields["BROADCAST_OPTION"][0]
+    return ["whenIReceive", message]
+
 
 def visitWhengreaterthan(block, blockmap):
-    pass
+    sensor = block.fields["WHENGREATERTHANMENU"][0]
+    value = visitGeneric(block, "VALUE")
+    return ["whenSensorGreaterThan", sensor, value]
