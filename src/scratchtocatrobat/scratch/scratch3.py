@@ -23,28 +23,9 @@ def visitGeneric(block, attributename):
         if isinstance(substackstartblock, Scratch3Block):
             blocklist = visitBlockAlt(substackstartblock, testglobalmap)
             return blocklist
+        return get_block(block.inputs[attributename][1][1])
     return []
 
-
-
-class Scratch3Sprite(object):
-    def __init__(self):
-        self.isStage = False
-        self.objName = "__UNSET__"
-        self.variables = []
-        self.lists = []
-        self.scripts = []
-        self.sounds = []
-        self.costumes = []
-        self.currentCostumeIndex = 0
-        self.scratchX = 0
-        self.scratchY = 0
-        self.scale = 1
-        self.direction = 90
-        self.rotationStyle = "normal"
-        self.isDraggable = False
-        self.visible = False
-        self.spriteInfo = []
 
 class Scratch3Script(object):
     def __init__(self):
@@ -170,13 +151,28 @@ class Scratch3Parser(object):
 
     def parse_sprites(self):
         sprites = self.raw_dict["targets"]
-        project = Scratch3Project()
+        scratch2Data = {}
+        scratch2Data['sprites'] = []
+        stageSprite = {}
 
         for sprite in sprites:
-            self.parse_sprite(project, sprite)
-        return project
+            spriteContent = self.parse_sprite(sprite)
+            if sprite["isStage"]:
+                stageSprite = spriteContent
+            else:
+                scratch2Data['sprites'].append(spriteContent)
 
-    def parse_sprite(self, project, sprite):
+        stageSprite["children"] = []
+        for sprite in scratch2Data['sprites']:
+            stageSprite["children"].append(sprite)
+        stageSprite["info"] = self.raw_dict["meta"]
+        stageSprite["penLayerMD5"] = "Scratch3Doesn'tHaveThis"
+        stageSprite["penLayerID"] = 0 #TODO: this doesn't exist in scratch3 what is this!?
+        stageSprite["tempoBPM"] = 60
+        stageSprite["videoAlpha"] = 0.5
+        return stageSprite
+
+    def parse_sprite(self, sprite):
         #project.sprites.append(Scratch3Sprite(sprite))
         #pprint(sprite["blocks"])
 
@@ -191,16 +187,62 @@ class Scratch3Parser(object):
         for blockId in temp_block_dict:
             if temp_block_dict[blockId].topLevel:
                 script_blocks.append(temp_block_dict[blockId])
-
+        scratch2ProjectDict = {}
         #test
         global testglobalmap
         testglobalmap = temp_block_dict
+        scratch2ProjectDict["scripts"] = []
+
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
-            visitBlockAlt(block, temp_block_dict)
+            scratch2ProjectDict["scripts"] += visitBlockAlt(block, temp_block_dict)
 
 
+        scratch2ProjectDict["variables"] = "NO variables"
+        scratch2ProjectDict["costumes"] = []
+        for s3Costume in sprite["costumes"]:
+            s2Costume = {}
+            s2Costume["costumeName"] = s3Costume["name"]
+            s2Costume["baseLayerID"] = s3Costume["assetId"]
+            s2Costume["baseLayerMD5"] = s3Costume["md5ext"]
+            s2Costume["rotationCenterX"]= s3Costume["rotationCenterX"]
+            s2Costume["rotationCenterY"]= s3Costume["rotationCenterX"]
+            if "bitmapResolution" in s3Costume:
+                s2Costume["bitmapResolution"] = s3Costume["bitmapResolution"]
+            else:
+                s2Costume["bitmapResolution"] =  1
+            scratch2ProjectDict["costumes"].append(s2Costume)
+
+        scratch2ProjectDict["sounds"] = []
+        i = 0
+        for s3Sound in sprite["sounds"]:
+            i += 1
+            s2Sound = {}
+            s2Sound["assetId"] =  s3Sound["assetId"]
+            s2Sound["soundName"] =  s3Sound["name"]
+            s2Sound["format"] =  s3Sound["format"]
+            s2Sound["rate"] =  s3Sound["rate"]
+            s2Sound["sampleCount"] =  s3Sound["sampleCount"]
+            s2Sound["md5"] =  s3Sound["md5ext"]
+            s2Sound["soundID"] = i #TODO this could be wrong
+
+
+        scratch2ProjectDict["objName"] = sprite["name"]
+        scratch2ProjectDict["currentCostumeIndex"] = sprite["currentCostume"]
+        scratch2ProjectDict["isStage"] = sprite["isStage"]
+        if not sprite['isStage']:
+            scratch2ProjectDict["scratchX"] = sprite["x"]
+            scratch2ProjectDict["scratchY"] = sprite["y"]
+            scratch2ProjectDict["scale"] = sprite["size"]
+            scratch2ProjectDict["direction"] = sprite["direction"]
+            scratch2ProjectDict["rotationStyle"] = sprite["rotationStyle"]
+            scratch2ProjectDict["isDraggable"] = sprite["draggable"]
+            # scratch2ProjectDict["indexInLibrary"] = sprite["indexInLibrary"]
+            # scratch2ProjectDict["spriteInfo"] = sprite["spriteInfo"]
+            scratch2ProjectDict["visible"] = sprite["visible"]
+
+        return scratch2ProjectDict
 
     def printLinkedBlockList(self, block, temp_block_dict):
         #TODO: unhardcode this

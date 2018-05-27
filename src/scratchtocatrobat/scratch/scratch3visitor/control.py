@@ -24,7 +24,7 @@ def visitIf(block, blockmap):
 
 def visitIf_else(block, blockmap):
     condition = visitCondition(block)
-    substack1 = visitSubStack(block, "SUBSTACK1")
+    substack1 = visitSubStack(block, "SUBSTACK")
     substack2 = visitSubStack(block, "SUBSTACK2")
     return ["doIfElse", condition, substack1, substack2]
 

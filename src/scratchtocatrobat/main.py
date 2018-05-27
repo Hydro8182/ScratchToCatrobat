@@ -137,9 +137,13 @@ def run_converter(scratch_project_file_or_url, output_dir,
             if isScratch3Project :
                 from scratch.scratch3 import Scratch3Parser
                 parser = Scratch3Parser(os.path.join(scratch_project_dir, helpers.config.get("SCRATCH","code_file_name")))
-                project = parser.parse_sprites()
-            else:
-                project = scratch.Project(scratch_project_dir, progress_bar=progress_bar)
+                scratch2Data = parser.parse_sprites()
+                with open(os.path.join(scratch_project_dir, helpers.config.get("SCRATCH","code_file_name")),'w') as file:
+                    file.flush()
+                    import json
+                    #json.dump(json.JSONEncoder.encode(scratch3data),file)
+                    json.dump(scratch2Data, file)
+            project = scratch.Project(scratch_project_dir, progress_bar=progress_bar)
             log.info("Converting scratch project '%s' into output folder: %s", project.name, output_dir)
             context = converter.Context()
             converted_project = converter.converted(project, progress_bar, context)
