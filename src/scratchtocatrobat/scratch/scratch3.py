@@ -209,15 +209,7 @@ class Scratch3Parser(object):
         blockcode = "_".join(block.opcode.split('_')[1:])
         blockcode = blockcode[0].upper() + blockcode[1:]
         # print( '"'+block.opcode+"\" : scratch3visitor." + group + ".visit" + blockcode + ",")
-        # if "CONDITION" in block.inputs:
-        #     print "--condition--"
-        #     self.printLinkedBlockList(temp_block_dict[block.inputs["CONDITION"][1]], temp_block_dict)
-        # if "SUBSTACK" in block.inputs:
-        #     print "--substack--"
-        #     self.printLinkedBlockList(temp_block_dict[block.inputs["SUBSTACK"][1]], temp_block_dict)
-        # if "SUBSTACK2" in block.inputs:
-        #     print "--substack2--"
-        #     self.printLinkedBlockList(temp_block_dict[block.inputs["SUBSTACK2"][1]], temp_block_dict)
+
         if block.nextBlock is None:
             return
         self.printLinkedBlockList(block.nextBlock, temp_block_dict)
@@ -371,4 +363,17 @@ visitormap = {
     "motion_glideto_menu" : scratch3visitor.motion.visitGlideto_menu,
     "motion_pointtowards_menu" : scratch3visitor.motion.visitPointtowards_menu,
 
+    "data_addtolist" : scratch3visitor.data.visitAddtolist,
+    "data_deleteoflist" : scratch3visitor.data.visitDeleteoflist,
+    "data_insertatlist" : scratch3visitor.data.visitInsertatlist,
+    "data_replaceitemoflist" : scratch3visitor.data.visitReplaceitemoflist,
+    "data_itemoflist" : scratch3visitor.data.visitItemoflist,
+    "data_itemnumoflist" : scratch3visitor.data.visitItemnumoflist,
+    "data_lengthoflist" : scratch3visitor.data.visitLengthoflist,
+    "data_listcontainsitem" : scratch3visitor.data.visitListcontainsitem,
+    "data_showlist" : scratch3visitor.data.visitShowlist,
+    "data_hidelist" : scratch3visitor.data.visitHidelist,
+
+    "looks_costume" : scratch3visitor.looks.visitCostume,
+    "looks_backdrops" : scratch3visitor.looks.visitBackdrops,
 }

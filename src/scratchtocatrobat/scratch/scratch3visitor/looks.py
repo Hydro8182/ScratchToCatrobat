@@ -1,64 +1,86 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
-from scratchtocatrobat.scratch.scratch3 import testglobalmap
+from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitSayforsecs(block, blockmap):
-    message = visitBlockAlt(blockmap[block.inputs["MESSAGE"][1]], blockmap)
-    duration = visitBlockAlt(blockmap[block.inputs["SECS"][1]], blockmap)
-    return ["sayFor", message, duration]
+    message = visitGeneric(block, "MESSAGE")
+    duration = visitGeneric(block, "SECS")
+    return ["say:duration:elapsed:from:", message, duration]
 
 def visitSay(block, blockmap):
-    pass
+    message = visitGeneric(block, "MESSAGE")
+    return ["say:", message]
 
 def visitThinkforsecs(block, blockmap):
-    pass
+    message = visitGeneric(block, "MESSAGE")
+    duration = visitGeneric(block, "SECS")
+    return ["think:duration:elapsed:from:", message, duration]
 
 def visitThink(block, blockmap):
-    pass
+    message = visitGeneric(block, "MESSAGE")
+    return ["think:", message]
 
 def visitSwitchcostumeto(block, blockmap):
-    pass
+    costume = visitGeneric(block, "COSTUME")
+    return ["lookLike:", costume]
 
 def visitNextcostume(block, blockmap):
-    pass
+    return ["nextCostume"]
 
 def visitSwitchbackdropto(block, blockmap):
-    pass
+    backdrop = visitGeneric(block, "BACKDROP")
+    return ["startScene", backdrop]
 
 def visitNextbackdrop(block, blockmap):
-    pass
+    return ["nextBackdropPlaceholder"] #TODO: not in scratch2
 
 def visitChangesizeby(block, blockmap):
-    pass
+    size = visitGeneric(block, "CHANGE")
+    return ["changeSizeBy:", size]
 
 def visitSetsizeto(block, blockmap):
-    pass
+    size = visitGeneric(block, "SIZE")
+    return ["setSizeTo:", size]
 
 def visitChangeeffectby(block, blockmap):
-    pass
+    effect = block.fields["EFFECT"][0]
+    change = visitGeneric(block, "CHANGE")
+    return ["changeGraphicEffect:by:", effect, change]
 
 def visitSeteffectto(block, blockmap):
-    pass
+    effect = block.fields["EFFECT"][0]
+    value = visitGeneric(block, "VALUE")
+    return ["setGraphicEffect:to:", effect, value]
 
 def visitCleargraphiceffects(block, blockmap):
-    pass
+    return ["filterReset"]
 
 def visitShow(block, blockmap):
-    pass
+    return ["show"]
 
 def visitHide(block, blockmap):
-    pass
+    return ["hide"]
 
 def visitGotofrontback(block, blockmap):
-    pass
+    return ["comeToFront"]
 
 def visitGoforwardbackwardlayers(block, blockmap):
-    pass
+    direction = block.fields["FORWARD_BACKWARD"][0]
+    change = visitGeneric(block, "NUM")
+    return ["goBackByLayers:", direction, change]
 
 def visitCostumenumbername(block, blockmap):
-    pass
+    name_number = block.fields["NUMBER_NAME"][0]
+    return ["costumeIndexPlaceholder"]#TODO:nur number in scratch2?
+
 
 def visitBackdropnumbername(block, blockmap):
-    pass
+    name_number = block.fields["NUMBER_NAME"][0]
+    return ["sceneNamePlaceholder"] #TODO: nur name in scratch2
 
 def visitSize(block, blockmap):
-    pass
+    return ["scale"]
+
+def visitCostume(block, blockmap):
+    return block.fields['COSTUME'][0]
+
+def visitBackdrops(block, blockmap):
+    return block.fields['BACKDROP'][0]

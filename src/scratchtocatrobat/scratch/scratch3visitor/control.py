@@ -18,19 +18,14 @@ def visitRepeat(block, blockmap):
     return ["doRepeat", times, substack]
 
 def visitIf(block, blockmap):
-    # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
     condition = visitCondition(block)
-    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
     substack1 = visitSubStack(block, "SUBSTACK")
     return ["doIf", condition, substack1]
 
 def visitIf_else(block, blockmap):
-    # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
     condition = visitCondition(block)
-    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK1"][1]], blockmap)
     substack1 = visitSubStack(block, "SUBSTACK1")
     substack2 = visitSubStack(block, "SUBSTACK2")
-    # substack2 = visitBlockAlt(blockmap[block.inputs["SUBSTACK2"][1]], blockmap)
     return ["doIfElse", condition, substack1, substack2]
 
 def visitWait_until(block, blockmap):
@@ -38,8 +33,6 @@ def visitWait_until(block, blockmap):
     return ["doWaitUntil", condition]
 
 def visitRepeat_until(block, blockmap):
-    # condition = visitBlockAlt(blockmap[block.inputs["CONDITION"][1]], blockmap)
-    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
     condition = visitCondition(block)
     substack1 = visitSubStack(block, "SUBSTACK")
     return ["doUntil", condition, substack1]
@@ -58,7 +51,6 @@ def visitDelete_this_clone(block, blockmap):
     return ["deleteClone"]
 
 def visitForever(block, blockmap):
-    # substack1 = visitBlockAlt(blockmap[block.inputs["SUBSTACK"][1]], blockmap)
     substack1 = visitSubStack(block, "SUBSTACK")
     return ["doForever", substack1]
 
