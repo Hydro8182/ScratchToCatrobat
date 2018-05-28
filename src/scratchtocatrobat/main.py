@@ -142,7 +142,10 @@ def run_converter(scratch_project_file_or_url, output_dir,
                     file.flush()
                     import json
                     #json.dump(json.JSONEncoder.encode(scratch3data),file)
-                    json.dump(scratch2Data, file)
+                    json.dump(scratch2Data, file, sort_keys=True, indent=4, separators=(',', ': '))
+                with open("/home/philipp/IdeaProjects/testpython/ScratchToCatrobat/data/output/project.json",'w') as file:
+                    file.flush()
+                    json.dump(scratch2Data, file, sort_keys=True, indent=4, separators=(',', ': '))
             project = scratch.Project(scratch_project_dir, progress_bar=progress_bar)
             log.info("Converting scratch project '%s' into output folder: %s", project.name, output_dir)
             context = converter.Context()

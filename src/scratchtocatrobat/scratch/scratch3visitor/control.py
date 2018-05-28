@@ -41,6 +41,9 @@ def visitCreate_clone_of(block, blockmap):
     clone = visitGeneric(block, 'CLONE_OPTION')
     return ["createCloneOf", clone]
 
+def visitCreate_clone_of_menu(block, blockmap):
+    return block.fields["CLONE_OPTION"][0]
+
 def visitStop(block, blockmap):
     return ["stopScripts"]
 
@@ -60,15 +63,16 @@ def visitCondition(block):
     if "CONDITION" in block.inputs:
         conditionblock = get_block(block.inputs["CONDITION"][1])
         if isinstance(conditionblock, Scratch3Block):
-            condition = visitBlockAlt(conditionblock, testglobalmap)
+            # condition = visitBlockAlt(conditionblock, testglobalmap)
+            condition = visitGeneric(block, "CONDITION")
             return condition[0]
-    else:
-        return []
+    return []
 
 def visitSubStack(block, substackkey):
     if substackkey in block.inputs:
         substackstartblock = get_block(block.inputs[substackkey][1])
         if isinstance(substackstartblock, Scratch3Block):
             substack = visitBlockAlt(substackstartblock, testglobalmap)
+            # substack = visitGeneric(block, "CONDITION")
             return substack
     return []

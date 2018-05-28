@@ -2,11 +2,11 @@ from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitPlay(block, blockmap):
     sound = visitGeneric(block, 'SOUND_MENU')
-    return ['playSound', sound]
+    return ['playSound:', sound[0]]
 
 def visitPlayuntildone(block, blockmap):
     sound = visitGeneric(block, 'SOUND_MENU')
-    return ['playSoundAndWait', sound]
+    return ['playSoundAndWait', sound[0]]
 
 def visitStopallsounds(block, blockmap):
     return ["stopAllSounds"]
@@ -24,13 +24,13 @@ def visitChangevolumeby(block, blockmap):
     volume = visitGeneric(block, "VOLUME")
     if volume == []:
         volume = block.inputs['VOLUME'][1][1]
-    return ["changeVolumeBy", volume]
+    return ["changeVolumeBy:", volume]
 
 def visitSetvolumeto(block, blockmap):
     volume = visitGeneric(block, "VOLUME")
     if volume == []:
         volume = block.inputs['VOLUME'][1][1]
-    return ["setVolumeTo", volume]
+    return ["setVolumeTo:", volume]
 
 def visitVolume(block, blockmap):
     return ["volume"]

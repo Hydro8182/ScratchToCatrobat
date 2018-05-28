@@ -17,13 +17,21 @@ def visitBlockAlt(block, blockmap):
     pprint(blocklist)
     return blocklist
 
+def visitLiteral(literal):
+    if literal[0] == 12:
+        return ["readVariable", literal[1]]
+    else:
+        return literal[1]
+
+
 def visitGeneric(block, attributename):
     if attributename in block.inputs:
         substackstartblock = get_block(block.inputs[attributename][1])
         if isinstance(substackstartblock, Scratch3Block):
             blocklist = visitBlockAlt(substackstartblock, testglobalmap)
             return blocklist
-        return get_block(block.inputs[attributename][1][1])
+        return visitLiteral(block.inputs[attributename][1])
+        # return get_block(block.inputs[attributename][1][1])
     return []
 
 
@@ -196,10 +204,15 @@ class Scratch3Parser(object):
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
-            scratch2ProjectDict["scripts"] += visitBlockAlt(block, temp_block_dict)
-
-
-        scratch2ProjectDict["variables"] = "NO variables"
+            scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(block, temp_block_dict)]]
+        variables = []
+        for var in sprite["variables"].values():
+            curvar = {}
+            curvar["name"] = var[0]
+            curvar["value"] = var[1]
+            curvar["isPersistent"] = var[2] if len(var) > 2 else False
+            variables.append(curvar)
+        scratch2ProjectDict["variables"] = variables
         scratch2ProjectDict["costumes"] = []
         for s3Costume in sprite["costumes"]:
             s2Costume = {}
@@ -218,6 +231,7 @@ class Scratch3Parser(object):
         i = 0
         for s3Sound in sprite["sounds"]:
             i += 1
+            print s3Sound
             s2Sound = {}
             s2Sound["assetId"] =  s3Sound["assetId"]
             s2Sound["soundName"] =  s3Sound["name"]
@@ -226,6 +240,7 @@ class Scratch3Parser(object):
             s2Sound["sampleCount"] =  s3Sound["sampleCount"]
             s2Sound["md5"] =  s3Sound["md5ext"]
             s2Sound["soundID"] = i #TODO this could be wrong
+            scratch2ProjectDict["sounds"].append(s2Sound)
 
 
         scratch2ProjectDict["objName"] = sprite["name"]
@@ -234,7 +249,7 @@ class Scratch3Parser(object):
         if not sprite['isStage']:
             scratch2ProjectDict["scratchX"] = sprite["x"]
             scratch2ProjectDict["scratchY"] = sprite["y"]
-            scratch2ProjectDict["scale"] = sprite["size"]
+            scratch2ProjectDict["scale"] = sprite["size"] / 100.0
             scratch2ProjectDict["direction"] = sprite["direction"]
             scratch2ProjectDict["rotationStyle"] = sprite["rotationStyle"]
             scratch2ProjectDict["isDraggable"] = sprite["draggable"]
@@ -337,6 +352,7 @@ visitormap = {
     "control_wait_until" : scratch3visitor.control.visitWait_until,
     "control_repeat_until" : scratch3visitor.control.visitRepeat_until,
     "control_create_clone_of" : scratch3visitor.control.visitCreate_clone_of,
+    "control_create_clone_of_menu" : scratch3visitor.control.visitCreate_clone_of_menu,
     "control_stop" : scratch3visitor.control.visitStop,
 
     "control_start_as_clone" : scratch3visitor.control.visitStart_as_clone,

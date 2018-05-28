@@ -1,7 +1,7 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitWhenflagclicked(block, blockmap):
-    return ["whenFlagClicked"]
+    return ["whenGreenFlag"]
 
 def visitBroadcast(block, blockmap):
     pass
