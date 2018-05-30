@@ -2,8 +2,8 @@ from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, get_block, visitGe
 
 
 def visitSubtract(block, blockmap):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+    operand1 = visitGeneric(block, "NUM1")
+    operand2 = visitGeneric(block, "NUM2")
     return ["-", operand1, operand2]
 
 def visitGt(block, blockmap):
@@ -31,13 +31,13 @@ def visitNot(block, blockmap):
     return ["not", operand1]
 
 def visitMod(block, blockmap):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+    operand1 = visitGeneric(block, "NUM1")
+    operand2 = visitGeneric(block, "NUM2")
     return ["%", operand1, operand2]
 
 def visitAdd(block, blockmap):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+    operand1 = visitGeneric(block, "NUM1")
+    operand2 = visitGeneric(block, "NUM2")
     return ["+", operand1, operand2]
 
 def visitEquals(block, blockmap):
@@ -46,7 +46,8 @@ def visitEquals(block, blockmap):
     return ["=", operand1, operand2]
 
 def visitMathop(block, blockmap):
-    num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1]), blockmap)
+    #num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1]), blockmap)
+    num1 = visitGeneric(block, "NUM")
     operation = block.fields["OPERATOR"][0]
     return ["computeFunction:of:", operation, num1]
 
@@ -60,8 +61,8 @@ def visitRound(block, blockmap):
     return ["rounded", operand1]
 
 def visitMultiply(block, blockmap):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+    operand1 = visitGeneric(block, "NUM1")
+    operand2 = visitGeneric(block, "NUM2")
     return ["*", operand1, operand2]
 
 def visitRandom(block, blockmap):
@@ -70,8 +71,8 @@ def visitRandom(block, blockmap):
     return ["randomFrom:to:", from_param, to_param]
 
 def visitDivide(block, blockmap):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+    operand1 = visitGeneric(block, "NUM1")
+    operand2 = visitGeneric(block, "NUM2")
     return ["/", operand1, operand2]
 
 

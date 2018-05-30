@@ -12,16 +12,28 @@ def visitBlockAlt(block, blockmap):
         return block
     blocklist = []
     while block != None:
-        blocklist.append(visitormap[block.opcode](block, blockmap))
+        subblock = visitormap[block.opcode](block, blockmap)
+        blocklist.append(subblock)
         block = block.nextBlock
+    #if isinstance(subblock, list) and len(subblock) == 1:
+    #    subblock = subblock[0]
+
     pprint(blocklist)
     return blocklist
 
 def visitLiteral(literal):
     if literal[0] == 12:
         return ["readVariable", literal[1]]
-    elif literal[0] == 4:
+    elif literal[0] == 5 or literal[0] == 6 or literal[0] == 7:
+        if literal[1] == None:
+            return 0
         return int(literal[1])
+    elif literal[0] == 4 or literal[0] == 8:
+        if literal[1] == '':
+            return 0.0
+        return float(literal[1])
+    elif literal[0] == 9:
+        return literal[1]
     else:
         return literal[1]
 
@@ -153,11 +165,27 @@ class Scratch3Project(object):
 class Scratch3Parser(object):
     scratch2dict = {}
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, scratch_project_dir):
         import json
         print file_path
-        with open(file_path, "r") as file:
-            self.raw_dict = json.load(file)
+        with open(file_path, "r+") as file1:
+            import glob
+            import os
+            from scratchtocatrobat.tools import common
+            file_content = file1.read()
+            for file in glob.glob(scratch_project_dir + "/*.*"):
+                if not file.endswith(".json"):
+
+                    file_hash = common.md5_hash(file)
+                    newname = scratch_project_dir+"/"+ file_hash +"." +file.split(".")[-1]
+                    os.rename(file, newname)
+                    oldfile = "".join(file.split('/')[-1].split('.')[0:-1])
+                    print oldfile
+                    print file_hash
+                    file_content = file_content.replace(oldfile ,file_hash)
+            file1.flush()
+            file1.write(file_content)
+            self.raw_dict = json.loads(file_content)
 
     def parse_sprites(self):
         sprites = self.raw_dict["targets"]

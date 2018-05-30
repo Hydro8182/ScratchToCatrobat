@@ -24,10 +24,13 @@ def visitGotoxy(block, blockmap):
 def visitGlideto(block, blockmap):
     secs = visitGeneric(block, "SECS")
     to = visitGeneric(block, "TO")
-    return ["glideTo:", secs, to] #TODO: not in scratch2?
+    return ["glideTo:", secs[0], to[0]] #TODO: not in scratch2?
 
 def visitGlidesecstoxy(block, blockmap):
     secs = visitGeneric(block, "SECS")
+    #TODO: properly parse
+    if isinstance(secs, list) and len(secs) == 1:
+        secs = secs[0]
     x = visitGeneric(block, "X")
     y = visitGeneric(block, "Y")
     return ["glideSecs:toX:y:elapsed:from:", secs, x, y]

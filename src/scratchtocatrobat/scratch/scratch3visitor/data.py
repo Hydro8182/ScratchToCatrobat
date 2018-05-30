@@ -3,20 +3,30 @@ from scratchtocatrobat.scratch.scratch3 import visitGeneric
 def visitSetvariableto(block, blockmap):
     variable = block.fields["VARIABLE"][0]
     value = visitGeneric(block, "VALUE")
+    #TODO: properly parse
+    if isinstance(value, list) and len(value) == 1:
+        value = value[0]
+
     return ["setVar:to:", variable, value]
 
 def visitChangevariableby(block, blockmap):
     variable = block.fields["VARIABLE"][0]
     value = visitGeneric(block, "VALUE")
+    #TODO: properly parse
+    if isinstance(value, list) and len(value) == 1:
+        value = value[0]
     return ["changeVar:by:", variable, value]
 
 def visitShowvariable(block, blockmap):
     variable = block.fields["VARIABLE"][0]
-    return ["showVariable", variable]
+    #TODO: properly parse
+    #if isinstance(value, list) and len(value) > 1:
+    #    value = value[0]
+    return ["showVariable:", variable]
 
 def visitHidevariable(block, blockmap):
     variable = block.fields["VARIABLE"][0]
-    return ["hideVariable", variable]
+    return ["hideVariable:", variable]
 
 def visitRead_variable(block, blockmap):
     pass

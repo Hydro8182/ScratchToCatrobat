@@ -135,9 +135,14 @@ def run_converter(scratch_project_file_or_url, output_dir,
                     progress_bar.expected_progress = project.expected_progress_of_local_project(progress_bar)
 
             if isScratch3Project :
+
+
+
                 from scratch.scratch3 import Scratch3Parser
-                parser = Scratch3Parser(os.path.join(scratch_project_dir, helpers.config.get("SCRATCH","code_file_name")))
+                parser = Scratch3Parser(os.path.join(scratch_project_dir, helpers.config.get("SCRATCH","code_file_name")), scratch_project_dir)
                 scratch2Data = parser.parse_sprites()
+
+
                 with open(os.path.join(scratch_project_dir, helpers.config.get("SCRATCH","code_file_name")),'w') as file:
                     file.flush()
                     import json
