@@ -39,7 +39,7 @@ def visitRepeat_until(block, blockmap):
 
 def visitCreate_clone_of(block, blockmap):
     clone = visitGeneric(block, 'CLONE_OPTION')
-    return ["createCloneOf", clone]
+    return ["createCloneOf", clone[0]]
 
 def visitCreate_clone_of_menu(block, blockmap):
     return block.fields["CLONE_OPTION"][0]

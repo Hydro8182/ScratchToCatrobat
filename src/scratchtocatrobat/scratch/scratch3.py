@@ -20,6 +20,8 @@ def visitBlockAlt(block, blockmap):
 def visitLiteral(literal):
     if literal[0] == 12:
         return ["readVariable", literal[1]]
+    elif literal[0] == 4:
+        return int(literal[1])
     else:
         return literal[1]
 

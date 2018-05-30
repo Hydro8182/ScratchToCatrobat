@@ -62,8 +62,9 @@ def visitDayssince2000(block, blockmap):
     return ["timestamp"]
 
 def visitKeypressed(block, blockmap):
-    key = visitBlockAlt(blockmap[block.inputs["KEY_OPTION"][1]], blockmap)
-    return ["keyPressed", key]
+    # key = visitBlockAlt(blockmap[block.inputs["KEY_OPTION"][1]], blockmap)
+    key = visitGeneric(block, "KEY_OPTION")
+    return ["keyPressed:", key[0]] #TODO: is this always key[0]?
 
 def visitKey_options(block, blockmap):
     key = block.fields["KEY_OPTION"][0]

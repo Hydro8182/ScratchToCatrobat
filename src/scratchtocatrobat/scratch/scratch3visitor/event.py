@@ -4,10 +4,12 @@ def visitWhenflagclicked(block, blockmap):
     return ["whenGreenFlag"]
 
 def visitBroadcast(block, blockmap):
-    pass
+    message = visitGeneric(block, "BROADCAST_INPUT")
+    return ["broadcast:", message]
 
 def visitBroadcastandwait(block, blockmap):
-    pass
+    message = visitGeneric(block, "BROADCAST_INPUT")
+    return ["doBroadcastAndWait", message]
 
 def visitWhenthisspriteclicked(block, blockmap):
     return ["whenClicked"]
@@ -26,6 +28,6 @@ def visitWhenbroadcastreceived(block, blockmap):
 
 
 def visitWhengreaterthan(block, blockmap):
-    sensor = block.fields["WHENGREATERTHANMENU"][0]
+    sensor = block.fields["WHENGREATERTHANMENU"][0].lower()
     value = visitGeneric(block, "VALUE")
     return ["whenSensorGreaterThan", sensor, value]

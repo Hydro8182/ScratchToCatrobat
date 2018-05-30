@@ -14,7 +14,7 @@ def visitTurnleft(block, blockmap):
 
 def visitGoto(block, blockmap):
     to = visitGeneric(block, "TO")
-    return ["gotoSpriteOrMouse:", to]
+    return ["gotoSpriteOrMouse:", to[0]]
 
 def visitGotoxy(block, blockmap):
     x = visitGeneric(block, "X")
