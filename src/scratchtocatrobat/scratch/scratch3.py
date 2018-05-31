@@ -15,8 +15,20 @@ def visitBlockAlt(block, blockmap):
         subblock = visitormap[block.opcode](block, blockmap)
         blocklist.append(subblock)
         block = block.nextBlock
-    #if isinstance(subblock, list) and len(subblock) == 1:
-    #    subblock = subblock[0]
+    if isinstance(blocklist[0], list) and len(blocklist) == 1:
+        blocklist = blocklist[0]
+
+    pprint(blocklist)
+    return blocklist
+
+def visitBlockList(block, blockmap):
+    if not isinstance(block, Scratch3Block):
+        return block
+    blocklist = []
+    while block != None:
+        subblock = visitormap[block.opcode](block, blockmap)
+        blocklist.append(subblock)
+        block = block.nextBlock
 
     pprint(blocklist)
     return blocklist
@@ -43,6 +55,8 @@ def visitGeneric(block, attributename):
         substackstartblock = get_block(block.inputs[attributename][1])
         if isinstance(substackstartblock, Scratch3Block):
             blocklist = visitBlockAlt(substackstartblock, testglobalmap)
+            if block.inputs[attributename][0] == 1:
+                return blocklist[0]
             return blocklist
         return visitLiteral(block.inputs[attributename][1])
         # return get_block(block.inputs[attributename][1][1])

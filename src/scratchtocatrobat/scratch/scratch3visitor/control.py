@@ -1,4 +1,4 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt
+from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, visitBlockList
 from scratchtocatrobat.scratch.scratch3 import get_block
 from scratchtocatrobat.scratch.scratch3 import testglobalmap
 from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric
@@ -39,13 +39,13 @@ def visitRepeat_until(block, blockmap):
 
 def visitCreate_clone_of(block, blockmap):
     clone = visitGeneric(block, 'CLONE_OPTION')
-    return ["createCloneOf", clone[0]]
+    return ["createCloneOf", clone]
 
 def visitCreate_clone_of_menu(block, blockmap):
     return block.fields["CLONE_OPTION"][0]
 
 def visitStop(block, blockmap):
-    return ["stopScripts"]
+    return ["stopScripts", block.fields["STOP_OPTION"][0]]
 
 def visitStart_as_clone(block, blockmap):
     return ["whenCloned"]
@@ -65,14 +65,14 @@ def visitCondition(block):
         if isinstance(conditionblock, Scratch3Block):
             # condition = visitBlockAlt(conditionblock, testglobalmap)
             condition = visitGeneric(block, "CONDITION")
-            return condition[0]
+            return condition
     return []
 
 def visitSubStack(block, substackkey):
     if substackkey in block.inputs:
         substackstartblock = get_block(block.inputs[substackkey][1])
         if isinstance(substackstartblock, Scratch3Block):
-            substack = visitBlockAlt(substackstartblock, testglobalmap)
+            substack = visitBlockList(substackstartblock, testglobalmap)
             # substack = visitGeneric(block, "CONDITION")
             return substack
     return []
