@@ -250,6 +250,7 @@ class TestObjectInit(unittest.TestCase):
 class TestObjectFunc(unittest.TestCase):
 
     def setUp(self):
+        print "asdfdsafdsafdsafsadf"
         self.scratch_object = scratch.Object(json.loads(_default_object_json_str()))
 
     def test_can_access_scratch_scripts(self):
