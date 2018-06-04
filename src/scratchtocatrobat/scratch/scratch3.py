@@ -1,37 +1,38 @@
 from pprint import pprint
 testglobalmap = dict()
 
-def get_block(blockid):
-    if blockid in testglobalmap.keys():
-        return testglobalmap[blockid]
+def get_block(blockid, spriteblocks):
+    if blockid in spriteblocks.keys():
+        return spriteblocks[blockid]
     return blockid
 
 def visitBlockAlt(block):
     from scratch3visitor.blockmapping import visitormap
 
-    if not isinstance(block, Scratch3Block):
+    if not isinstance(block, BlockContext):
         return block
     blocklist = []
-    while block != None:
-        subblock = visitormap[block.opcode](block)
+    while block.block != None:
+        subblock = visitormap[block.block.opcode](block)
         blocklist.append(subblock)
-        block = block.nextBlock
+        block = BlockContext(block.block.nextBlock, block.spriteblocks)
     if isinstance(blocklist[0], list) and len(blocklist) == 1:
         blocklist = blocklist[0]
 
     pprint(blocklist)
     return blocklist
 
-def visitBlockList(block):
+def visitBlockList(blockcontext):
     from scratch3visitor.blockmapping import visitormap
 
-    if not isinstance(block, Scratch3Block):
-        return block
+    if not isinstance(blockcontext, BlockContext):
+        return blockcontext
     blocklist = []
-    while block != None:
-        subblock = visitormap[block.opcode](block)
+
+    while blockcontext.block != None:
+        subblock = visitormap[blockcontext.block.opcode](blockcontext)
         blocklist.append(subblock)
-        block = block.nextBlock
+        blockcontext = BlockContext(blockcontext.block.nextBlock, blockcontext.spriteblocks)
 
     pprint(blocklist)
     return blocklist
@@ -53,11 +54,12 @@ def visitLiteral(literal):
         return literal[1]
 
 
-def visitGeneric(block, attributename):
+def visitGeneric(blockcontext, attributename):
+    block = blockcontext.block
     if attributename in block.inputs:
-        substackstartblock = get_block(block.inputs[attributename][1])
+        substackstartblock = get_block(block.inputs[attributename][1], blockcontext.spriteblocks)
         if isinstance(substackstartblock, Scratch3Block):
-            blocklist = visitBlockAlt(substackstartblock, testglobalmap)
+            blocklist = visitBlockAlt(BlockContext(substackstartblock, blockcontext.spriteblocks))
             if block.inputs[attributename][0] == 1:
                 return blocklist[0]
             return blocklist
@@ -231,7 +233,10 @@ class Scratch3Parser(object):
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
-            scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(block, temp_block_dict)]]
+            # scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(block)]]
+
+            blockcontext = BlockContext(block, temp_block_dict)
+            scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(blockcontext)]]
         variables = []
         for var in sprite["variables"].values():
             curvar = {}
@@ -316,3 +321,7 @@ def notimplemented(x,y):
     assert False
 
 
+class BlockContext(object):
+    def __init__(self, block, spriteblocks):
+        self.block = block
+        self.spriteblocks = spriteblocks

@@ -1,86 +1,108 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
-def visitSayforsecs(block):
-    message = visitGeneric(block, "MESSAGE")
-    duration = visitGeneric(block, "SECS")
+def visitSayforsecs(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "MESSAGE")
+    duration = visitGeneric(blockcontext, "SECS")
     return ["say:duration:elapsed:from:", message, duration]
 
-def visitSay(block):
-    message = visitGeneric(block, "MESSAGE")
+def visitSay(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "MESSAGE")
     return ["say:", message]
 
-def visitThinkforsecs(block):
-    message = visitGeneric(block, "MESSAGE")
-    duration = visitGeneric(block, "SECS")
+def visitThinkforsecs(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "MESSAGE")
+    duration = visitGeneric(blockcontext, "SECS")
     return ["think:duration:elapsed:from:", message, duration]
 
-def visitThink(block):
-    message = visitGeneric(block, "MESSAGE")
+def visitThink(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "MESSAGE")
     return ["think:", message]
 
-def visitSwitchcostumeto(block):
-    costume = visitGeneric(block, "COSTUME")
+def visitSwitchcostumeto(blockcontext):
+    block = blockcontext.block
+    costume = visitGeneric(blockcontext, "COSTUME")
     return ["lookLike:", costume]
 
-def visitNextcostume(block):
+def visitNextcostume(blockcontext):
+    block = blockcontext.block
     return ["nextCostume"]
 
-def visitSwitchbackdropto(block):
-    backdrop = visitGeneric(block, "BACKDROP")
+def visitSwitchbackdropto(blockcontext):
+    block = blockcontext.block
+    backdrop = visitGeneric(blockcontext, "BACKDROP")
     return ["startScene", backdrop]
 
-def visitNextbackdrop(block):
+def visitNextbackdrop(blockcontext):
+    block = blockcontext.block
     return ["nextBackdropPlaceholder"] #TODO: not in scratch2
 
-def visitChangesizeby(block):
-    size = visitGeneric(block, "CHANGE")
+def visitChangesizeby(blockcontext):
+    block = blockcontext.block
+    size = visitGeneric(blockcontext, "CHANGE")
     return ["changeSizeBy:", size]
 
-def visitSetsizeto(block):
-    size = visitGeneric(block, "SIZE")
+def visitSetsizeto(blockcontext):
+    block = blockcontext.block
+    size = visitGeneric(blockcontext, "SIZE")
     return ["setSizeTo:", size]
 
-def visitChangeeffectby(block):
+def visitChangeeffectby(blockcontext):
+    block = blockcontext.block
     effect = block.fields["EFFECT"][0]
-    change = visitGeneric(block, "CHANGE")
+    change = visitGeneric(blockcontext, "CHANGE")
     return ["changeGraphicEffect:by:", effect, change]
 
-def visitSeteffectto(block):
+def visitSeteffectto(blockcontext):
+    block = blockcontext.block
     effect = block.fields["EFFECT"][0]
-    value = visitGeneric(block, "VALUE")
+    value = visitGeneric(blockcontext, "VALUE")
     return ["setGraphicEffect:to:", effect, value]
 
-def visitCleargraphiceffects(block):
+def visitCleargraphiceffects(blockcontext):
+    block = blockcontext.block
     return ["filterReset"]
 
-def visitShow(block):
+def visitShow(blockcontext):
+    block = blockcontext.block
     return ["show"]
 
-def visitHide(block):
+def visitHide(blockcontext):
+    block = blockcontext.block
     return ["hide"]
 
-def visitGotofrontback(block):
+def visitGotofrontback(blockcontext):
+    block = blockcontext.block
     return ["comeToFront"]
 
-def visitGoforwardbackwardlayers(block):
+def visitGoforwardbackwardlayers(blockcontext):
+    block = blockcontext.block
     direction = block.fields["FORWARD_BACKWARD"][0]
-    change = visitGeneric(block, "NUM")
+    change = visitGeneric(blockcontext, "NUM")
     return ["goBackByLayers:", direction, change]
 
-def visitCostumenumbername(block):
+def visitCostumenumbername(blockcontext):
+    block = blockcontext.block
     name_number = block.fields["NUMBER_NAME"][0]
     return ["costumeIndexPlaceholder"]#TODO:nur number in scratch2?
 
 
-def visitBackdropnumbername(block):
+def visitBackdropnumbername(blockcontext):
+    block = blockcontext.block
     name_number = block.fields["NUMBER_NAME"][0]
     return ["sceneNamePlaceholder"] #TODO: nur name in scratch2
 
-def visitSize(block):
+def visitSize(blockcontext):
+    block = blockcontext.block
     return ["scale"]
 
-def visitCostume(block):
+def visitCostume(blockcontext):
+    block = blockcontext.block
     return block.fields['COSTUME'][0]
 
-def visitBackdrops(block):
+def visitBackdrops(blockcontext):
+    block = blockcontext.block
     return block.fields['BACKDROP'][0]

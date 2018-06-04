@@ -1,40 +1,50 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
-def visitPlay(block):
-    sound = visitGeneric(block, 'SOUND_MENU')
+def visitPlay(blockcontext):
+    block = blockcontext.block
+    sound = visitGeneric(blockcontext, 'SOUND_MENU')
     return ['playSound:', sound[0]]
 
-def visitPlayuntildone(block):
-    sound = visitGeneric(block, 'SOUND_MENU')
+def visitPlayuntildone(blockcontext):
+    block = blockcontext.block
+    sound = visitGeneric(blockcontext, 'SOUND_MENU')
     return ['playSoundAndWait', sound[0]]
 
-def visitStopallsounds(block):
+def visitStopallsounds(blockcontext):
+    block = blockcontext.block
     return ["stopAllSounds"]
 
-def visitChangeeffectby(block):
+def visitChangeeffectby(blockcontext):
+    block = blockcontext.block
     pass #TODO: doesnt exist in scratch2/catroid
 
-def visitSeteffectto(block):
+def visitSeteffectto(blockcontext):
+    block = blockcontext.block
     pass #TODO: doesnt exist in scratch2/catroid
 
-def visitCleareffects(block):
+def visitCleareffects(blockcontext):
+    block = blockcontext.block
     return ["clearSoundEffects"] #TODO: not in scratch2
 
-def visitChangevolumeby(block):
-    volume = visitGeneric(block, "VOLUME")
+def visitChangevolumeby(blockcontext):
+    block = blockcontext.block
+    volume = visitGeneric(blockcontext, "VOLUME")
     if volume == []:
         volume = block.inputs['VOLUME'][1][1]
     return ["changeVolumeBy:", volume]
 
-def visitSetvolumeto(block):
-    volume = visitGeneric(block, "VOLUME")
+def visitSetvolumeto(blockcontext):
+    block = blockcontext.block
+    volume = visitGeneric(blockcontext, "VOLUME")
     if volume == []:
         volume = block.inputs['VOLUME'][1][1]
     return ["setVolumeTo:", volume]
 
-def visitVolume(block):
+def visitVolume(blockcontext):
+    block = blockcontext.block
     return ["volume"]
 
 
-def visitSounds_menu(block):
+def visitSounds_menu(blockcontext):
+    block = blockcontext.block
     return block.fields["SOUND_MENU"][0]

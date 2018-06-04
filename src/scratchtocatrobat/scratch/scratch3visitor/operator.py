@@ -1,93 +1,111 @@
 from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, get_block, visitGeneric, visitLiteral, testglobalmap
 
 
-def visitSubtract(block):
-    operand1 = visitGeneric(block, "NUM1")
-    operand2 = visitGeneric(block, "NUM2")
+def visitSubtract(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM1")
+    operand2 = visitGeneric(blockcontext, "NUM2")
     return ["-", operand1, operand2]
 
-def visitGt(block):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+def visitGt(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND1")
+    operand2 = visitGeneric(blockcontext, "OPERAND2")
     return [">", operand1, operand2]
 
-def visitJoin(block):
-    operand1 = visitGeneric(block, "STRING1")
-    operand2 = visitGeneric(block, "STRING2")
+def visitJoin(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "STRING1")
+    operand2 = visitGeneric(blockcontext, "STRING2")
     return ["concatenate:with:", operand1, operand2]
 
-def visitLetter_of(block):
-    letter = visitGeneric(block, "LETTER")
-    string = visitGeneric(block, "STRING")
+def visitLetter_of(blockcontext):
+    block = blockcontext.block
+    letter = visitGeneric(blockcontext, "LETTER")
+    string = visitGeneric(blockcontext, "STRING")
     return ["letter:of:", letter, string]
 
-def visitLt(block):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+def visitLt(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND1")
+    operand2 = visitGeneric(blockcontext, "OPERAND2")
     return ["<", operand1, operand2]
 
-def visitNot(block):
-    operand1 = visitGeneric(block, "OPERAND")
+def visitNot(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND")
     return ["not", operand1]
 
-def visitMod(block):
-    operand1 = visitGeneric(block, "NUM1")
-    operand2 = visitGeneric(block, "NUM2")
+def visitMod(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM1")
+    operand2 = visitGeneric(blockcontext, "NUM2")
     return ["%", operand1, operand2]
 
-def visitAdd(block):
-    operand1 = visitGeneric(block, "NUM1")
-    operand2 = visitGeneric(block, "NUM2")
+def visitAdd(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM1")
+    operand2 = visitGeneric(blockcontext, "NUM2")
     return ["+", operand1, operand2]
 
-def visitEquals(block):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+def visitEquals(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND1")
+    operand2 = visitGeneric(blockcontext, "OPERAND2")
     return ["=", operand1, operand2]
 
-def visitMathop(block):
+def visitMathop(blockcontext):
+    block = blockcontext.block
     #num1 = visitBlockAlt(get_block(block.inputs["NUM"][1][1]), blockmap)
-    num1 = visitGeneric(block, "NUM")
+    num1 = visitGeneric(blockcontext, "NUM")
     operation = block.fields["OPERATOR"][0]
     return ["computeFunction:of:", operation, num1]
 
-def visitAnd(block):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+def visitAnd(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND1")
+    operand2 = visitGeneric(blockcontext, "OPERAND2")
     return ["&", operand1, operand2]
 
-def visitRound(block):
-    operand1 = visitGeneric(block, "NUM")
+def visitRound(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM")
     return ["rounded", operand1]
 
-def visitMultiply(block):
-    operand1 = visitGeneric(block, "NUM1")
-    operand2 = visitGeneric(block, "NUM2")
+def visitMultiply(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM1")
+    operand2 = visitGeneric(blockcontext, "NUM2")
     return ["*", operand1, operand2]
 
-def visitRandom(block):
-    from_param = visitGeneric(block, "FROM")
-    to_param = visitGeneric(block, "TO")
+def visitRandom(blockcontext):
+    block = blockcontext.block
+    from_param = visitGeneric(blockcontext, "FROM")
+    to_param = visitGeneric(blockcontext, "TO")
     return ["randomFrom:to:", from_param, to_param]
 
-def visitDivide(block):
-    operand1 = visitGeneric(block, "NUM1")
-    operand2 = visitGeneric(block, "NUM2")
+def visitDivide(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "NUM1")
+    operand2 = visitGeneric(blockcontext, "NUM2")
     return ["/", operand1, operand2]
 
 
-def visitContains(block):
-    operand1 = visitGeneric(block, "STRING1")
-    operand2 = visitGeneric(block, "STRING2")
+def visitContains(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "STRING1")
+    operand2 = visitGeneric(blockcontext, "STRING2")
     return ["contains:", operand1, operand2]
     #TODO: not in scratch2?
 
 
-def visitOr(block):
-    operand1 = visitGeneric(block, "OPERAND1")
-    operand2 = visitGeneric(block, "OPERAND2")
+def visitOr(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "OPERAND1")
+    operand2 = visitGeneric(blockcontext, "OPERAND2")
     return ["|", operand1, operand2]
 
-def visitLength(block):
-    operand1 = visitGeneric(block, "STRING")
+def visitLength(blockcontext):
+    block = blockcontext.block
+    operand1 = visitGeneric(blockcontext, "STRING")
     return ["stringLength:", operand1]

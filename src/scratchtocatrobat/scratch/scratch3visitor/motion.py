@@ -1,85 +1,106 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
-def visitMovesteps(block):
-    steps = visitGeneric(block, "STEPS")
+def visitMovesteps(blockcontext):
+    block = blockcontext.block
+    steps = visitGeneric(blockcontext, "STEPS")
     return ["forward:", steps]
 
-def visitTurnright(block):
-    degrees = visitGeneric(block, "DEGREES")
+def visitTurnright(blockcontext):
+    block = blockcontext.block
+    degrees = visitGeneric(blockcontext, "DEGREES")
     return ["turnRight:", degrees]
 
-def visitTurnleft(block):
-    degrees = visitGeneric(block, "DEGREES")
+def visitTurnleft(blockcontext):
+    block = blockcontext.block
+    degrees = visitGeneric(blockcontext, "DEGREES")
     return ["turnLeft:", degrees]
 
-def visitGoto(block):
-    to = visitGeneric(block, "TO")
+def visitGoto(blockcontext):
+    block = blockcontext.block
+    to = visitGeneric(blockcontext, "TO")
     return ["gotoSpriteOrMouse:", to]
 
-def visitGotoxy(block):
-    x = visitGeneric(block, "X")
-    y = visitGeneric(block, "Y")
+def visitGotoxy(blockcontext):
+    block = blockcontext.block
+    x = visitGeneric(blockcontext, "X")
+    y = visitGeneric(blockcontext, "Y")
     return ["gotoX:y:", x, y]
 
-def visitGlideto(block):
-    secs = visitGeneric(block, "SECS")
-    to = visitGeneric(block, "TO")
+def visitGlideto(blockcontext):
+    block = blockcontext.block
+    secs = visitGeneric(blockcontext, "SECS")
+    to = visitGeneric(blockcontext, "TO")
     return ["glideTo:", secs, to] #TODO: not in scratch2?
 
-def visitGlidesecstoxy(block):
-    secs = visitGeneric(block, "SECS")
+def visitGlidesecstoxy(blockcontext):
+    block = blockcontext.block
+    secs = visitGeneric(blockcontext, "SECS")
     #TODO: properly parse
    # if isinstance(secs[0], list) and len(secs) == 1:
     #    secs = secs[0]
-    x = visitGeneric(block, "X")
-    y = visitGeneric(block, "Y")
+    x = visitGeneric(blockcontext, "X")
+    y = visitGeneric(blockcontext, "Y")
     return ["glideSecs:toX:y:elapsed:from:", secs, x, y]
 
-def visitPointindirection(block):
-    direction = visitGeneric(block, "DIRECTION")
+def visitPointindirection(blockcontext):
+    block = blockcontext.block
+    direction = visitGeneric(blockcontext, "DIRECTION")
     return ["heading:", direction]
 
-def visitPointtowards(block):
-    towards = visitGeneric(block, "TOWARDS")
+def visitPointtowards(blockcontext):
+    block = blockcontext.block
+    towards = visitGeneric(blockcontext, "TOWARDS")
     return ["pointTowards:", towards]
 
-def visitChangexby(block):
-    x = visitGeneric(block, "DX")
+def visitChangexby(blockcontext):
+    block = blockcontext.block
+    x = visitGeneric(blockcontext, "DX")
     return ["changeXposBy:", x]
 
-def visitSetx(block):
-    x = visitGeneric(block, "X")
+def visitSetx(blockcontext):
+    block = blockcontext.block
+    x = visitGeneric(blockcontext, "X")
     return ["xpos:", x]
 
-def visitChangeyby(block):
-    y = visitGeneric(block, "DY")
+def visitChangeyby(blockcontext):
+    block = blockcontext.block
+    y = visitGeneric(blockcontext, "DY")
     return ["changeYposBy:", y]
 
-def visitSety(block):
-    y = visitGeneric(block, "Y")
+def visitSety(blockcontext):
+    block = blockcontext.block
+    y = visitGeneric(blockcontext, "Y")
     return ["ypos:", y]
 
-def visitIfonedgebounce(block):
+def visitIfonedgebounce(blockcontext):
+    block = blockcontext.block
     return ["bounceOffEdge"]
 
-def visitSetrotationstyle(block):
+def visitSetrotationstyle(blockcontext):
+    block = blockcontext.block
     rotation_style = block.fields["STYLE"][0]
     return ["setRotationStyle", rotation_style]
 
-def visitDirection(block):
+def visitDirection(blockcontext):
+    block = blockcontext.block
     return ["heading"]
 
-def visitYposition(block):
+def visitYposition(blockcontext):
+    block = blockcontext.block
     return ["ypos"]
 
-def visitXposition(block):
+def visitXposition(blockcontext):
+    block = blockcontext.block
     return ["xpos"]
 
-def visitGoto_menu(block):
+def visitGoto_menu(blockcontext):
+    block = blockcontext.block
     return block.fields["TO"][0]
 
-def visitGlideto_menu(block):
+def visitGlideto_menu(blockcontext):
+    block = blockcontext.block
     return block.fields["TO"][0]
 
-def visitPointtowards_menu(block):
+def visitPointtowards_menu(blockcontext):
+    block = blockcontext.block
     return block.fields["TOWARDS"][0]

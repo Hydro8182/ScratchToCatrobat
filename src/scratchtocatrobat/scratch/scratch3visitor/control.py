@@ -1,76 +1,89 @@
 from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, visitBlockList
 from scratchtocatrobat.scratch.scratch3 import get_block
 from scratchtocatrobat.scratch.scratch3 import testglobalmap
-from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric
+from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric, BlockContext
 
 
-def visitWait(block):
-    duration = visitGeneric(block, 'DURATION')
+def visitWait(blockcontext):
+    block = blockcontext.block
+    duration = visitGeneric(blockcontext, 'DURATION')
     if duration == []:
         duration = block.inputs['DURATION'][1][1]
     return ["wait:elapsed:from:", duration]
 
-def visitRepeat(block):
-    times = visitGeneric(block, "TIMES")
+def visitRepeat(blockcontext):
+    block = blockcontext.block
+    times = visitGeneric(blockcontext, "TIMES")
     if times == []:
         times = block.inputs["TIMES"][1][1]
-    substack = visitSubStack(block, "SUBSTACK")
+    substack = visitSubstack(blockcontext, "SUBSTACK")
     return ["doRepeat", times, substack]
 
-def visitIf(block):
-    condition = visitCondition(block)
-    substack1 = visitSubStack(block, "SUBSTACK")
+def visitIf(blockcontext):
+    block = blockcontext.block
+    condition = visitCondition(blockcontext)
+    substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doIf", condition, substack1]
 
-def visitIf_else(block):
-    condition = visitCondition(block)
-    substack1 = visitSubStack(block, "SUBSTACK")
-    substack2 = visitSubStack(block, "SUBSTACK2")
+def visitIf_else(blockcontext):
+    block = blockcontext.block
+    condition = visitCondition(blockcontext)
+    substack1 = visitSubstack(blockcontext, "SUBSTACK")
+    substack2 = visitSubstack(blockcontext, "SUBSTACK2")
     return ["doIfElse", condition, substack1, substack2]
 
-def visitWait_until(block):
-    condition = visitCondition(block)
+def visitWait_until(blockcontext):
+    block = blockcontext.block
+    condition = visitCondition(blockcontext)
     return ["doWaitUntil", condition]
 
-def visitRepeat_until(block):
-    condition = visitCondition(block)
-    substack1 = visitSubStack(block, "SUBSTACK")
+def visitRepeat_until(blockcontext):
+    block = blockcontext.block
+    condition = visitCondition(blockcontext)
+    substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doUntil", condition, substack1]
 
-def visitCreate_clone_of(block):
-    clone = visitGeneric(block, 'CLONE_OPTION')
+def visitCreate_clone_of(blockcontext):
+    block = blockcontext.block
+    clone = visitGeneric(blockcontext, 'CLONE_OPTION')
     return ["createCloneOf", clone]
 
-def visitCreate_clone_of_menu(block):
+def visitCreate_clone_of_menu(blockcontext):
+    block = blockcontext.block
     return block.fields["CLONE_OPTION"][0]
 
-def visitStop(block):
+def visitStop(blockcontext):
+    block = blockcontext.block
     return ["stopScripts", block.fields["STOP_OPTION"][0]]
 
-def visitStart_as_clone(block):
+def visitStart_as_clone(blockcontext):
+    block = blockcontext.block
     return ["whenCloned"]
 
-def visitDelete_this_clone(block):
+def visitDelete_this_clone(blockcontext):
+    block = blockcontext.block
     return ["deleteClone"]
 
-def visitForever(block):
-    substack1 = visitSubStack(block, "SUBSTACK")
+def visitForever(blockcontext):
+    block = blockcontext.block
+    substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doForever", substack1]
 
 
 
-def visitCondition(block):
+def visitCondition(blockcontext):
+    block = blockcontext.block
     if "CONDITION" in block.inputs:
-        conditionblock = get_block(block.inputs["CONDITION"][1])
+        conditionblock = get_block(block.inputs["CONDITION"][1], blockcontext.spriteblocks)
         if isinstance(conditionblock, Scratch3Block):
-            condition = visitGeneric(block, "CONDITION")
+            condition = visitGeneric(blockcontext, "CONDITION")
             return condition
     return []
 
-def visitSubStack(block, substackkey):
-    if substackkey in block.inputs:
-        substackstartblock = get_block(block.inputs[substackkey][1])
+def visitSubstack(blockcontext, substackkey):
+    if substackkey in blockcontext.block.inputs:
+        substackstartblock = get_block(blockcontext.block.inputs[substackkey][1], blockcontext.spriteblocks)
         if isinstance(substackstartblock, Scratch3Block):
-            substack = visitBlockList(substackstartblock)
+            substack = visitBlockList(BlockContext(substackstartblock, blockcontext.spriteblocks))
             return substack
     return []

@@ -1,33 +1,41 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
-def visitWhenflagclicked(block):
+def visitWhenflagclicked(blockcontext):
+    block = blockcontext.block
     return ["whenGreenFlag"]
 
-def visitBroadcast(block):
-    message = visitGeneric(block, "BROADCAST_INPUT")
+def visitBroadcast(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "BROADCAST_INPUT")
     return ["broadcast:", message]
 
-def visitBroadcastandwait(block):
-    message = visitGeneric(block, "BROADCAST_INPUT")
+def visitBroadcastandwait(blockcontext):
+    block = blockcontext.block
+    message = visitGeneric(blockcontext, "BROADCAST_INPUT")
     return ["doBroadcastAndWait", message]
 
-def visitWhenthisspriteclicked(block):
+def visitWhenthisspriteclicked(blockcontext):
+    block = blockcontext.block
     return ["whenClicked"]
 
-def visitWhenkeypressed(block):
+def visitWhenkeypressed(blockcontext):
+    block = blockcontext.block
     key = block.fields["KEY_OPTION"][0]
     return ["whenKeyPressed", key]
 
-def visitWhenbackdropswitchesto(block):
+def visitWhenbackdropswitchesto(blockcontext):
+    block = blockcontext.block
     backdrop = block.fields["BACKDROP"][0]
     return ["whenSceneStarts", backdrop]
 
-def visitWhenbroadcastreceived(block):
+def visitWhenbroadcastreceived(blockcontext):
+    block = blockcontext.block
     message = block.fields["BROADCAST_OPTION"][0]
     return ["whenIReceive", message]
 
 
-def visitWhengreaterthan(block):
+def visitWhengreaterthan(blockcontext):
+    block = blockcontext.block
     sensor = block.fields["WHENGREATERTHANMENU"][0].lower()
-    value = visitGeneric(block, "VALUE")
+    value = visitGeneric(blockcontext, "VALUE")
     return ["whenSensorGreaterThan", sensor, value]
