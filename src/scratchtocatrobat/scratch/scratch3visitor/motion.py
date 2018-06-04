@@ -1,32 +1,32 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
-def visitMovesteps(block, blockmap):
+def visitMovesteps(block):
     steps = visitGeneric(block, "STEPS")
     return ["forward:", steps]
 
-def visitTurnright(block, blockmap):
+def visitTurnright(block):
     degrees = visitGeneric(block, "DEGREES")
     return ["turnRight:", degrees]
 
-def visitTurnleft(block, blockmap):
+def visitTurnleft(block):
     degrees = visitGeneric(block, "DEGREES")
     return ["turnLeft:", degrees]
 
-def visitGoto(block, blockmap):
+def visitGoto(block):
     to = visitGeneric(block, "TO")
     return ["gotoSpriteOrMouse:", to]
 
-def visitGotoxy(block, blockmap):
+def visitGotoxy(block):
     x = visitGeneric(block, "X")
     y = visitGeneric(block, "Y")
     return ["gotoX:y:", x, y]
 
-def visitGlideto(block, blockmap):
+def visitGlideto(block):
     secs = visitGeneric(block, "SECS")
     to = visitGeneric(block, "TO")
     return ["glideTo:", secs, to] #TODO: not in scratch2?
 
-def visitGlidesecstoxy(block, blockmap):
+def visitGlidesecstoxy(block):
     secs = visitGeneric(block, "SECS")
     #TODO: properly parse
    # if isinstance(secs[0], list) and len(secs) == 1:
@@ -35,51 +35,51 @@ def visitGlidesecstoxy(block, blockmap):
     y = visitGeneric(block, "Y")
     return ["glideSecs:toX:y:elapsed:from:", secs, x, y]
 
-def visitPointindirection(block, blockmap):
+def visitPointindirection(block):
     direction = visitGeneric(block, "DIRECTION")
     return ["heading:", direction]
 
-def visitPointtowards(block, blockmap):
+def visitPointtowards(block):
     towards = visitGeneric(block, "TOWARDS")
     return ["pointTowards:", towards]
 
-def visitChangexby(block, blockmap):
+def visitChangexby(block):
     x = visitGeneric(block, "DX")
     return ["changeXposBy:", x]
 
-def visitSetx(block, blockmap):
+def visitSetx(block):
     x = visitGeneric(block, "X")
     return ["xpos:", x]
 
-def visitChangeyby(block, blockmap):
+def visitChangeyby(block):
     y = visitGeneric(block, "DY")
     return ["changeYposBy:", y]
 
-def visitSety(block, blockmap):
+def visitSety(block):
     y = visitGeneric(block, "Y")
     return ["ypos:", y]
 
-def visitIfonedgebounce(block, blockmap):
+def visitIfonedgebounce(block):
     return ["bounceOffEdge"]
 
-def visitSetrotationstyle(block, blockmap):
+def visitSetrotationstyle(block):
     rotation_style = block.fields["STYLE"][0]
     return ["setRotationStyle", rotation_style]
 
-def visitDirection(block, blockmap):
+def visitDirection(block):
     return ["heading"]
 
-def visitYposition(block, blockmap):
+def visitYposition(block):
     return ["ypos"]
 
-def visitXposition(block, blockmap):
+def visitXposition(block):
     return ["xpos"]
 
-def visitGoto_menu(block, blockmap):
+def visitGoto_menu(block):
     return block.fields["TO"][0]
 
-def visitGlideto_menu(block, blockmap):
+def visitGlideto_menu(block):
     return block.fields["TO"][0]
 
-def visitPointtowards_menu(block, blockmap):
+def visitPointtowards_menu(block):
     return block.fields["TOWARDS"][0]

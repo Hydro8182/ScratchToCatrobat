@@ -6,14 +6,14 @@ def get_block(blockid):
         return testglobalmap[blockid]
     return blockid
 
-def visitBlockAlt(block, blockmap):
+def visitBlockAlt(block):
     from scratch3visitor.blockmapping import visitormap
 
     if not isinstance(block, Scratch3Block):
         return block
     blocklist = []
     while block != None:
-        subblock = visitormap[block.opcode](block, blockmap)
+        subblock = visitormap[block.opcode](block)
         blocklist.append(subblock)
         block = block.nextBlock
     if isinstance(blocklist[0], list) and len(blocklist) == 1:
@@ -22,14 +22,14 @@ def visitBlockAlt(block, blockmap):
     pprint(blocklist)
     return blocklist
 
-def visitBlockList(block, blockmap):
+def visitBlockList(block):
     from scratch3visitor.blockmapping import visitormap
 
     if not isinstance(block, Scratch3Block):
         return block
     blocklist = []
     while block != None:
-        subblock = visitormap[block.opcode](block, blockmap)
+        subblock = visitormap[block.opcode](block)
         blocklist.append(subblock)
         block = block.nextBlock
 
@@ -148,26 +148,6 @@ class Scratch3Block(object):
     #                     return search(json_pos[list[0]], list[1:])
     #
     #             blockvalue = search(block, keys)
-
-
-
-
-
-# "y%sx.1U$*5ORAHMlDK5D":{
-#     "next":null,
-#     "opcode":"event_broadcast",
-#     "parent":"[bI:rFG}?Cfu7B`_=o5x",
-#     "inputs":{
-#         "BROADCAST_INPUT":[
-#             1,
-#             [
-#                 11,
-#                 "message1",
-#                 "PtPY47g*YB=o?D!f@U_C"
-#             ]
-#         ]
-#     },
-
 
 
 
