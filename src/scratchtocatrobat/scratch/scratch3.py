@@ -1,5 +1,5 @@
 from pprint import pprint
-testglobalmap = dict()
+# testglobalmap = dict()
 
 def get_block(blockid, spriteblocks):
     if blockid in spriteblocks.keys():
@@ -226,8 +226,8 @@ class Scratch3Parser(object):
                 script_blocks.append(temp_block_dict[blockId])
         scratch2ProjectDict = {}
         #test
-        global testglobalmap
-        testglobalmap = temp_block_dict
+        # global testglobalmap
+        # testglobalmap = temp_block_dict
         scratch2ProjectDict["scripts"] = []
 
         for block in script_blocks:

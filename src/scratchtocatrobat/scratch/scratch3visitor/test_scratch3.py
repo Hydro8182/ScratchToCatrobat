@@ -15,7 +15,7 @@ def addInputToBlock(block, key, value, type=2, datatype=4):
 def addInputOfType(block, key, type):
 
     if type == TYPE_INT:
-        value = [1, [4, 80085]]
+        value = [1, [4, 1234]]
     elif type == TYPE_STRING:
         value = [1, [10, "teststring"]]
     elif type == TYPE_BLOCK:

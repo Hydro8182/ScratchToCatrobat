@@ -1,6 +1,5 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, visitBlockList
+from scratchtocatrobat.scratch.scratch3 import visitBlockList
 from scratchtocatrobat.scratch.scratch3 import get_block
-from scratchtocatrobat.scratch.scratch3 import testglobalmap
 from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric, BlockContext
 
 

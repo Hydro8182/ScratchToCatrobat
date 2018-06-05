@@ -1,4 +1,4 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, get_block, visitGeneric, visitLiteral, testglobalmap
+from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 
 def visitSubtract(blockcontext):

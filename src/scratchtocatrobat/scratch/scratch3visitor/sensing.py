@@ -1,10 +1,10 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockAlt, Scratch3Block, get_block, testglobalmap, visitGeneric
+from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitTouchingObject(blockcontext):
     block = blockcontext.block
     touch = visitGeneric(blockcontext, "TOUCHINGOBJECTMENU")
     print("touching ", touch)
-    return ["touching:", touch[0]]
+    return ["touching:", touch]
 
 def visitTouchingObjectMenu(blockcontext):
     block = blockcontext.block
