@@ -1,17 +1,14 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitPlay(blockcontext):
-    block = blockcontext.block
     sound = visitGeneric(blockcontext, 'SOUND_MENU')
-    return ['playSound:', sound[0]]
+    return ['playSound:', sound]
 
 def visitPlayuntildone(blockcontext):
-    block = blockcontext.block
     sound = visitGeneric(blockcontext, 'SOUND_MENU')
-    return ['playSoundAndWait', sound[0]]
+    return ['playSoundAndWait', sound]
 
 def visitStopallsounds(blockcontext):
-    block = blockcontext.block
     return ["stopAllSounds"]
 
 def visitChangeeffectby(blockcontext):
@@ -23,7 +20,6 @@ def visitSeteffectto(blockcontext):
     pass #TODO: doesnt exist in scratch2/catroid
 
 def visitCleareffects(blockcontext):
-    block = blockcontext.block
     return ["clearSoundEffects"] #TODO: not in scratch2
 
 def visitChangevolumeby(blockcontext):
@@ -41,7 +37,6 @@ def visitSetvolumeto(blockcontext):
     return ["setVolumeTo:", volume]
 
 def visitVolume(blockcontext):
-    block = blockcontext.block
     return ["volume"]
 
 

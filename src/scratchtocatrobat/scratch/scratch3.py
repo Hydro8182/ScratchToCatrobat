@@ -40,10 +40,15 @@ def visitBlockList(blockcontext):
 def visitLiteral(literal):
     if literal[0] == 12:
         return ["readVariable", literal[1]]
+    elif literal[0] == 13:
+        return ["contentsOfList:", literal[1]]
     elif literal[0] == 5 or literal[0] == 6 or literal[0] == 7:
         if literal[1] == None:
             return 0
-        return int(literal[1])
+        try:
+            return int(literal[1])
+        except:
+            return str(literal[1])
     elif literal[0] == 4 or literal[0] == 8:
         if literal[1] == '':
             return 0.0
@@ -65,7 +70,8 @@ def visitGeneric(blockcontext, attributename):
             return blocklist
         return visitLiteral(block.inputs[attributename][1])
         # return get_block(block.inputs[attributename][1][1])
-    return []
+    # assert False
+    return [False]
 
 
 class Scratch3Script(object):
@@ -105,20 +111,27 @@ class Scratch3Sound(object):
 
 
 
+def get_value_of_block(block, key):
+    if key in block.keys():
+        return block[key]
+    return None
+
 
 class Scratch3Block(object):
 
     def __init__(self, block, name):
+        print block
         self.name = name
-        self.opcode = block["opcode"]
-        self.nextName = block["next"]
-        self.parentName = block["parent"]
+        self.opcode = get_value_of_block(block, "opcode")
+        self.nextName = get_value_of_block(block, "next")
+        self.parentName = get_value_of_block(block, "parent")
         self.nextBlock = None
         self.parentBlock = None
-        self.inputs = block["inputs"]
-        self.fields = block["fields"]
-        self.topLevel = block["topLevel"]
-        self.shadow = block["shadow"]
+        self.inputs = get_value_of_block(block, "inputs")
+        self.fields = get_value_of_block(block, "fields")
+        self.topLevel = get_value_of_block(block, "topLevel")
+        self.shadow = get_value_of_block(block, "shadow")
+        self.mutation = get_value_of_block(block, "mutation")
         self.x = 0
         self.y = 0
         if self.topLevel:
@@ -244,6 +257,21 @@ class Scratch3Parser(object):
             curvar["value"] = var[1]
             curvar["isPersistent"] = var[2] if len(var) > 2 else False
             variables.append(curvar)
+
+        lists = []
+        for list in sprite["lists"].values():
+            curlist = {}
+            curlist["listName"] = list[0]
+            curlist["contents"] = list[1]
+            curlist["isPersistent"] = list[2] if len(list) > 2 else False
+            curlist["x"] = 1
+            curlist["y"] = 1
+            curlist["width"] = 1
+            curlist["height"] = 1
+            curlist["visible"] = True
+            lists.append(curlist)
+        scratch2ProjectDict["lists"] = lists
+
         scratch2ProjectDict["variables"] = variables
         scratch2ProjectDict["costumes"] = []
         for s3Costume in sprite["costumes"]:

@@ -342,10 +342,9 @@ def _parse_and_rewrite_svg_file(svg_input_path, svg_output_path):
         del root.attrib['viewBox']
 
     for child in root:
-        if re.search('.*}text', child.tag) != None:
+        if re.search('.*}text', child.tag) != None and child.text != None:
             child.attrib['x'] = '3'
             child.attrib['y'] = '22'
-
             list_of_text_parts = (child.text).split('\n')
             child.text = (child.text).replace(child.text, '')
             namespace_tag = (child.tag).replace('text', '')

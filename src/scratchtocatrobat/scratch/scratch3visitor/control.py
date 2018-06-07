@@ -69,6 +69,25 @@ def visitForever(blockcontext):
     return ["doForever", substack1]
 
 
+def visitProcedures_call(blockcontext):
+    proc_name = visitMutation(blockcontext)
+    parameters = visitParams(blockcontext)
+    return ["call", proc_name] + parameters
+
+def visitProcedures_definition(blockcontext):
+    proto = visitGeneric(blockcontext, "custom_block")
+    return proto
+
+def visitProcedures_prototype(blockcontext):
+    proc_name = visitMutation(blockcontext)
+    arguments = sanitizeListArgument(blockcontext.block.mutation["argumentnames"])
+    default_values = sanitizeListArgument(blockcontext.block.mutation["argumentdefaults"])
+    # default_values = visitParams(blockcontext)
+    return [["procDef", proc_name, arguments, default_values, False]] #TODO: what is the last parameter
+
+
+def visitArgument(blockcontext):
+    return ["getParam", blockcontext.block.fields["VALUE"][0], "r"] #TODO what is "r"
 
 def visitCondition(blockcontext):
     block = blockcontext.block
@@ -77,7 +96,7 @@ def visitCondition(blockcontext):
         if isinstance(conditionblock, Scratch3Block):
             condition = visitGeneric(blockcontext, "CONDITION")
             return condition
-    return []
+    return False
 
 def visitSubstack(blockcontext, substackkey):
     if substackkey in blockcontext.block.inputs:
@@ -85,4 +104,33 @@ def visitSubstack(blockcontext, substackkey):
         if isinstance(substackstartblock, Scratch3Block):
             substack = visitBlockList(BlockContext(substackstartblock, blockcontext.spriteblocks))
             return substack
-    return []
+    return None
+
+def visitMutation(blockcontext):
+    return blockcontext.block.mutation["proccode"]
+
+def visitParams(blockcontext):
+    paramids = blockcontext.block.mutation["argumentids"].strip("[]").split(",")
+    sanitized = []
+    for paramid in paramids:
+        sanitized.append(paramid.strip("\""))
+
+    arguments = []
+
+    for paramid in sanitized:
+        if paramid == "":
+            continue #TODO: remove this once we figured out how this works
+        arg = visitGeneric(blockcontext, paramid)
+        #arg = blockcontext.block.inputs[paramid]
+        arguments.append(arg)
+    return arguments
+
+def sanitizeListArgument(listString):
+    paramids = listString.strip("[]").split(",")
+    sanitized = []
+    for paramid in paramids:
+        paramid = paramid.strip("\"")
+        if paramid == '':
+            continue
+        sanitized.append(paramid)
+    return sanitized

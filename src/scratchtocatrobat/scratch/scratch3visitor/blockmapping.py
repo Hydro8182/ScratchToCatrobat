@@ -137,4 +137,10 @@ visitormap = {
 
     "looks_costume" : looks.visitCostume,
     "looks_backdrops" : looks.visitBackdrops,
+
+    "procedures_call" : control.visitProcedures_call,
+    "procedures_definition" : control.visitProcedures_definition,
+    "argument_reporter_string_number" : control.visitArgument,
+    "procedures_prototype" : control.visitProcedures_prototype,
+
 }

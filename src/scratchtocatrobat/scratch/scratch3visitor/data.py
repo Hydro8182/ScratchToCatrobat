@@ -4,27 +4,17 @@ def visitSetvariableto(blockcontext):
     block = blockcontext.block
     variable = block.fields["VARIABLE"][0]
     value = visitGeneric(blockcontext, "VALUE")
-    #TODO: properly parse
-    if isinstance(value, list) and len(value) == 1:
-        value = value[0]
-
     return ["setVar:to:", variable, value]
 
 def visitChangevariableby(blockcontext):
     block = blockcontext.block
     variable = block.fields["VARIABLE"][0]
     value = visitGeneric(blockcontext, "VALUE")
-    #TODO: properly parse
-    if isinstance(value, list) and len(value) == 1:
-        value = value[0]
     return ["changeVar:by:", variable, value]
 
 def visitShowvariable(blockcontext):
     block = blockcontext.block
     variable = block.fields["VARIABLE"][0]
-    #TODO: properly parse
-    #if isinstance(value, list) and len(value) > 1:
-    #    value = value[0]
     return ["showVariable:", variable]
 
 def visitHidevariable(blockcontext):
@@ -35,7 +25,7 @@ def visitHidevariable(blockcontext):
 def visitRead_variable(blockcontext):
     block = blockcontext.block
     pass
-    #TODO: a viariable block just shows up as "my_variable",
+    #TODO: a variable block just shows up as "my_variable",
         # not as an actual block with a reference
 
 
@@ -49,26 +39,28 @@ def visitDeleteoflist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     index = visitGeneric(blockcontext, "INDEX")
-    return ["deleteLine:ofList:", list, index]
+    return ["deleteLine:ofList:", index, list]
 
 def visitInsertatlist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     item = visitGeneric(blockcontext, "ITEM")
     index = visitGeneric(blockcontext, "INDEX")
-    return ["insert:at:ofList:", list, item, index]
+    return ["insert:at:ofList:", index, list, item]
 
 def visitReplaceitemoflist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     item = visitGeneric(blockcontext, "ITEM")
     index = visitGeneric(blockcontext, "INDEX")
-    return ["setLine:ofList:to:", list, item, index]
+    return ["setLine:ofList:to:", index, list, item]
 
 def visitItemoflist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     index = visitGeneric(blockcontext, "INDEX")
+    print list
+    print index
     return ["getLine:ofList:", index, list]
 
 def visitItemnumoflist(blockcontext):
