@@ -1,4 +1,4 @@
-import looks, motion, event, sensing, sound, operator, control, data
+import looks, motion, event, sensing, sound, operator, control, data, pen
 
 visitormap = {
     "sensing_touchingobjectmenu" : sensing.visitTouchingObjectMenu,
@@ -142,5 +142,17 @@ visitormap = {
     "procedures_definition" : control.visitProcedures_definition,
     "argument_reporter_string_number" : control.visitArgument,
     "procedures_prototype" : control.visitProcedures_prototype,
+
+    "pen_clear" : pen.visitClear,
+    "pen_stamp" : pen.visitStamp,
+    "pen_penDown" : pen.visitPenDown,
+    "pen_penUp" : pen.visitPenUp,
+    "pen_setPenColorToColor" : pen.visitSetPenColorToColor,
+    "pen_changePenColorParamBy" : pen.visitChangePenColorParamBy,
+    "pen_menu_colorParam" : pen.visitPen_menu_colorParam,
+    "pen_setPenColorParamTo" : pen.visitSetPenColorParamTo,
+    "pen_changePenSizeBy" : pen.visitChangePenSizeBy,
+    "pen_setPenSizeTo" : pen.visitSetPenSizeTo,
+
 
 }
