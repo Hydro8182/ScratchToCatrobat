@@ -33,7 +33,7 @@ def visitAddtolist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     item = visitGeneric(blockcontext, "ITEM")
-    return ["append:toList:", list, item]
+    return ["append:toList:", item, list]
 
 def visitDeleteoflist(blockcontext):
     block = blockcontext.block

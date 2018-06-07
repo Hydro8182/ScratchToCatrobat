@@ -80,8 +80,15 @@ def visitProcedures_definition(blockcontext):
 
 def visitProcedures_prototype(blockcontext):
     proc_name = visitMutation(blockcontext)
+    if proc_name == "%s":
+        pass
     arguments = sanitizeListArgument(blockcontext.block.mutation["argumentnames"])
-    default_values = sanitizeListArgument(blockcontext.block.mutation["argumentdefaults"])
+    if len(arguments) == 0:
+        default_values = []
+    else:
+        default_values = sanitizeListDefault(blockcontext.block.mutation["argumentdefaults"])
+        # default_values = sanitizeListDefault(blockcontext)
+
     # default_values = visitParams(blockcontext)
     return [["procDef", proc_name, arguments, default_values, False]] #TODO: what is the last parameter
 
@@ -107,6 +114,8 @@ def visitSubstack(blockcontext, substackkey):
     return None
 
 def visitMutation(blockcontext):
+    if blockcontext.block.mutation["proccode"] == "%s":
+        pass
     return blockcontext.block.mutation["proccode"]
 
 def visitParams(blockcontext):
@@ -114,7 +123,8 @@ def visitParams(blockcontext):
     sanitized = []
     for paramid in paramids:
         sanitized.append(paramid.strip("\""))
-
+        if sanitized =="Comment":
+            pass
     arguments = []
 
     for paramid in sanitized:
@@ -132,5 +142,19 @@ def sanitizeListArgument(listString):
         paramid = paramid.strip("\"")
         if paramid == '':
             continue
+        if sanitized =="Comment":
+            pass
         sanitized.append(paramid)
     return sanitized
+
+def sanitizeListDefault(listString):
+    paramids = listString.strip("[]").split(",")
+    sanitized = []
+    for paramid in paramids:
+        paramid = paramid.strip("\"")
+        sanitized.append(paramid)
+    return sanitized
+
+def sanitizeBoth(blockcontext):
+    block = blockcontext.block
+

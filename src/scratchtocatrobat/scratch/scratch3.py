@@ -13,7 +13,7 @@ def visitBlockAlt(block):
         return block
     blocklist = []
     while block.block != None:
-        subblock = visitormap[block.block.opcode](block)
+        subblock = visitormap.get(block.block.opcode, visitDefault)(block)
         blocklist.append(subblock)
         block = BlockContext(block.block.nextBlock, block.spriteblocks)
     if isinstance(blocklist[0], list) and len(blocklist) == 1:
@@ -30,7 +30,7 @@ def visitBlockList(blockcontext):
     blocklist = []
 
     while blockcontext.block != None:
-        subblock = visitormap[blockcontext.block.opcode](blockcontext)
+        subblock = visitormap.get(blockcontext.block.opcode, visitDefault)(blockcontext)
         blocklist.append(subblock)
         blockcontext = BlockContext(blockcontext.block.nextBlock, blockcontext.spriteblocks)
 
@@ -73,6 +73,9 @@ def visitGeneric(blockcontext, attributename):
     # assert False
     return [False]
 
+def visitDefault(blockcontext):
+    print("########### block not yet implemented: ", blockcontext.block.opcode, "#########")
+    return ["say:", "ERROR: BLOCK NOT FOUND: " + blockcontext.block.opcode]
 
 class Scratch3Script(object):
     def __init__(self):
