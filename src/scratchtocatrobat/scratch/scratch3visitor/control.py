@@ -76,7 +76,10 @@ def visitProcedures_call(blockcontext):
 
 def visitProcedures_definition(blockcontext):
     proto = visitGeneric(blockcontext, "custom_block")
-    return proto
+    # block = get_block(blockcontext.block.inputs["custom_block"][1], blockcontext.spriteblocks)
+    # proto = visitProcedures_prototype(BlockContext(block, blockcontext.spriteblocks))
+
+    return proto #TODO: if there are no subblocks we currently remove one nesting and the userscript no longer counts as valid script(see scratch.py:106)
 
 def visitProcedures_prototype(blockcontext):
     proc_name = visitMutation(blockcontext)

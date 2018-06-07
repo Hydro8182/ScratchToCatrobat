@@ -22,6 +22,31 @@ def visitBlockAlt(block):
     pprint(blocklist)
     return blocklist
 
+
+
+
+def visitScriptBlock(block):
+    from scratch3visitor.blockmapping import visitormap
+
+    if not isinstance(block, BlockContext):
+        return block
+
+    scriptblock = visitormap.get(block.block.opcode, visitDefault)(block)
+    block = BlockContext(block.block.nextBlock, block.spriteblocks)
+    if scriptblock[0] == "procDef" and scriptblock[1] == "%s":
+        pass
+    blocklist = []
+    blocklist.append(scriptblock)
+    while block.block != None:
+        subblock = visitormap.get(block.block.opcode, visitDefault)(block)
+        blocklist.append(subblock)
+        block = BlockContext(block.block.nextBlock, block.spriteblocks)
+    # if isinstance(blocklist[0], list) and len(blocklist) == 1:
+    #     blocklist = blocklist[0]
+
+    pprint(blocklist)
+    return blocklist
+
 def visitBlockList(blockcontext):
     from scratch3visitor.blockmapping import visitormap
 
@@ -252,7 +277,8 @@ class Scratch3Parser(object):
             # scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(block)]]
 
             blockcontext = BlockContext(block, temp_block_dict)
-            scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(blockcontext)]]
+            # scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(blockcontext)]]
+            scratch2ProjectDict["scripts"] += [[1,1, visitScriptBlock(blockcontext)]]
         variables = []
         for var in sprite["variables"].values():
             curvar = {}
