@@ -33,8 +33,6 @@ def visitScriptBlock(block):
 
     scriptblock = visitormap.get(block.block.opcode, visitDefault)(block)
     block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    if scriptblock[0] == "procDef" and scriptblock[1] == "%s":
-        pass
     blocklist = []
     blocklist.append(scriptblock)
     while block.block != None:

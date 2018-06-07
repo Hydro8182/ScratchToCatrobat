@@ -46,7 +46,7 @@ def visitInsertatlist(blockcontext):
     list = block.fields["LIST"][0]
     item = visitGeneric(blockcontext, "ITEM")
     index = visitGeneric(blockcontext, "INDEX")
-    return ["insert:at:ofList:", index, list, item]
+    return ["insert:at:ofList:", item, index, list]
 
 def visitReplaceitemoflist(blockcontext):
     block = blockcontext.block
