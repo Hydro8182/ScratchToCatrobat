@@ -1,4 +1,4 @@
-from scratchtocatrobat.scratch.scratch3 import visitGeneric
+from visitorUtil import visitGeneric
 
 def visitTouchingObject(blockcontext):
     touch = visitGeneric(blockcontext, "TOUCHINGOBJECTMENU")

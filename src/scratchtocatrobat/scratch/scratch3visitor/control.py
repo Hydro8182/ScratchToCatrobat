@@ -1,6 +1,5 @@
-from scratchtocatrobat.scratch.scratch3 import visitBlockList
-from scratchtocatrobat.scratch.scratch3 import get_block
-from scratchtocatrobat.scratch.scratch3 import Scratch3Block, visitGeneric, BlockContext
+from visitorUtil import visitGeneric, visitCondition, visitSubstack, visitMutation, visitParams
+from visitorUtil import sanitizeListDefault, sanitizeListArgument
 
 
 def visitWait(blockcontext):
@@ -83,56 +82,6 @@ def visitProcedures_prototype(blockcontext):
 def visitArgument(blockcontext):
     return ["getParam", blockcontext.block.fields["VALUE"][0], "r"] #TODO what is "r"
 
-def visitCondition(blockcontext):
-    block = blockcontext.block
-    if "CONDITION" in block.inputs:
-        conditionblock = get_block(block.inputs["CONDITION"][1], blockcontext.spriteblocks)
-        if isinstance(conditionblock, Scratch3Block):
-            condition = visitGeneric(blockcontext, "CONDITION")
-            return condition
-    return False
 
-def visitSubstack(blockcontext, substackkey):
-    if substackkey in blockcontext.block.inputs:
-        substackstartblock = get_block(blockcontext.block.inputs[substackkey][1], blockcontext.spriteblocks)
-        if isinstance(substackstartblock, Scratch3Block):
-            substack = visitBlockList(BlockContext(substackstartblock, blockcontext.spriteblocks))
-            return substack
-    return None
-
-def visitMutation(blockcontext):
-    return blockcontext.block.mutation["proccode"]
-
-def visitParams(blockcontext):
-    paramids = blockcontext.block.mutation["argumentids"].strip("[]").split(",")
-    sanitized = []
-    for paramid in paramids:
-        sanitized.append(paramid.strip("\""))
-    arguments = []
-
-    for paramid in sanitized:
-        if paramid == "":
-            continue
-        arg = visitGeneric(blockcontext, paramid)
-        arguments.append(arg)
-    return arguments
-
-def sanitizeListArgument(listString):
-    paramids = listString.strip("[]").split(",")
-    sanitized = []
-    for paramid in paramids:
-        paramid = paramid.strip("\"")
-        if paramid == '':
-            continue
-        sanitized.append(paramid)
-    return sanitized
-
-def sanitizeListDefault(listString):
-    paramids = listString.strip("[]").split(",")
-    sanitized = []
-    for paramid in paramids:
-        paramid = paramid.strip("\"")
-        sanitized.append(paramid)
-    return sanitized
 
 

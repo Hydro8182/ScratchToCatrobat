@@ -1,4 +1,4 @@
-from scratchtocatrobat.scratch.scratch3 import visitGeneric
+from visitorUtil import visitGeneric
 
 def visitPlay(blockcontext):
     sound = visitGeneric(blockcontext, 'SOUND_MENU')

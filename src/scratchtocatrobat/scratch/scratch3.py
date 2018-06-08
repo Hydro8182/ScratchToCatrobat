@@ -1,92 +1,5 @@
 from pprint import pprint
 
-def get_block(blockid, spriteblocks):
-    if blockid in spriteblocks.keys():
-        return spriteblocks[blockid]
-    return blockid
-
-def visitBlock(block):
-    from scratch3visitor.blockmapping import visitormap
-
-    if not isinstance(block, BlockContext):
-        return block
-    blocklist = []
-    while block.block != None:
-        subblock = visitormap.get(block.block.opcode, visitDefault)(block)
-        blocklist.append(subblock)
-        block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    if isinstance(blocklist[0], list) and len(blocklist) == 1:
-        blocklist = blocklist[0]
-    return blocklist
-
-def visitScriptBlock(block):
-    from scratch3visitor.blockmapping import visitormap
-
-    if not isinstance(block, BlockContext):
-        return block
-
-    scriptblock = visitormap.get(block.block.opcode, visitDefault)(block)
-    block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    blocklist = []
-    blocklist.append(scriptblock)
-    while block.block != None:
-        subblock = visitormap.get(block.block.opcode, visitDefault)(block)
-        blocklist.append(subblock)
-        block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    pprint(blocklist)
-    return blocklist
-
-def visitBlockList(blockcontext):
-    from scratch3visitor.blockmapping import visitormap
-
-    if not isinstance(blockcontext, BlockContext):
-        return blockcontext
-    blocklist = []
-
-    while blockcontext.block != None:
-        subblock = visitormap.get(blockcontext.block.opcode, visitDefault)(blockcontext)
-        blocklist.append(subblock)
-        blockcontext = BlockContext(blockcontext.block.nextBlock, blockcontext.spriteblocks)
-    return blocklist
-
-def visitLiteral(literal):
-    if literal[0] == 12:
-        return ["readVariable", literal[1]]
-    elif literal[0] == 13:
-        return ["contentsOfList:", literal[1]]
-    elif literal[0] == 5 or literal[0] == 6 or literal[0] == 7:
-        if literal[1] == None:
-            return 0
-        try:
-            return int(literal[1])
-        except:
-            return str(literal[1])
-    elif literal[0] == 4 or literal[0] == 8:
-        if literal[1] == '':
-            return 0.0
-        return float(literal[1])
-    elif literal[0] == 9:
-        return literal[1]
-    else:
-        return literal[1]
-
-
-def visitGeneric(blockcontext, attributename):
-    block = blockcontext.block
-    if attributename in block.inputs:
-        substackstartblock = get_block(block.inputs[attributename][1], blockcontext.spriteblocks)
-        if isinstance(substackstartblock, Scratch3Block):
-            blocklist = visitBlock(BlockContext(substackstartblock, blockcontext.spriteblocks))
-            if block.inputs[attributename][0] == 1:
-                return blocklist[0]
-            return blocklist
-        return visitLiteral(block.inputs[attributename][1])
-    return [False]
-
-def visitDefault(blockcontext):
-    print("########### block not yet implemented: ", blockcontext.block.opcode, "#########")
-    return ["say:", "ERROR: BLOCK NOT FOUND: " + blockcontext.block.opcode]
-
 class Scratch3Script(object):
     def __init__(self):
         self.isStage = False
@@ -203,6 +116,8 @@ class Scratch3Parser(object):
         return stageSprite
 
     def parse_sprite(self, sprite):
+        from scratch3visitor.visitorUtil import BlockContext, visitScriptBlock
+
         script_blocks = []
         temp_block_dict = {}
         for block in sprite["blocks"]:
@@ -309,12 +224,3 @@ class Scratch3Parser(object):
         if block.parentName is not None:
             block.parentBlock = temp_block_dict[block.parentName]
 
-    def parse_scripts(self):
-        pass
-    def parse_script(self, script):
-        pass
-
-class BlockContext(object):
-    def __init__(self, block, spriteblocks):
-        self.block = block
-        self.spriteblocks = spriteblocks
