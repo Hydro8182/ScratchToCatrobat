@@ -1,21 +1,17 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitWhenflagclicked(blockcontext):
-    block = blockcontext.block
     return ["whenGreenFlag"]
 
 def visitBroadcast(blockcontext):
-    block = blockcontext.block
     message = visitGeneric(blockcontext, "BROADCAST_INPUT")
     return ["broadcast:", message]
 
 def visitBroadcastandwait(blockcontext):
-    block = blockcontext.block
     message = visitGeneric(blockcontext, "BROADCAST_INPUT")
     return ["doBroadcastAndWait", message]
 
 def visitWhenthisspriteclicked(blockcontext):
-    block = blockcontext.block
     return ["whenClicked"]
 
 def visitWhenkeypressed(blockcontext):

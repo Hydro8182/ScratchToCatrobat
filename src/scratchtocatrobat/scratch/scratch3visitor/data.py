@@ -22,13 +22,6 @@ def visitHidevariable(blockcontext):
     variable = block.fields["VARIABLE"][0]
     return ["hideVariable:", variable]
 
-def visitRead_variable(blockcontext):
-    block = blockcontext.block
-    pass
-    #TODO: a variable block just shows up as "my_variable",
-        # not as an actual block with a reference
-
-
 def visitAddtolist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]

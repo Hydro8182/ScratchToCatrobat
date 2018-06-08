@@ -19,31 +19,26 @@ def visitRepeat(blockcontext):
     return ["doRepeat", times, substack]
 
 def visitIf(blockcontext):
-    block = blockcontext.block
     condition = visitCondition(blockcontext)
     substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doIf", condition, substack1]
 
 def visitIf_else(blockcontext):
-    block = blockcontext.block
     condition = visitCondition(blockcontext)
     substack1 = visitSubstack(blockcontext, "SUBSTACK")
     substack2 = visitSubstack(blockcontext, "SUBSTACK2")
     return ["doIfElse", condition, substack1, substack2]
 
 def visitWait_until(blockcontext):
-    block = blockcontext.block
     condition = visitCondition(blockcontext)
     return ["doWaitUntil", condition]
 
 def visitRepeat_until(blockcontext):
-    block = blockcontext.block
     condition = visitCondition(blockcontext)
     substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doUntil", condition, substack1]
 
 def visitCreate_clone_of(blockcontext):
-    block = blockcontext.block
     clone = visitGeneric(blockcontext, 'CLONE_OPTION')
     return ["createCloneOf", clone]
 
@@ -56,15 +51,12 @@ def visitStop(blockcontext):
     return ["stopScripts", block.fields["STOP_OPTION"][0]]
 
 def visitStart_as_clone(blockcontext):
-    block = blockcontext.block
     return ["whenCloned"]
 
 def visitDelete_this_clone(blockcontext):
-    block = blockcontext.block
     return ["deleteClone"]
 
 def visitForever(blockcontext):
-    block = blockcontext.block
     substack1 = visitSubstack(blockcontext, "SUBSTACK")
     return ["doForever", substack1]
 
@@ -76,23 +68,15 @@ def visitProcedures_call(blockcontext):
 
 def visitProcedures_definition(blockcontext):
     proto = visitGeneric(blockcontext, "custom_block")
-    # block = get_block(blockcontext.block.inputs["custom_block"][1], blockcontext.spriteblocks)
-    # proto = visitProcedures_prototype(BlockContext(block, blockcontext.spriteblocks))
-
-    return proto #TODO: if there are no subblocks we currently remove one nesting and the userscript no longer counts as valid script(see scratch.py:106)
+    return proto
 
 def visitProcedures_prototype(blockcontext):
     proc_name = visitMutation(blockcontext)
-    if proc_name == "%s":
-        pass
     arguments = sanitizeListArgument(blockcontext.block.mutation["argumentnames"])
     if len(arguments) == 0:
         default_values = []
     else:
         default_values = sanitizeListDefault(blockcontext.block.mutation["argumentdefaults"])
-        # default_values = sanitizeListDefault(blockcontext)
-
-    # default_values = visitParams(blockcontext)
     return [["procDef", proc_name, arguments, default_values, False]] #TODO: what is the last parameter
 
 
@@ -117,8 +101,6 @@ def visitSubstack(blockcontext, substackkey):
     return None
 
 def visitMutation(blockcontext):
-    if blockcontext.block.mutation["proccode"] == "%s":
-        pass
     return blockcontext.block.mutation["proccode"]
 
 def visitParams(blockcontext):
@@ -126,15 +108,12 @@ def visitParams(blockcontext):
     sanitized = []
     for paramid in paramids:
         sanitized.append(paramid.strip("\""))
-        if sanitized =="Comment":
-            pass
     arguments = []
 
     for paramid in sanitized:
         if paramid == "":
-            continue #TODO: remove this once we figured out how this works
+            continue
         arg = visitGeneric(blockcontext, paramid)
-        #arg = blockcontext.block.inputs[paramid]
         arguments.append(arg)
     return arguments
 
@@ -145,8 +124,6 @@ def sanitizeListArgument(listString):
         paramid = paramid.strip("\"")
         if paramid == '':
             continue
-        if sanitized =="Comment":
-            pass
         sanitized.append(paramid)
     return sanitized
 
@@ -158,6 +135,4 @@ def sanitizeListDefault(listString):
         sanitized.append(paramid)
     return sanitized
 
-def sanitizeBoth(blockcontext):
-    block = blockcontext.block
 

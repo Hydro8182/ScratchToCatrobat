@@ -1,12 +1,11 @@
 from pprint import pprint
-# testglobalmap = dict()
 
 def get_block(blockid, spriteblocks):
     if blockid in spriteblocks.keys():
         return spriteblocks[blockid]
     return blockid
 
-def visitBlockAlt(block):
+def visitBlock(block):
     from scratch3visitor.blockmapping import visitormap
 
     if not isinstance(block, BlockContext):
@@ -18,12 +17,7 @@ def visitBlockAlt(block):
         block = BlockContext(block.block.nextBlock, block.spriteblocks)
     if isinstance(blocklist[0], list) and len(blocklist) == 1:
         blocklist = blocklist[0]
-
-    pprint(blocklist)
     return blocklist
-
-
-
 
 def visitScriptBlock(block):
     from scratch3visitor.blockmapping import visitormap
@@ -39,9 +33,6 @@ def visitScriptBlock(block):
         subblock = visitormap.get(block.block.opcode, visitDefault)(block)
         blocklist.append(subblock)
         block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    # if isinstance(blocklist[0], list) and len(blocklist) == 1:
-    #     blocklist = blocklist[0]
-
     pprint(blocklist)
     return blocklist
 
@@ -56,8 +47,6 @@ def visitBlockList(blockcontext):
         subblock = visitormap.get(blockcontext.block.opcode, visitDefault)(blockcontext)
         blocklist.append(subblock)
         blockcontext = BlockContext(blockcontext.block.nextBlock, blockcontext.spriteblocks)
-
-    pprint(blocklist)
     return blocklist
 
 def visitLiteral(literal):
@@ -87,13 +76,11 @@ def visitGeneric(blockcontext, attributename):
     if attributename in block.inputs:
         substackstartblock = get_block(block.inputs[attributename][1], blockcontext.spriteblocks)
         if isinstance(substackstartblock, Scratch3Block):
-            blocklist = visitBlockAlt(BlockContext(substackstartblock, blockcontext.spriteblocks))
+            blocklist = visitBlock(BlockContext(substackstartblock, blockcontext.spriteblocks))
             if block.inputs[attributename][0] == 1:
                 return blocklist[0]
             return blocklist
         return visitLiteral(block.inputs[attributename][1])
-        # return get_block(block.inputs[attributename][1][1])
-    # assert False
     return [False]
 
 def visitDefault(blockcontext):
@@ -130,14 +117,9 @@ class Scratch3Sound(object):
         self.rate = 48000
         self.sampleCount = 1123
         self.md5ext = "83a9787d4cb6f3b7632b4ddfebf74367.wav"
-        pass
 
 
-
-
-
-
-def get_value_of_block(block, key):
+def get_block_attribute(block, key):
     if key in block.keys():
         return block[key]
     return None
@@ -148,49 +130,21 @@ class Scratch3Block(object):
     def __init__(self, block, name):
         print block
         self.name = name
-        self.opcode = get_value_of_block(block, "opcode")
-        self.nextName = get_value_of_block(block, "next")
-        self.parentName = get_value_of_block(block, "parent")
+        self.opcode = get_block_attribute(block, "opcode")
+        self.nextName = get_block_attribute(block, "next")
+        self.parentName = get_block_attribute(block, "parent")
         self.nextBlock = None
         self.parentBlock = None
-        self.inputs = get_value_of_block(block, "inputs")
-        self.fields = get_value_of_block(block, "fields")
-        self.topLevel = get_value_of_block(block, "topLevel")
-        self.shadow = get_value_of_block(block, "shadow")
-        self.mutation = get_value_of_block(block, "mutation")
+        self.inputs = get_block_attribute(block, "inputs")
+        self.fields = get_block_attribute(block, "fields")
+        self.topLevel = get_block_attribute(block, "topLevel")
+        self.shadow = get_block_attribute(block, "shadow")
+        self.mutation = get_block_attribute(block, "mutation")
         self.x = 0
         self.y = 0
         if self.topLevel:
             self.x = block["x"]
             self.y = block["y"]
-
-    # pass
-    # class type (object):
-    #     FORMULA = 1
-    # def visitblock(self, block):
-    #     scratch3_to_scratch2_map = {
-    #         "event_broadcast" : ["whenIReceive", ("inputs", "BROADCAST_INPUT", 1, 2)] #"whenIReceive", "Trees"
-    #     }
-    #     if not "opcode" in scratch3_to_scratch2_map:
-    #         return block
-    #     keys = scratch3_to_scratch2_map["opcode"]
-    #
-    #     newname = keys[0]
-    #
-    #     for key in keys[1:]:
-    #         if  key in block["inputs"]:
-    #
-    #             #blockvalue = block["inputs"][key]
-    #             def search(json_pos, list):
-    #                 if len(list) == 0:
-    #                     return self.visitblock(json_pos)
-    #
-    #                 else:
-    #                     return search(json_pos[list[0]], list[1:])
-    #
-    #             blockvalue = search(block, keys)
-
-
 
 class Scratch3Project(object):
     def __init__(self):
@@ -249,9 +203,6 @@ class Scratch3Parser(object):
         return stageSprite
 
     def parse_sprite(self, sprite):
-        #project.sprites.append(Scratch3Sprite(sprite))
-        #pprint(sprite["blocks"])
-
         script_blocks = []
         temp_block_dict = {}
         for block in sprite["blocks"]:
@@ -264,18 +215,12 @@ class Scratch3Parser(object):
             if temp_block_dict[blockId].topLevel:
                 script_blocks.append(temp_block_dict[blockId])
         scratch2ProjectDict = {}
-        #test
-        # global testglobalmap
-        # testglobalmap = temp_block_dict
         scratch2ProjectDict["scripts"] = []
 
         for block in script_blocks:
             print "------------"
             self.printLinkedBlockList(block, temp_block_dict)
-            # scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(block)]]
-
             blockcontext = BlockContext(block, temp_block_dict)
-            # scratch2ProjectDict["scripts"] += [[1,1, visitBlockAlt(blockcontext)]]
             scratch2ProjectDict["scripts"] += [[1,1, visitScriptBlock(blockcontext)]]
         variables = []
         for var in sprite["variables"].values():
@@ -318,7 +263,6 @@ class Scratch3Parser(object):
         i = 0
         for s3Sound in sprite["sounds"]:
             i += 1
-            print s3Sound
             s2Sound = {}
             s2Sound["assetId"] =  s3Sound["assetId"]
             s2Sound["soundName"] =  s3Sound["name"]
@@ -369,12 +313,6 @@ class Scratch3Parser(object):
         pass
     def parse_script(self, script):
         pass
-
-
-def notimplemented(x,y):
-    print "block not implemented"
-    assert False
-
 
 class BlockContext(object):
     def __init__(self, block, spriteblocks):

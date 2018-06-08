@@ -1,7 +1,6 @@
 from scratchtocatrobat.scratch.scratch3 import visitGeneric
 
 def visitTouchingObject(blockcontext):
-    block = blockcontext.block
     touch = visitGeneric(blockcontext, "TOUCHINGOBJECTMENU")
     print("touching ", touch)
     return ["touching:", touch]
@@ -26,29 +25,18 @@ def visitSetdragmode(blockcontext):
 
 
 def visitResettimer(blockcontext):
-    block = blockcontext.block
     return ["timerReset"]
 
 def visitLoudness(blockcontext):
-    block = blockcontext.block
     return ["soundLevel"]
 
 def visitDistanceto(blockcontext):
-    block = blockcontext.block
     distance = visitGeneric(blockcontext, "DISTANCETOMENU")
     return ["distanceTo:", distance]
-    #TODO: distanceTO(join("asdf", "asdfdsf")) hat zwei refernezen in inputs:
-        # 1: zum join block, 2: zu distance_menu{mouse} ?????
 
 def visitColoristouchingcolor(blockcontext):
-    block = blockcontext.block
     color = visitGeneric(blockcontext, "COLOR")
-    if color == []:
-        color = block.inputs["COLOR"][1][1]
-
     color2 = visitGeneric(blockcontext, "COLOR2")
-    if color2 == []:
-        color2 = block.inputs["COLOR2"][1][1]
     return ["touchingColor:", color, color2]
 
 def visitOf(blockcontext):
@@ -59,7 +47,6 @@ def visitOf(blockcontext):
 
 
 def visitTouchingobject(blockcontext):
-    block = blockcontext.block
     object = visitGeneric(blockcontext, 'TOUCHINGOBJECTMENU')
     return ["touching:", object]
 
@@ -68,18 +55,14 @@ def visitCurrent(blockcontext):
     return ["timeAndDate", block.fields['CURRENTMENU'][0]]
 
 def visitAnswer(blockcontext):
-    block = blockcontext.block
     return ["answer"]
 
 def visitDayssince2000(blockcontext):
-    block = blockcontext.block
     return ["timestamp"]
 
 def visitKeypressed(blockcontext):
-    block = blockcontext.block
-    # key = visitBlockAlt(blockmap[block.inputs["KEY_OPTION"][1]], blockmap)
     key = visitGeneric(blockcontext, "KEY_OPTION")
-    return ["keyPressed:", key] #TODO: is this always key[0]?
+    return ["keyPressed:", key]
 
 def visitKey_options(blockcontext):
     block = blockcontext.block
@@ -87,21 +70,17 @@ def visitKey_options(blockcontext):
     return key
 
 def visitMousex(blockcontext):
-    block = blockcontext.block
     return ["mouseX"]
 
 def visitMousedown(blockcontext):
-    block = blockcontext.block
     return ["mousePressed"]
 
 
 def visitMousey(blockcontext):
-    block = blockcontext.block
     return ["mouseY"]
 
 
 def visitTimer(blockcontext):
-    block = blockcontext.block
     return ["timer"]
 
 def visitTouchingcolor(blockcontext):
@@ -112,7 +91,6 @@ def visitTouchingcolor(blockcontext):
     return ["touchingColor:", color]
 
 def visitUsername(blockcontext):
-    block = blockcontext.block
     return ["getUserName"]
 
 
