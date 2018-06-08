@@ -34,6 +34,9 @@ def visitDistanceto(blockcontext):
     distance = visitGeneric(blockcontext, "DISTANCETOMENU")
     return ["distanceTo:", distance]
 
+def visitDistanceto_menu(blockcontext):
+    return blockcontext.block.fields["DISTANCETOMENU"][0]
+
 def visitColoristouchingcolor(blockcontext):
     color = visitGeneric(blockcontext, "COLOR")
     color2 = visitGeneric(blockcontext, "COLOR2")

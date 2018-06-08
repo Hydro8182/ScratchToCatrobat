@@ -68,8 +68,6 @@ def visitGoforwardbackwardlayers(blockcontext):
     block = blockcontext.block
     direction = block.fields["FORWARD_BACKWARD"][0]
     change = visitGeneric(blockcontext, "NUM")
-    change = -1*change if direction == "backward" else change
-    print direction
     return ["goBackByLayers:", change]
 
 def visitCostumenumbername(blockcontext):

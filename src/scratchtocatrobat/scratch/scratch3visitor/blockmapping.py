@@ -71,6 +71,7 @@ visitormap = {
     "data_hidevariable" : data.visitHidevariable,
 
     "sensing_distanceto" : sensing.visitDistanceto,
+    "sensing_distancetomenu" : sensing.visitDistanceto_menu,
     "looks_costumenumbername" : looks.visitCostumenumbername,
     "sensing_loudness" : sensing.visitLoudness,
     "sensing_coloristouchingcolor" : sensing.visitColoristouchingcolor,
