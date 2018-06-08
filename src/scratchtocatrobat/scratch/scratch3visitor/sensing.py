@@ -52,7 +52,12 @@ def visitTouchingobject(blockcontext):
 
 def visitCurrent(blockcontext):
     block = blockcontext.block
-    return ["timeAndDate", block.fields['CURRENTMENU'][0]]
+    time = visitGeneric(blockcontext, "CURRENTMENU")
+    return ["timeAndDate", time]
+
+def visitCurrent_menu(blockcontext):
+    block = blockcontext.block
+    return block.fields["CURRENTMENU"][0]
 
 def visitAnswer(blockcontext):
     return ["answer"]
@@ -62,6 +67,8 @@ def visitDayssince2000(blockcontext):
 
 def visitKeypressed(blockcontext):
     key = visitGeneric(blockcontext, "KEY_OPTION")
+    if key == "": # shouldn't happen anyways since it is dropdown, but for some reason it can!?
+        key = "space"
     return ["keyPressed:", key]
 
 def visitKey_options(blockcontext):

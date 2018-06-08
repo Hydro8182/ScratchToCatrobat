@@ -79,8 +79,17 @@ def visitProcedures_prototype(blockcontext):
     return [["procDef", proc_name, arguments, default_values, False]] #TODO: what is the last parameter
 
 
-def visitArgument(blockcontext):
-    return ["getParam", blockcontext.block.fields["VALUE"][0], "r"] #TODO what is "r"
+def visitArgumentIntOrString(blockcontext):
+    param = blockcontext.block.fields["VALUE"][0]
+    if param is None:
+        param = 0
+    return ["getParam", param, "r"] #TODO what is "r"
+
+def visitArgumentBool(blockcontext):
+    param =  blockcontext.block.fields["VALUE"][0]
+    if param is None:
+        param = False
+    return ["getParam", param, "r"] #TODO what is "r"
 
 
 

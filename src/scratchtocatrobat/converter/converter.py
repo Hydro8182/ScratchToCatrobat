@@ -510,7 +510,20 @@ def _create_user_brick(context, scratch_function_header, param_values, declare=F
         param_types += [function_header_part]
         param_value = param_values[param_index]
         if not isinstance(param_value, catformula.FormulaElement):
-            param_value = int(param_value) if function_header_part in {'%n', '%b'} else str(param_value)
+            try:
+                if function_header_part in {'%n', '%b'}:
+                    if param_value is None:
+                        param_value = 0
+                    else:
+                        param_value = int(param_value)
+                else:
+                    if param_value is None:
+                        param_value = ""
+                    else:
+                        param_value = str(param_value)
+
+            except Exception as e:
+                raise e
         param_value_formula = catrobat.create_formula_with_value(param_value)
 
         user_brick_parameter = catbricks.UserBrickParameter(param_value_formula)
@@ -545,6 +558,7 @@ def _get_or_create_shared_global_answer_variable(project, data_container):
     "variable: %s" % (_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
     return shared_global_answer_user_variable
 
+#TODO: refactor
 # TODO: refactor _key_* functions to be used just once
 def _key_image_path_for(key):
     key_images_path = os.path.join(common.get_project_base_path(), 'resources', 'images', 'keys')
@@ -552,7 +566,8 @@ def _key_image_path_for(key):
         basename, _ = os.path.splitext(key_filename)
         if basename.lower().endswith("_" + "_".join(key.split())):
             return os.path.join(key_images_path, key_filename)
-    assert False, "Key '%s' not found in %s" % (key, os.listdir(key_images_path))
+    log.warning("Key '%s' not found in %s" % (key, os.listdir(key_images_path)))
+    raise Exception("Key '%s' not found in %s" % (key, os.listdir(key_images_path)))
 
 def _mouse_image_path():
     return os.path.join(common.get_project_base_path(), 'resources', 'images', 'keys', MOUSE_SPRITE_FILENAME)
@@ -762,7 +777,11 @@ class Converter(object):
     @staticmethod
     def _key_pressed_block_workaround_script(key, x_pos, y_pos, catrobat_scene):
         #load key file and create sprite with looks
-        key_filename = _key_filename_for(key)
+        key_filename = None
+        try: #TODO: make a workaround if the key name is within a formula
+            key_filename = _key_filename_for(key)
+        except:
+            return False
         #TODO: different names for key pressed block case, key pressed script case
         key_message = _key_to_broadcast_message(key)
         #TODO: Check if sprite already exists
@@ -1288,7 +1307,10 @@ class ConvertedProject(object):
 
             # copying key images needed for keyPressed substitution
             for listened_key_tuple in self.scratch_project.listened_keys:
-                key_image_path = _key_image_path_for(listened_key_tuple[0])
+                try:
+                    key_image_path = _key_image_path_for(listened_key_tuple[0])
+                except:
+                    continue
                 shutil.copyfile(key_image_path, os.path.join(images_path, _key_filename_for(listened_key_tuple[0])))
             for sprite in catrobat_program.getDefaultScene().spriteList:
                 if sprite.name == MOUSE_SPRITE_NAME:

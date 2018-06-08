@@ -27,6 +27,8 @@ def visitLt(blockcontext):
 
 def visitNot(blockcontext):
     operand1 = visitGeneric(blockcontext, "OPERAND")
+    if operand1 is None:
+        operand1 = False
     return ["not", operand1]
 
 def visitMod(blockcontext):
@@ -52,7 +54,11 @@ def visitMathop(blockcontext):
 
 def visitAnd(blockcontext):
     operand1 = visitGeneric(blockcontext, "OPERAND1")
+    if operand1 is None:
+        operand1 = False
     operand2 = visitGeneric(blockcontext, "OPERAND2")
+    if operand2 is None:
+        operand2 = False
     return ["&", operand1, operand2]
 
 def visitRound(blockcontext):
@@ -83,7 +89,11 @@ def visitContains(blockcontext):
 
 def visitOr(blockcontext):
     operand1 = visitGeneric(blockcontext, "OPERAND1")
+    if operand1 is None:
+        operand1 = False
     operand2 = visitGeneric(blockcontext, "OPERAND2")
+    if operand2 is None:
+        operand2 = False
     return ["|", operand1, operand2]
 
 def visitLength(blockcontext):

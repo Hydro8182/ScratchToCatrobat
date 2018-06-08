@@ -32,7 +32,7 @@ def visitSetPenColorParamTo(blockcontext):
 
 def visitChangePenSizeBy(blockcontext):
     sizechange = visitGeneric(blockcontext, "SIZE")
-    return ["chagePenSizeBy:", sizechange]
+    return ["changePenSizeBy:", sizechange]
 
 def visitSetPenSizeTo(blockcontext):
     size = visitGeneric(blockcontext, "SIZE")

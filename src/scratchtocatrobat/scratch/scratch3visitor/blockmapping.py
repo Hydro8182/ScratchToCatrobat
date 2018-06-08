@@ -92,6 +92,7 @@ visitormap = {
     "sensing_touchingcolor" : sensing.visitTouchingcolor,
     "motion_direction" : motion.visitDirection,
     "sensing_touchingobject" : sensing.visitTouchingObject,
+    "sensing_currentmenu" : sensing.visitCurrent_menu,
 
     "event_whenbroadcastreceived" : event.visitWhenbroadcastreceived,
     "operator_subtract" : operator.visitSubtract,
@@ -140,7 +141,8 @@ visitormap = {
 
     "procedures_call" : control.visitProcedures_call,
     "procedures_definition" : control.visitProcedures_definition,
-    "argument_reporter_string_number" : control.visitArgument,
+    "argument_reporter_string_number" : control.visitArgumentIntOrString,
+    "argument_reporter_boolean" : control.visitArgumentBool,
     "procedures_prototype" : control.visitProcedures_prototype,
 
     "pen_clear" : pen.visitClear,

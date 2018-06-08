@@ -41,7 +41,6 @@ def get_block_attribute(block, key):
 class Scratch3Block(object):
 
     def __init__(self, block, name):
-        print block
         self.name = name
         self.opcode = get_block_attribute(block, "opcode")
         self.nextName = get_block_attribute(block, "next")
@@ -133,8 +132,6 @@ class Scratch3Parser(object):
         scratch2ProjectDict["scripts"] = []
 
         for block in script_blocks:
-            print "------------"
-            self.printLinkedBlockList(block, temp_block_dict)
             blockcontext = BlockContext(block, temp_block_dict)
             scratch2ProjectDict["scripts"] += [[1,1, visitScriptBlock(blockcontext)]]
         variables = []
@@ -204,18 +201,6 @@ class Scratch3Parser(object):
             scratch2ProjectDict["visible"] = sprite["visible"]
 
         return scratch2ProjectDict
-
-    def printLinkedBlockList(self, block, temp_block_dict):
-        #TODO: unhardcode this
-        # print(block.opcode)
-        group = block.opcode.split('_')[0]
-        blockcode = "_".join(block.opcode.split('_')[1:])
-        blockcode = blockcode[0].upper() + blockcode[1:]
-        # print( '"'+block.opcode+"\" : scratch3visitor." + group + ".visit" + blockcode + ",")
-
-        if block.nextBlock is None:
-            return
-        self.printLinkedBlockList(block.nextBlock, temp_block_dict)
 
     def build_block_structure(self, blockId, temp_block_dict):
         block = temp_block_dict[blockId]

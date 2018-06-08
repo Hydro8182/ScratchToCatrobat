@@ -35,7 +35,7 @@ def visitScriptBlock(block):
         subblock = visitormap.get(block.block.opcode, visitDefault)(block)
         blocklist.append(subblock)
         block = BlockContext(block.block.nextBlock, block.spriteblocks)
-    pprint(blocklist)
+    # pprint(blocklist)
     return blocklist
 
 def visitBlockList(blockcontext):
@@ -52,12 +52,14 @@ def visitBlockList(blockcontext):
     return blocklist
 
 def visitLiteral(literal):
-    if literal[0] == 12:
+    if literal is None:
+        return None #TODO: Warning or error message maybe?
+    elif literal[0] == 12:
         return ["readVariable", literal[1]]
     elif literal[0] == 13:
         return ["contentsOfList:", literal[1]]
     elif literal[0] == 5 or literal[0] == 6 or literal[0] == 7:
-        if literal[1] == None:
+        if literal[1] is None:
             return 0
         try:
             return int(literal[1])
@@ -138,6 +140,8 @@ def sanitizeListDefault(listString):
     sanitized = []
     for paramid in paramids:
         paramid = paramid.strip("\"")
+        if paramid == 'true': paramid = True
+        if paramid == 'false': paramid = False
         sanitized.append(paramid)
     return sanitized
 
