@@ -37,3 +37,16 @@ def visitChangePenSizeBy(blockcontext):
 def visitSetPenSizeTo(blockcontext):
     size = visitGeneric(blockcontext, "SIZE")
     return ["penSize:", size]
+
+def visitSetPenShadeToNumber(blockcontext):
+    size = visitGeneric(blockcontext, "SHADE")
+    return ["penShade:", size]
+
+def visitChangePenShadeByNumber(blockcontext):
+    size = visitGeneric(blockcontext, "SHADE")
+    return ["changePenShadeBy:", size]
+
+def visitSetPenHueToNumber(blockcontext):
+    size = visitGeneric(blockcontext, "HUE")
+    return ["penHue:", size]
+

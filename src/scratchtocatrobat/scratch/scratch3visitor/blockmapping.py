@@ -156,6 +156,9 @@ visitormap = {
     "pen_setPenColorParamTo" : pen.visitSetPenColorParamTo,
     "pen_changePenSizeBy" : pen.visitChangePenSizeBy,
     "pen_setPenSizeTo" : pen.visitSetPenSizeTo,
+    "pen_setPenShadeToNumber" : pen.visitSetPenShadeToNumber,
+    "pen_changePenShadeBy" : pen.visitChangePenShadeByNumber,
+    "pen_setPenHueToNumber" : pen.visitSetPenHueToNumber,
 
 
 }
