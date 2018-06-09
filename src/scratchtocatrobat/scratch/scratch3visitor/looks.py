@@ -73,6 +73,11 @@ def visitGoforwardbackwardlayers(blockcontext):
 def visitCostumenumbername(blockcontext):
     block = blockcontext.block
     name_number = block.fields["NUMBER_NAME"][0]
+    if name_number == "number":
+        return ["costumeIndex"]
+    if name_number == "name":
+        return ["costumeName"]
+
     return ["costumeIndexPlaceholder"]#TODO:nur number in scratch2?
 
 
