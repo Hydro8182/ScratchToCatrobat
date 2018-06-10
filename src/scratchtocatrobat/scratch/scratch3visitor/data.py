@@ -52,8 +52,6 @@ def visitItemoflist(blockcontext):
     block = blockcontext.block
     list = block.fields["LIST"][0]
     index = visitGeneric(blockcontext, "INDEX")
-    print list
-    print index
     return ["getLine:ofList:", index, list]
 
 def visitItemnumoflist(blockcontext):

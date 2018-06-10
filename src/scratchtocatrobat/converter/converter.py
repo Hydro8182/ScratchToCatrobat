@@ -425,7 +425,7 @@ def _create_modified_formula_brick(sensor_type, unconverted_formula, catrobat_pr
         #TODO: Implement if ready. Other sensor types (up to now only video motion) not supported.
         raise common.ScratchtobatError("Unsupported sensor type '{}'".format(sensor_type))
 
-    if isinstance(unconverted_formula, int):
+    if isinstance(unconverted_formula, int) or isinstance(unconverted_formula, float):
         formula_right_child = catformula.FormulaElement(catElementType.NUMBER, None, None)
         formula_right_child.value = str(unconverted_formula)
 

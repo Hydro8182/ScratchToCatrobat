@@ -2,7 +2,6 @@ from visitorUtil import visitGeneric
 
 def visitTouchingObject(blockcontext):
     touch = visitGeneric(blockcontext, "TOUCHINGOBJECTMENU")
-    print("touching ", touch)
     return ["touching:", touch]
 
 def visitTouchingObjectMenu(blockcontext):
