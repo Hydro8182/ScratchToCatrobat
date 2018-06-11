@@ -69,27 +69,30 @@ class Scratch3Project(object):
 class Scratch3Parser(object):
     scratch2dict = {}
 
+
+    def fixBadScratch3Hashes(self, projectFile, scratch_project_dir):
+        import glob
+        import os
+        from scratchtocatrobat.tools import common
+        file_content = projectFile.read()
+        for file in glob.glob(scratch_project_dir + "/*.*"):
+            if not file.endswith(".json"):
+                file_hash = common.md5_hash(file)
+                newname = scratch_project_dir+"/"+ file_hash +"." +file.split(".")[-1]
+                os.rename(file, newname)
+                oldfile = "".join(file.split('/')[-1].split('.')[0:-1])
+                file_content = file_content.replace(oldfile ,file_hash)
+        projectFile.flush()
+        projectFile.write(file_content)
+        return file_content
+
     def __init__(self, file_path, scratch_project_dir):
         import json
         print file_path
-        with open(file_path, "r+") as file1:
-            import glob
-            import os
-            from scratchtocatrobat.tools import common
-            file_content = file1.read()
-            for file in glob.glob(scratch_project_dir + "/*.*"):
-                if not file.endswith(".json"):
 
-                    file_hash = common.md5_hash(file)
-                    newname = scratch_project_dir+"/"+ file_hash +"." +file.split(".")[-1]
-                    os.rename(file, newname)
-                    oldfile = "".join(file.split('/')[-1].split('.')[0:-1])
-                    print oldfile
-                    print file_hash
-                    file_content = file_content.replace(oldfile ,file_hash)
-            file1.flush()
-            file1.write(file_content)
-            self.raw_dict = json.loads(file_content)
+        with open(file_path, "r+") as projectFile:
+            new_json = self.fixBadScratch3Hashes(projectFile, scratch_project_dir)
+            self.raw_dict = json.loads(new_json)
 
     def parse_sprites(self):
         sprites = self.raw_dict["targets"]
@@ -142,6 +145,7 @@ class Scratch3Parser(object):
             curvar["isPersistent"] = var[2] if len(var) > 2 else False
             variables.append(curvar)
 
+        #TODO: check if list is global, if it is add it to the list list of the stage, same for variables
         lists = []
         for list in sprite["lists"].values():
             curlist = {}

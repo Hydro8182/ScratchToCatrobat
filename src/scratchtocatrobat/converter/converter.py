@@ -1106,11 +1106,11 @@ class _ScratchObjectConverter(object):
         if x_pos != 0 or y_pos != 0:
             implicit_bricks_to_add += [catbricks.PlaceAtBrick(x_pos, y_pos)]
 
-        object_relative_scale = scratch_object.get_scale() or 1
-        if costume_resolution is not None:
-            object_scale = object_relative_scale * 100.0 / costume_resolution
-            if object_scale != 100.0:
-                implicit_bricks_to_add += [catbricks.SetSizeToBrick(object_scale)]
+        # object_relative_scale = scratch_object.get_scale() or 1
+        # if costume_resolution is not None:
+        #     object_scale = object_relative_scale * 100.0 / costume_resolution
+        #     if object_scale != 100.0:
+        #         implicit_bricks_to_add += [catbricks.SetSizeToBrick(object_scale)]
 
         object_rotation_in_degrees = float(scratch_object.get_direction() or 90.0)
         number_of_full_object_rotations = int(round(object_rotation_in_degrees/360.0))
@@ -1333,6 +1333,7 @@ class ConvertedProject(object):
         log.info("  Saving media files")
         media_converter = mediaconverter.MediaConverter(self.scratch_project, self.catrobat_program,
                                                         images_path, sounds_path)
+
         media_converter.convert(progress_bar)
 
         log.info("  Saving project XML file")
@@ -1588,7 +1589,6 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
             index_formula_element = self._converted_helper_brick_or_formula_element([start_formula_element, end_formula_element], "randomFrom:to:")
         else:
             index_formula_element = catrobat.create_formula_element_with_value(position)
-
         right_formula_elem = catformula.FormulaElement(catElementType.USER_LIST, list_name, None)
         formula_element = catformula.FormulaElement(catElementType.FUNCTION, self.CatrobatClass.toString(), None)
         formula_element.setLeftChild(index_formula_element)
@@ -1641,6 +1641,8 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
         else:
             assert self.block_name == 'doForever', self.block_name
             [nested_bricks] = brick_arguments
+            if nested_bricks == None:
+                nested_bricks = []
             catr_loop_start_brick = self.CatrobatClass()
         return [catr_loop_start_brick] + nested_bricks + [catbricks.LoopEndBrick(catr_loop_start_brick)]
 
