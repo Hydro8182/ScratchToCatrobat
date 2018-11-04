@@ -273,6 +273,8 @@ class TestScratch3Blocks(unittest.TestCase):
         converted_block = visitBlock(context)
         assert converted_block[0] == "doRepeat"
         assert converted_block[1] == 1234
+        assert converted_block[1][0][0] == "say:"
+
 
     def test_visitIf(self):
         context = create_block_context("control_if")
@@ -281,7 +283,8 @@ class TestScratch3Blocks(unittest.TestCase):
         addInputOfType(testblock, "SUBSTACK", TYPE_BLOCK)
         converted_block = visitBlock(context)
         assert converted_block[0] == "doIf"
-        assert converted_block[1] == 1234
+        assert converted_block[1][0][0] == "say:"
+
 
     def test_visitIfelse(self):
         context = create_block_context("control_if_else")
@@ -291,7 +294,9 @@ class TestScratch3Blocks(unittest.TestCase):
         addInputOfType(testblock, "SUBSTACK2", TYPE_BLOCK)
         converted_block = visitBlock(context)
         assert converted_block[0] == "doIfElse"
-        assert converted_block[1] == 1234
+        assert converted_block[1][0][0] == "say:"
+
+        # assert converted_block[1] == 1234
 
     def test_visitWait_until(self):
         context = create_block_context("control_wait_until")
@@ -299,7 +304,9 @@ class TestScratch3Blocks(unittest.TestCase):
         addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
         converted_block = visitBlock(context)
         assert converted_block[0] == "doWaitUntil"
-        assert converted_block[1] == 1234
+        assert converted_block[1][0][0] == "say:"
+
+        # assert converted_block[1] == 1234
 
     def test_visitRepeat_until(self):
         context = create_block_context("control_repeat_until")
@@ -308,45 +315,60 @@ class TestScratch3Blocks(unittest.TestCase):
         addInputOfType(testblock, "SUBSTACK", TYPE_BLOCK)
         converted_block = visitBlock(context)
         assert converted_block[0] == "doUntil"
-        assert converted_block[1] == 1234
+        assert converted_block[1][0][0] == "say:"
+
+        # assert converted_block[1] == 1234
 
     def test_visitCreate_clone_of(self):
         context = create_block_context("control_create_clone_of")
         testblock = context.block
-        addInputOfType(testblock, "CLONE_OPTION", TYPE_BLOCK)
-        addInputToBlock(testblock, "CLONE_OPTION", "")
+        menu_block = add_new_block_to_context(context, "control_create_clone_of_menu")
+        menu_block.fields["CLONE_OPTION"] = ["_myself_"]
+
+        testblock.inputs["CLONE_OPTION"] = [1, menu_block.name]
+
+        # addInputOfType(testblock, "CLONE_OPTION", TYPE_BLOCK)
+        # addInputToBlock(testblock, "CLONE_OPTION", [1,])
 
         converted_block = visitBlock(context)
         assert converted_block[0] == "createCloneOf"
-        assert converted_block[1] == 1234
+        assert converted_block[1] == "_myself_"
 
     def test_visitStop(self):
         context = create_block_context("control_stop")
         testblock = context.block
         testblock.fields["STOP_OPTION"] = ["stopthisscript"]
         converted_block = visitBlock(context)
-        assert converted_block[0] == "doRepeat"
-        assert converted_block[1] == 1234
+        assert converted_block[0] == "stopScripts"
+        assert converted_block[1][0][0] == "say:"
+
 
     def test_visitStart_as_clone(self):
         context = create_block_context("control_start_as_clone")
         testblock = context.block
         converted_block = visitBlock(context)
         assert converted_block[0] == "whenCloned"
+        assert converted_block[1][0][0] == "say:"
+
 
     def test_visitDelete_this_clone(self):
         context = create_block_context("control_delete_this_clone")
         testblock = context.block
         converted_block = visitBlock(context)
         assert converted_block[0] == "deleteClone"
+        assert converted_block[1][0][0] == "say:"
+
 
     def test_visitForever(self):
         context = create_block_context("control_forever")
         testblock = context.block
-        addInputOfType(testblock, "SUBSTACK", TYPE_BLOCK)
+        sayblock = createScratch3Block(context, "looks_say")
+        context.spriteblocks[sayblock.name] = sayblock
+        testblock.inputs["SUBSTACK"] = [1, sayblock.name]
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
         converted_block = visitBlock(context)
         assert converted_block[0] == "doForever"
-        assert converted_block[1] == None
+        assert converted_block[1][0][0] == "say:"
 
 if __name__ == "__main__":
     unittest.main()
