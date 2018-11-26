@@ -52,6 +52,7 @@ def createScratch3Block(context, opcode):
     block["parent"] = None
     block["next"] = None
     block = Scratch3Block(block, name)
+    context.spriteblocks[name] = block
 
     return block
 
@@ -270,52 +271,85 @@ class TestScratch3Blocks(unittest.TestCase):
         testblock = context.block
         addInputOfType(testblock, "TIMES", TYPE_INT)
         testblock.fields["NUMBER_NAME"] = ["name"]
+
+
+        sayblock = createScratch3Block(context, "looks_say")
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
+        testblock.inputs["SUBSTACK"] = [1, sayblock.name]
+
         converted_block = visitBlock(context)
         assert converted_block[0] == "doRepeat"
         assert converted_block[1] == 1234
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[2][0][0] == "say:"
 
 
     def test_visitIf(self):
         context = create_block_context("control_if")
         testblock = context.block
         addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
-        addInputOfType(testblock, "SUBSTACK", TYPE_BLOCK)
+
+        sayblock = createScratch3Block(context, "looks_say")
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
+        # context.spriteblocks[sayblock.name] = sayblock
+        testblock.inputs["CONDITION"] = [1, sayblock.name]
+        testblock.inputs["SUBSTACK"] = [1, sayblock.name]
+
         converted_block = visitBlock(context)
         assert converted_block[0] == "doIf"
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[1] == "say:"
+        assert converted_block[2][0][0] == "say:"
 
 
     def test_visitIfelse(self):
         context = create_block_context("control_if_else")
         testblock = context.block
-        addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
-        addInputOfType(testblock, "SUBSTACK1", TYPE_BLOCK)
-        addInputOfType(testblock, "SUBSTACK2", TYPE_BLOCK)
+        # addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
+        # addInputOfType(testblock, "SUBSTACK1", TYPE_BLOCK)
+
+        sayblock = createScratch3Block(context, "looks_say")
+        # context.spriteblocks[sayblock.name] = sayblock
+        testblock.inputs["CONDITION"] = [1, sayblock.name]
+        testblock.inputs["SUBSTACK"] = [1, sayblock.name]
+        testblock.inputs["SUBSTACK2"] = [1, sayblock.name]
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
+
+        # assert converted_block[1][0] in conditionalblocks
         converted_block = visitBlock(context)
         assert converted_block[0] == "doIfElse"
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[1] == "say:"
+        assert converted_block[2][0][0] == "say:"
+        assert converted_block[3][0][0] == "say:"
+
 
         # assert converted_block[1] == 1234
 
     def test_visitWait_until(self):
         context = create_block_context("control_wait_until")
         testblock = context.block
-        addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
+        sayblock = createScratch3Block(context, "looks_say")
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
+        testblock.inputs["CONDITION"] = [1, sayblock.name]
+
         converted_block = visitBlock(context)
         assert converted_block[0] == "doWaitUntil"
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[1] == "say:"
 
         # assert converted_block[1] == 1234
 
     def test_visitRepeat_until(self):
         context = create_block_context("control_repeat_until")
         testblock = context.block
-        addInputOfType(testblock, "CONDITION", TYPE_BLOCK)
-        addInputOfType(testblock, "SUBSTACK", TYPE_BLOCK)
+        sayblock = createScratch3Block(context, "looks_say")
+        addInputOfType(sayblock, "MESSAGE", TYPE_STRING)
+
+        testblock.inputs["CONDITION"] = [1, sayblock.name]
+        testblock.inputs["SUBSTACK"] = [1, sayblock.name]
+
+        # context.spriteblocks[sayblock.name] = sayblock
         converted_block = visitBlock(context)
         assert converted_block[0] == "doUntil"
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[1] == "say:"
+        assert converted_block[2][0][0] == "say:"
 
         # assert converted_block[1] == 1234
 
@@ -340,7 +374,7 @@ class TestScratch3Blocks(unittest.TestCase):
         testblock.fields["STOP_OPTION"] = ["stopthisscript"]
         converted_block = visitBlock(context)
         assert converted_block[0] == "stopScripts"
-        assert converted_block[1][0][0] == "say:"
+        assert converted_block[1] == "stopthisscript"
 
 
     def test_visitStart_as_clone(self):
@@ -348,7 +382,6 @@ class TestScratch3Blocks(unittest.TestCase):
         testblock = context.block
         converted_block = visitBlock(context)
         assert converted_block[0] == "whenCloned"
-        assert converted_block[1][0][0] == "say:"
 
 
     def test_visitDelete_this_clone(self):
@@ -356,7 +389,6 @@ class TestScratch3Blocks(unittest.TestCase):
         testblock = context.block
         converted_block = visitBlock(context)
         assert converted_block[0] == "deleteClone"
-        assert converted_block[1][0][0] == "say:"
 
 
     def test_visitForever(self):
