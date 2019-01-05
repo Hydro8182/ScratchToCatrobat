@@ -42,7 +42,7 @@ function updateAndShowProjectDetails(projectID) {
     showSuccessMessage(projectMetadataDiv);
   }, function(event, jqxhr, exception) {
     showErrorMessage("Invalid project?? No metadata available!");
-    disableSubmitButton();
+    //disableSubmitButton();
     $(this).focus();
   });
 }
