@@ -610,10 +610,19 @@ class Project(RawProject):
             self.instructions = self.notes_and_credits = None
             self.automatic_screenshot_image_url = None
         else:
-            self.name = name if name is not None else scratchwebapi.getMetaDataEntry(self.project_id, "title")
-            self.instructions = scratchwebapi.getMetaDataEntry(self.project_id, "instructions")
-            self.notes_and_credits = scratchwebapi.getMetaDataEntry(self.project_id, "description")
-            self.automatic_screenshot_image_url = "{}{}.png".format(scratchwebapi.SCRATCH_PROJECT_IMAGE_BASE_URL, self.project_id)
+
+            if name is not None:
+                self.name = name
+            else:
+                [self.name] = scratchwebapi.getMetaDataEntry(self.project_id, "title")
+
+            # self.name = name if name is not None else scratchwebapi.getMetaDataEntry(self.project_id, "title")
+
+            self.instructions, self.notes_and_credits, self.automatic_screenshot_image_url =\
+                scratchwebapi.getMetaDataEntry(self.project_id, "instructions", "description", "image")
+            # self.instructions = scratchwebapi.getMetaDataEntry(self.project_id, "instructions")
+            # self.notes_and_credits = scratchwebapi.getMetaDataEntry(self.project_id, "description")
+            # self.automatic_screenshot_image_url = "{}{}.png".format(scratchwebapi.SCRATCH_PROJECT_IMAGE_BASE_URL, self.project_id)
 
         if progress_bar != None: progress_bar.update(ProgressType.DETAILS) # details step passed
 

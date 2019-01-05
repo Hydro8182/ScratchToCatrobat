@@ -28,6 +28,7 @@ from scratchtocatrobat.tools import logger, helpers
 from scratchtocatrobat.tools.helpers import ProgressType
 from collections import namedtuple
 from datetime import datetime
+import time
 
 HTTP_RETRIES = int(helpers.config.get("SCRATCH_API", "http_retries"))
 HTTP_BACKOFF = int(helpers.config.get("SCRATCH_API", "http_backoff"))
@@ -220,6 +221,7 @@ def downloadProjectMetaData(project_id, retry_after_http_status_exception=True):
     try:
         document = fetch_document(scratch_project_url, HTTP_TIMEOUT, HTTP_USER_AGENT)
         if document != None:
+            document["meta_data_timestamp"] = datetime.now()
             _cached_jsoup_documents[project_id] = document
             _projectMetaData[project_id] = document
         return document
@@ -420,5 +422,14 @@ def extract_project_details_from_document(document, project_id, escape_quotes=Tr
 
 
 
-def getMetaDataEntry(projectID, entryKey):
-    return _projectMetaData[projectID][entryKey]
+def getMetaDataEntry(projectID, *entryKey):
+    if not projectID in _projectMetaData.keys() or (_projectMetaData[projectID]["meta_data_timestamp"] + 3600) < datetime.now() :
+        downloadProjectMetaData(projectID)
+
+    metadata = []
+
+    for i in range(len(entryKey)):
+        key = entryKey[i]
+        metadata.append(_projectMetaData[projectID][key])
+
+    return metadata
