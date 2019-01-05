@@ -27,7 +27,7 @@ from urlparse import urlparse
 from scratchtocatrobat.tools import logger, helpers
 from scratchtocatrobat.tools.helpers import ProgressType
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 
 HTTP_RETRIES = int(helpers.config.get("SCRATCH_API", "http_retries"))
@@ -247,17 +247,6 @@ def request_is_project_available(project_id):
         else:
             raise e
 
-def request_project_title_for(project_id):
-    return extract_project_title_from_document(downloadProjectMetaData(project_id))
-
-def request_project_owner_for(project_id):
-    return extract_project_owner_from_document(request_project_page_as_Jsoup_document_for(project_id))
-
-def request_project_instructions_for(project_id):
-    return extract_project_instructions_from_document(request_project_page_as_Jsoup_document_for(project_id))
-
-def request_project_notes_and_credits_for(project_id):
-    return extract_project_notes_and_credits_from_document(request_project_page_as_Jsoup_document_for(project_id))
 
 def request_project_remixes_for(project_id):
     global _cached_remix_info_data
@@ -296,51 +285,6 @@ def request_project_remixes_for(project_id):
         _log.error("Cannot fetch remix tree data: HTTP-Status-Code 404")
         return None
 
-def request_project_details_for(project_id):
-    return extract_project_details_from_document(downloadProjectMetaData(project_id), project_id)
-
-def request_project_visibility_state_for(project_id, retry_after_http_status_exception=True):
-    return extract_project_visibilty_state_from_document(downloadProjectMetaData(project_id, retry_after_http_status_exception))
-
-
-def extract_project_title_from_document(document):
-    if document is None: return None
-
-    extracted_text = document.select_first_as_text("html > head > title")
-    if extracted_text is None: return None
-
-    title = unicode(extracted_text).strip()
-    appended_title_text = "on Scratch"
-    if title.endswith(appended_title_text):
-        title = title.split(appended_title_text)[0].strip()
-    return title.encode('utf-8')
-
-def extract_project_image_url_from_document(document):
-    if document is None: return None
-
-    extracted_text_list = document.select_attributes_as_text_list("div#scratch > img.image", "src")
-    if extracted_text_list is None or len(extracted_text_list) == 0: return None
-
-    image_url_of_project = unicode(extracted_text_list[0]).strip()
-    if image_url_of_project.startswith("//"):
-        image_url_of_project = image_url_of_project.replace("//", "https://")
-    return image_url_of_project
-
-def extract_project_owner_from_document(document):
-    if document is None: return None
-    extracted_text = document.select_first_as_text("span#owner")
-    return unicode(extracted_text).replace("by ", "").strip().encode('utf-8') if extracted_text != None else None
-
-def extract_project_instructions_from_document(document):
-    if document is None: return None
-    extracted_text = document.select_first_as_text("div#instructions > div.viewport > div.overview")
-    return unicode(extracted_text).strip().encode('utf-8') if extracted_text != None else None
-
-def extract_project_notes_and_credits_from_document(document):
-    if document is None: return None
-    extracted_text = document.select_first_as_text("div#description > div.viewport > div.overview")
-    return unicode(extracted_text).strip().encode('utf-8') if extracted_text != None else None
-
 def extract_project_remixes_from_data(tree_data, project_id):
     if tree_data is None or not isinstance(tree_data, dict) or tree_data == []:
         return []
@@ -358,15 +302,6 @@ def extract_project_remixes_from_data(tree_data, project_id):
         remixed_program_info += [remix_data]
     return remixed_program_info
 
-def extract_project_visibilty_state_from_document(document):
-    if document is None: return ScratchProjectVisibiltyState.PRIVATE
-    extracted_text = document.select_first_as_text("div#share-bar > span")
-    if extracted_text == "Sorry this project is not shared":
-        return ScratchProjectVisibiltyState.PRIVATE
-    elif extracted_text is not None:
-        return ScratchProjectVisibiltyState.UNKNOWN
-    else:
-        return ScratchProjectVisibiltyState.PUBLIC
 
 def extract_project_details_from_document(document, project_id, escape_quotes=True):
     if document is None: return None
@@ -423,7 +358,7 @@ def extract_project_details_from_document(document, project_id, escape_quotes=Tr
 
 
 def getMetaDataEntry(projectID, *entryKey):
-    if not projectID in _projectMetaData.keys() or (_projectMetaData[projectID]["meta_data_timestamp"] + 3600) < datetime.now() :
+    if not projectID in _projectMetaData.keys() or (_projectMetaData[projectID]["meta_data_timestamp"] + timedelta(hours=1)) < datetime.now() :
         downloadProjectMetaData(projectID)
 
     metadata = []
