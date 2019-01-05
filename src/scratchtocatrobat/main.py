@@ -107,7 +107,7 @@ def run_converter(scratch_project_file_or_url, output_dir,
                 project_ID = scratchwebapi.extract_project_id_from_url(scratch_project_file_or_url)
                 if not scratchwebapi.request_is_project_available(project_ID):
                     raise common.ScratchtobatError("Project with ID %s not available" % project_ID)
-                if scratchwebapi.request_project_visibility_state_for(project_ID) != scratchwebapi.ScratchProjectVisibiltyState.PUBLIC:
+                if scratchwebapi.getMetaDataEntry(project_ID, "visibility") != scratchwebapi.ScratchProjectVisibiltyState.PUBLIC:
                     log.warn('-'*80)
                     log.warn("CAVE: Project with ID %s is NOT a public project!! Trying to " \
                              "continue the conversion-process anyway, but expecting the " \

@@ -37,11 +37,13 @@ HTTP_USER_AGENT = helpers.config.get("SCRATCH_API", "user_agent")
 SCRATCH_PROJECT_BASE_URL = helpers.config.get("SCRATCH_API", "project_base_url")
 SCRATCH_PROJECT_REMIX_TREE_URL_TEMPLATE = helpers.config.get("SCRATCH_API", "project_remix_tree_url_template")
 SCRATCH_PROJECT_IMAGE_BASE_URL = helpers.config.get("SCRATCH_API", "project_image_base_url")
+SCRATCH_PROJECT_META_DATA_BASE_URL = helpers.config.get("SCRATCH_API", "project_meta_data_base_url")
 
 _log = logger.log
 _cached_jsoup_documents = {}
 _cached_remix_info_data = {}
 
+_projectMetaData = {}
 
 class ScratchProjectInfo(namedtuple("ScratchProjectInfo", "title owner image_url instructions " \
                                     "notes_and_credits tags views favorites loves modified_date " \
@@ -185,8 +187,9 @@ class _ResponseJsoupDocumentWrapper(ResponseDocumentWrapper):
             return None
         return [element.attr(attribute_name) for element in result if element is not None]
 
-def request_project_page_as_Jsoup_document_for(project_id, retry_after_http_status_exception=True):
+def downloadProjectMetaData(project_id, retry_after_http_status_exception=True):
     global _cached_jsoup_documents
+    global _projectMetaData
 
     from java.net import SocketTimeoutException, UnknownHostException
     from org.jsoup import Jsoup, HttpStatusException
@@ -195,9 +198,7 @@ def request_project_page_as_Jsoup_document_for(project_id, retry_after_http_stat
         _log.debug("Cache hit: Document!")
         return _cached_jsoup_documents[project_id]
 
-    scratch_project_url = SCRATCH_PROJECT_BASE_URL + str(project_id)
-    if not is_valid_project_url(scratch_project_url):
-        raise ScratchWebApiError("Project URL must be matching '{}'. Given: {}".format(SCRATCH_PROJECT_BASE_URL + '<project id>', scratch_project_url))
+    scratch_project_url = SCRATCH_PROJECT_META_DATA_BASE_URL + str(project_id)
 
     def retry_hook(exc, tries, delay):
         _log.warning("  Exception: {}\nRetrying after {}:'{}' in {} secs (remaining trys: {})".format(sys.exc_info()[0], type(exc).__name__, exc, delay, tries))
@@ -211,12 +212,16 @@ def request_project_page_as_Jsoup_document_for(project_id, retry_after_http_stat
         connection = Jsoup.connect(scratch_project_url)
         connection.userAgent(user_agent)
         connection.timeout(timeout)
-        return _ResponseJsoupDocumentWrapper(connection.get())
+        connection.ignoreContentType(True)
+        # connection.header("content-type", "	text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+        # return _ResponseJsoupDocumentWrapper(connection.get().text())
+        return json.loads(connection.get().text())
 
     try:
         document = fetch_document(scratch_project_url, HTTP_TIMEOUT, HTTP_USER_AGENT)
         if document != None:
             _cached_jsoup_documents[project_id] = document
+            _projectMetaData[project_id] = document
         return document
     except HttpStatusException as e:
         if e.getStatusCode() == 404:
@@ -232,7 +237,7 @@ def request_project_page_as_Jsoup_document_for(project_id, retry_after_http_stat
 def request_is_project_available(project_id):
     from org.jsoup import HttpStatusException
     try:
-        return request_project_page_as_Jsoup_document_for(project_id, False) is not None
+        return downloadProjectMetaData(project_id, False) is not None
     except HttpStatusException as e:
         if e.getStatusCode() == 404:
             _log.error("HTTP 404 - Not found! Project not available.")
@@ -241,7 +246,7 @@ def request_is_project_available(project_id):
             raise e
 
 def request_project_title_for(project_id):
-    return extract_project_title_from_document(request_project_page_as_Jsoup_document_for(project_id))
+    return extract_project_title_from_document(downloadProjectMetaData(project_id))
 
 def request_project_owner_for(project_id):
     return extract_project_owner_from_document(request_project_page_as_Jsoup_document_for(project_id))
@@ -290,10 +295,10 @@ def request_project_remixes_for(project_id):
         return None
 
 def request_project_details_for(project_id):
-    return extract_project_details_from_document(request_project_page_as_Jsoup_document_for(project_id), project_id)
+    return extract_project_details_from_document(downloadProjectMetaData(project_id), project_id)
 
 def request_project_visibility_state_for(project_id, retry_after_http_status_exception=True):
-    return extract_project_visibilty_state_from_document(request_project_page_as_Jsoup_document_for(project_id, retry_after_http_status_exception))
+    return extract_project_visibilty_state_from_document(downloadProjectMetaData(project_id, retry_after_http_status_exception))
 
 
 def extract_project_title_from_document(document):
@@ -411,3 +416,9 @@ def extract_project_details_from_document(document, project_id, escape_quotes=Tr
                               instructions = instructions, notes_and_credits = notes_and_credits,
                               tags = tags, views = views, favorites = favorites, loves = loves,
                               modified_date = modified_date, shared_date = shared_date)
+
+
+
+
+def getMetaDataEntry(projectID, entryKey):
+    return _projectMetaData[projectID][entryKey]
