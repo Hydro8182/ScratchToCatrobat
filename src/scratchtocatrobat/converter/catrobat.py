@@ -149,11 +149,17 @@ def create_formula_element_with_value(variable_value):
 def add_user_variable(project, variable_name, sprite=None, sprite_name=None):
     ''' If `sprite_name` is set a sprite variable is added otherwise the variable is added to the project. '''
     _log.debug("adding variable '%s' to sprite '%s'", variable_name, sprite_name if sprite_name is not None else "<Stage>")
-    user_variables = project.getDefaultScene().getDataContainer()
+    user_variables = project.userVariables
     if sprite_name is None:
-        added_user_variable = user_variables.addProjectUserVariable(variable_name)
+        user_variables = project.userVariables
+        # added_user_variable = user_variables.addProjectUserVariable(variable_name)
+        added_user_variable = catformula.UserVariable(variable_name)
+        user_variables.add(added_user_variable)
     else:
-        added_user_variable = user_variables.addSpriteUserVariableToSprite(sprite, variable_name)
+        user_variables = sprite.userVariables
+        # added_user_variable = user_variables.addSpriteUserVariableToSprite(sprite, variable_name)
+        added_user_variable = catformula.UserVariable(variable_name)
+        user_variables.add(added_user_variable)
     assert added_user_variable is not None
     return added_user_variable
 

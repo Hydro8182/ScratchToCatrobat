@@ -36,7 +36,7 @@ import org.catrobat.catroid.content.bricks as catbricks
 import org.catrobat.catroid.formulaeditor as catformula
 import org.catrobat.catroid.formulaeditor.FormulaElement.ElementType as catElementType
 import org.catrobat.catroid.io as catio
-
+import java.util as javaUtil;
 from scratchtocatrobat.tools import common
 from scratchtocatrobat.scratch import scratch
 from scratchtocatrobat.tools import logger
@@ -207,7 +207,7 @@ class _ScratchToCatrobat(object):
         scratch.SCRIPT_SCENE_STARTS: lambda look_name: catbase.BroadcastScript(_background_look_to_broadcast_message(look_name)),
         scratch.SCRIPT_CLICKED: catbase.WhenScript,
         scratch.SCRIPT_CLONED: catbase.WhenClonedScript,
-        scratch.SCRIPT_PROC_DEF: catbricks.UserBrick,
+        #scratch.SCRIPT_PROC_DEF: catbricks.UserBrick,
         scratch.SCRIPT_SENSOR_GREATER_THAN: None,
         scratch.SCRIPT_WHEN_BACKGROUND_SWITCHES_TO: None
     }
@@ -541,12 +541,13 @@ def _create_variable_brick(value, user_variable, Class):
 def _variable_for(variable_name):
     return catformula.FormulaElement(catElementType.USER_VARIABLE, variable_name, None)  # @UndefinedVariable
 
-def _get_or_create_shared_global_answer_variable(project, data_container):
-    shared_global_answer_user_variable = data_container.findProjectVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
+def _get_or_create_shared_global_answer_variable(project):
+    # shared_global_answer_user_variable = data_container.findProjectVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
+    shared_global_answer_user_variable = project.getUserVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
     if shared_global_answer_user_variable is None:
         assert(_is_generated(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME))
         catrobat.add_user_variable(project, _SHARED_GLOBAL_ANSWER_VARIABLE_NAME, None, None)
-        shared_global_answer_user_variable = data_container.findProjectVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
+        shared_global_answer_user_variable = project.getUserVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
 
     assert shared_global_answer_user_variable is not None \
     and shared_global_answer_user_variable.getName() == _SHARED_GLOBAL_ANSWER_VARIABLE_NAME, \
@@ -638,8 +639,8 @@ class Converter(object):
         _catr_project = catbase.Project(None, scratch_project.name)
         _catr_scene = catbase.Scene( CATROBAT_DEFAULT_SCENE_NAME, _catr_project)
         _catr_project.sceneList.add(_catr_scene)
-        _catr_scene = _catr_project.getDefaultScene()
-        ProjectManager.getInstance().setProject(_catr_project)
+        # _catr_scene = _catr_project.getDefaultScene()
+        ProjectManager.getInstance().setCurrentProject(_catr_project)
 
         self._scratch_object_converter = _ScratchObjectConverter(_catr_project, scratch_project,
                                                                  progress_bar, context)
@@ -659,8 +660,9 @@ class Converter(object):
         for global_user_list in self.scratch_project.global_user_lists:
             # TODO: use "visible" as soon as show/hide-formula-list-bricks are available in Catrobat => global_formula_list["visible"]
             # TODO: use "isPersistent" as soon as Catrobat supports this => global_formula_list["isPersistent"]
-            data_container = catrobat_scene.getDataContainer()
-            data_container.addProjectUserList(global_user_list["listName"])
+            # data_container = catrobat_scene.getDataContainer()
+            catrobat_scene.project.userLists.add(global_user_list["listName"])
+            # data_container.addProjectUserList(global_user_list["listName"])
 
     def _add_converted_sprites_to(self, catrobat_scene):
         for scratch_object in self.scratch_project.objects:
@@ -713,7 +715,7 @@ class Converter(object):
         move_script = catbase.BroadcastScript("_mouse_move_")
         move_goto = catbricks.GoToBrick()
         move_goto.spinnerSelection = catcommon.BrickValues.GO_TO_TOUCH_POSITION
-        move_script.addBrick(move_goto)
+        move_script.brickList.add(move_goto)
         sprite.addScript(move_script)
 
         start_script = catbase.StartScript()
@@ -724,9 +726,9 @@ class Converter(object):
 
         wait_until_brick = catbricks.WaitUntilBrick(touch_formula)
         clone_self_brick = catbricks.CloneBrick()
-        loop_end_brick = catbricks.LoopEndBrick(loop_brick)
-        loop_brick.setLoopEndBrick(loop_end_brick)
-        start_bricks = [transperancy_brick, loop_brick, wait_until_brick, clone_self_brick, loop_end_brick]
+        loop_brick.loopBricks.add(wait_until_brick)
+        loop_brick.loopBricks.add(clone_self_brick)
+        start_bricks = [transperancy_brick, loop_brick]
         start_script.brickList.addAll(start_bricks)
         sprite.addScript(start_script)
 
@@ -752,11 +754,11 @@ class Converter(object):
 
         clone_if = catbricks.IfThenLogicBeginBrick(catformula.Formula(root))
         clone_broadcast = catbricks.BroadcastBrick("_mouse_move_")
-        clone_if_end = catbricks.IfThenLogicEndBrick(clone_if)
-        clone_if.setIfThenEndBrick(clone_if_end)
+        # clone_if_end = catbricks.IfThenLogicEndBrick(clone_if)
+        # clone_if.setIfThenEndBrick(clone_if_end)
         clone_kill = catbricks.DeleteThisCloneBrick()
-
-        clone_bricks = [clone_goto, clone_if, clone_broadcast,clone_if_end ,clone_kill]#[clone_goto, clone_if, clone_broadcast, clone_if_end, clone_kill]
+        clone_if.ifBranchBricks.add(clone_broadcast)
+        clone_bricks = [clone_goto, clone_if,clone_kill]#[clone_goto, clone_if, clone_broadcast, clone_if_end, clone_kill]
         clone_script.brickList.addAll(clone_bricks)
         sprite.addScript(clone_script)
         catrobat_scene.addSprite(sprite)
@@ -798,10 +800,12 @@ class Converter(object):
 
         broadcast_brick2 = catbricks.BroadcastBrick(key_message)
         wait_brick2 = catbricks.WaitBrick(50)
-        loop_end_brick = catbricks.LoopEndBrick(repeat_until_brick)
-        repeat_until_brick.loopEndBrick = loop_end_brick
+        # loop_end_brick = catbricks.LoopEndBrick(repeat_until_brick)
+        repeat_until_brick.loopBricks.add(broadcast_brick2)
+        repeat_until_brick.loopBricks.add(wait_brick2)
+        # repeat_until_brick.loopEndBrick = loop_end_brick
 
-        bricklist = [broadcast_brick, wait_brick, repeat_until_brick, broadcast_brick2, wait_brick2, loop_end_brick]
+        bricklist = [broadcast_brick, wait_brick, repeat_until_brick]
         when_tapped_script.brickList.addAll(bricklist)
         return when_tapped_script
 
@@ -837,11 +841,12 @@ class Converter(object):
         bricks = []
 
         global_key_var_name = scratch.S2CC_KEY_VARIABLE_NAME + key
-        key_user_variable = catrobat_scene.getDataContainer().findProjectVariable(global_key_var_name)
+        # key_user_variable = catrobat_scene.getDataContainer().findProjectVariable(global_key_var_name)
+        key_user_variable = catrobat_scene.project.getUserVariable(global_key_var_name)
         if key_user_variable == None:
             key_user_variable = catformula.UserVariable(global_key_var_name)
             key_user_variable.value = catformula.Formula(0)
-            catrobat_scene.getProject().projectVariables.add(key_user_variable)
+            catrobat_scene.getProject().userVariables.add(key_user_variable)
 
         set_variable_brick = _create_variable_brick(1, key_user_variable, catbricks.SetVariableBrick)
         bricks.append(set_variable_brick)
@@ -948,11 +953,12 @@ class Converter(object):
         xml_header.setApplicationBuildNumber(build_number)
         xml_header.setApplicationName(helpers.application_info("name"))
         xml_header.setApplicationVersion(helpers.application_info("version"))
-        xml_header.setProgramName('%s' % program_name) # NOTE: needed to workaround unicode issue!
+        xml_header.setProjectName('%s' % program_name) # NOTE: needed to workaround unicode issue!
         xml_header.setCatrobatLanguageVersion(catrobat.CATROBAT_LANGUAGE_VERSION)
         xml_header.setDeviceName(helpers.scratch_info("device_name"))
         xml_header.setPlatform(helpers.scratch_info("platform"))
-        xml_header.setPlatformVersion(float(helpers.scratch_info("platform_version")))
+        # xml_header.setPlatformVersion(float(helpers.scratch_info("platform_version")))
+        xml_header.setPlatformVersion(helpers.scratch_info("platform_version"))
         xml_header.setScreenMode(catcommon.ScreenModes.STRETCH)
         xml_header.mediaLicense = helpers.catrobat_info("media_license_url")
         xml_header.programLicense = helpers.catrobat_info("program_license_url")
@@ -1017,7 +1023,7 @@ class _ScratchObjectConverter(object):
         scratch_user_script_declared_labels_map = dict(map(lambda s: (s.arguments[0], s.arguments[1]), scratch_user_scripts))
         sprite_context = SpriteContext(sprite_name, scratch_user_script_declared_labels_map)
         catrobat_scene = self._catrobat_project.getDefaultScene()
-        data_container = catrobat_scene.getDataContainer()
+        # data_container = catrobat_scene.getDataContainer()
         sprite = SpriteFactory().newInstance(SpriteFactory.SPRITE_SINGLE, sprite_name)
         assert sprite_name == sprite.getName()
 
@@ -1052,7 +1058,8 @@ class _ScratchObjectConverter(object):
         if not scratch_object.is_stage() and scratch_object.get_lists() is not None:
             for user_list_data in scratch_object.get_lists():
                 assert len(user_list_data["listName"]) > 0
-                data_container.addSpriteUserListToSprite(sprite, user_list_data["listName"])
+                # data_container.addSpriteUserListToSprite(sprite, user_list_data["listName"])
+                sprite.userLists.add(user_list_data["listName"])
                 # TODO: check if user list has been added...
 
         for scratch_variable in scratch_object.get_variables():
@@ -1064,8 +1071,11 @@ class _ScratchObjectConverter(object):
                     sprite_name=sprite.getName() if not scratch_object.is_stage() else None
             )
             assert user_variable is not None
-            user_variable = data_container.findProjectVariable(variable_name) \
-                            if scratch_object.is_stage() else data_container.getUserVariable(sprite, variable_name)
+            # user_variable = data_container.findProjectVariable(variable_name) \
+            #                 if scratch_object.is_stage() else data_container.getUserVariable(sprite, variable_name)
+            # user_variable = catrobat_scene.getProject().getUserVariable(variable_name) if scratch_object.is_stage() else sprite.getUserVariable(variable_name)
+            user_variable = self._catrobat_project.getUserVariable(variable_name) if scratch_object.is_stage() else sprite.getUserVariable(variable_name)
+
             assert user_variable is not None
 
         for scratch_script in scratch_object.scripts:
@@ -1218,8 +1228,8 @@ class _ScratchObjectConverter(object):
         # if this sprite object contains a script that first added AskBrick or accessed the
         # (global) answer variable, the (global) answer variable gets initialized by adding a
         # SetVariable brick with an empty string-initialization value (i.e. "")
-        data_container = catrobat_scene.getDataContainer()
-        shared_global_answer_user_variable = data_container.findProjectVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
+        # data_container = catrobat_scene.getDataContainer()
+        shared_global_answer_user_variable = catrobat_scene.project.getUserVariable(_SHARED_GLOBAL_ANSWER_VARIABLE_NAME)
         if shared_global_answer_user_variable is not None and scratch_object.is_stage():
             try:
                 _assign_initialization_value_to_user_variable(catrobat_scene, _SHARED_GLOBAL_ANSWER_VARIABLE_NAME, "", sprite)
@@ -1238,7 +1248,8 @@ class _ScratchObjectConverter(object):
 
         # Display visible variables at start
         for variable_name in local_sprite_variables:
-            user_variable = catrobat_scene.getDataContainer().getUserVariable(sprite, variable_name)
+            # user_variable = catrobat_scene.getDataContainer().getUserVariable(sprite, variable_name)
+            user_variable = sprite.getUserVariable(variable_name)
             show_variable_brick = catbricks.ShowTextBrick(context.visible_var_X, context.visible_var_Y)
             show_variable_brick.setUserVariable(user_variable)
             context.visible_var_Y -= VISIBLE_VAR_POSITION_STEP_Y
@@ -1281,7 +1292,8 @@ class _ScratchObjectConverter(object):
             try:
                 if not isinstance(cat_instance, catbricks.UserBrick):
                     assert isinstance(cat_instance, catbase.Script)
-                    cat_instance.addBrick(brick)
+                    # cat_instance.addBrick(brick)
+                    cat_instance.brickList.add(brick)
                 else:
                     cat_instance.appendBrickToScript(brick)
             except TypeError as ex:
@@ -1308,7 +1320,7 @@ class ConvertedProject(object):
     def __init__(self, catrobat_project, scratch_project):
         self.scratch_project = scratch_project
         self.catrobat_program = catrobat_project
-        self.name = self.catrobat_program.getXmlHeader().getProgramName()
+        self.name = self.catrobat_program.getXmlHeader().getProjectName()
 
     @staticmethod
     def _converted_output_path(output_dir, project_name):
@@ -1361,7 +1373,16 @@ class ConvertedProject(object):
 
         def program_source_for(catrobat_program):
             storage_handler = catio.XstreamSerializer.getInstance()
+
             code_xml_content = storage_handler.XML_HEADER
+            # catrobat_program.sceneList.pop()
+            # javaUtil.ArrayList<
+            # del catrobat_program.sceneList[0]
+            # iter.next()
+            # iter.remove()
+            catrobat_program.sceneList = javaUtil.ArrayList()
+            catrobat_program.userVariables = javaUtil.ArrayList()
+
             code_xml_content += storage_handler.xstream.toXML(catrobat_program)
             return code_xml_content
 
@@ -1417,8 +1438,8 @@ def _add_new_user_variable_with_initialization_value(project, variable_name, var
     catrobat.add_to_start_script([variable_initialization_brick], sprite)
 
 def _assign_initialization_value_to_user_variable(scene, variable_name, variable_value, sprite):
-    data_container = scene.getDataContainer()
-    user_variable = data_container.findProjectVariable(variable_name) if sprite is None else data_container.getUserVariable(sprite, variable_name)
+    # data_container = scene.getDataContainer()
+    user_variable = scene.project.getUserVariable(variable_name) if sprite is None else scene.project.getUserVariable(variable_name)
     assert user_variable is not None and user_variable.getName() == variable_name, \
            "variable: %s, sprite_name: %s" % (variable_name, sprite.getName())
     variable_initialization_brick = _create_variable_brick(variable_value, user_variable, catbricks.SetVariableBrick)
@@ -1887,7 +1908,7 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
     @_register_handler(_block_name_to_handler_map, "showVariable:")
     def _convert_show_variable_block(self):
         [variable_name] = self.arguments
-        user_variable = self.scene.getDataContainer().getUserVariable(self.sprite, variable_name)
+        user_variable = self.sprite.getUserVariable(variable_name)
         assert user_variable is not None # the variable must exist at this stage!
         assert user_variable.getName() == variable_name
         show_variable_brick = self.CatrobatClass(0, 0)
@@ -1898,7 +1919,7 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
     @_register_handler(_block_name_to_handler_map, "hideVariable:")
     def _convert_hide_variable_block(self):
         [variable_name] = self.arguments
-        user_variable = self.scene.getDataContainer().getUserVariable(self.sprite, variable_name)
+        user_variable = self.sprite.getUserVariable(variable_name)
         assert user_variable is not None # the variable must exist at this stage!
         assert user_variable.getName() == variable_name
         hide_variable_brick = self.CatrobatClass()
@@ -2048,14 +2069,14 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
     @_register_handler(_block_name_to_handler_map, "changeVar:by:", "setVar:to:")
     def _convert_variable_block(self):
         [variable_name, value] = self.arguments
-        user_variable = self.scene.getDataContainer().getUserVariable(self.sprite, variable_name)
+        user_variable = self.sprite.getUserVariable(variable_name)
         if user_variable is None:
             # WORKAROUND: for generated variables added in preprocessing step
             # must be generated user variable, otherwise the variable must have already been added at this stage!
             if not _is_generated(variable_name):
                 log.warning("UserVariable with name :'" + variable_name + "' does not exist. Creating it now.")
             catrobat.add_user_variable(self.project, variable_name, self.sprite, self.sprite.getName())
-            user_variable = self.scene.getDataContainer().getUserVariable(self.sprite, variable_name)
+        user_variable = self.sprite.getUserVariable(variable_name)
 
         assert user_variable is not None and user_variable.getName() == variable_name, \
                "variable: %s, sprite_name: %s" % (variable_name, self.sprite.getName())
@@ -2092,15 +2113,13 @@ class _BlocksConversionTraverser(scratch.AbstractBlocksTraverser):
     @_register_handler(_block_name_to_handler_map, "doAsk")
     def _convert_do_ask_block(self):
         [question] = self.arguments
-        data_container = self.scene.getDataContainer()
         question_formula = catrobat.create_formula_with_value(question)
-        shared_global_answer_user_variable = _get_or_create_shared_global_answer_variable(self.project, data_container)
+        shared_global_answer_user_variable = _get_or_create_shared_global_answer_variable(self.project)
         return self.CatrobatClass(question_formula, shared_global_answer_user_variable)
 
     @_register_handler(_block_name_to_handler_map, "answer")
     def _convert_answer_block(self):
-        data_container = self.scene.getDataContainer()
-        shared_global_answer_user_variable = _get_or_create_shared_global_answer_variable(self.project, data_container)
+        shared_global_answer_user_variable = _get_or_create_shared_global_answer_variable(self.project)
         return _variable_for(shared_global_answer_user_variable.getName())
 
     @_register_handler(_block_name_to_handler_map, "createCloneOf")
