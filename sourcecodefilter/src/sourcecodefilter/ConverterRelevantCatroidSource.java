@@ -54,6 +54,7 @@ public class ConverterRelevantCatroidSource {
     private Set<String> fieldsToRemove;
     private Set<String> methodsToPreserve;
     private Set<String> methodsToRemove;
+    private Set<String> annotationsToRemove;
     private CompilationUnit sourceAst;
     private Boolean isSerializationClass;
     private Document internalSource;
@@ -233,6 +234,7 @@ public class ConverterRelevantCatroidSource {
         for (File sourcePath : FileUtils.listFiles(catroidProjectDir, new String[] { "java" }, true)) {
             if (! (project.toOutputPath(sourcePath).exists())) {
                 String className = Files.getNameWithoutExtension(sourcePath.getName());
+                System.out.println(className);
                 boolean isSerializationSource = serializationTargetClassNames.contains(className);
                 boolean isHelperSource = SourceCodeFilter.ADDITIONAL_HELPER_CLASSES.contains(className);
                 boolean isRemovedClass = SourceCodeFilter.REMOVE_CLASSES.contains(className);
